@@ -58,3 +58,6 @@ dkms.conf
 .vscode
 ./*.txt
 fdf
+fdf_debug
+minilibx*
+*.tgz
