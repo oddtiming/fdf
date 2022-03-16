@@ -14,6 +14,7 @@ RESET_COL	=	\033[0m
 
 CFILES	=	draw.c \
 			fdf.c \
+			init.c \
 			hooks.c
 
 SRC_DIR	= src
@@ -30,7 +31,7 @@ HEADERS		= $(addprefix $(INCL)/, $(HFILES))
 MLX_FLAGS = -Lminilibx_macos -lmlx  -framework OpenGL -framework AppKit
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g -O2
+CFLAGS	= -Wall -Wextra -Werror -g
 
 #
 # DEBUG build settings

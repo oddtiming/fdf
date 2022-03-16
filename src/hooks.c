@@ -1,20 +1,26 @@
 #include "fdf.h"
 
-int	handle_expose_hook(void *param)
+int	handle_default_hook(t_fdf_cont *cont)
 {
-	t_mlx	*mlx;
+	display_square(cont);
+	return (0);
+}
+
+
+int	handle_expose_hook(t_fdf_cont *cont)
+{
+	t_fdf_cont	*mlx;
 	char	*data_addr;
 	void	*img_ptr;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
 
-	mlx = (t_mlx *) param;
+	mlx = (t_fdf_cont *)cont;
 	img_ptr = NULL;
 	bits_per_pixel = 0;
 	size_line = 0;
 	endian = 0;
-	// data_addr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
 	data_addr = NULL;
 	if (DEBUG)
 	{
@@ -28,11 +34,11 @@ int	handle_expose_hook(void *param)
 	return (0);
 }
 
-int	handle_key_hook(int keysym, void *param)
+int	handle_key_hook(int keysym, t_fdf_cont *cont)
 {
-	t_mlx	*mlx;
+	t_fdf_cont	*mlx;
 
-	mlx = (t_mlx *) param;
+	mlx = (t_fdf_cont *)cont;
 	if (DEBUG)
 	{
 		printf("Keysim = %d\n", keysym);
@@ -44,7 +50,7 @@ int	handle_key_hook(int keysym, void *param)
 	}
 	if (keysym == 1)
 	{
-		draw_square(mlx);
+		display_square(mlx);
 	}
 	if (keysym == 40)
 	{
@@ -61,11 +67,11 @@ int	handle_key_hook(int keysym, void *param)
 	return (0);
 }
 
-int	handle_mouse_hook(int button, int x, int y, void *param)
+int	handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont)
 {
-	t_mlx	*mlx;
+	t_fdf_cont	*mlx;
 
-	mlx = (t_mlx *) param;
+	mlx = (t_fdf_cont *)cont;
 	if (DEBUG)
 	{
 		printf("Mouse coordinates (X: %d, Y: %d)\n", x, y);
