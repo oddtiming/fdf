@@ -16,12 +16,24 @@
 #  define DEBUG 0
 # endif
 
+# define WIN_W 1280
+# define WIN_H 1024
+
 
 //TYPEDEFS
 // Enums
 enum e_colors
 {
-	FDF_WHITE = 255 << 24 | 255 << 16 | 255 << 8 | 255
+	FDF_BLACK	= 0x000000,
+	FDF_CYAN	= 0x00FFFF,
+	FDF_PINK	= 0xFF00FF,
+	FDF_WHITE	= 0xFFFFFF,
+	FDF_YELLOW	= 0xFFFF00
+};
+
+enum e_mlx_events
+{
+	DESTROY_NOTIFY = 17
 };
 
 // Structs
@@ -35,8 +47,8 @@ typedef struct	s_img
 {
 	void	*img_ptr;
 	char	*data_addr;
-	int		bits_per_pixel;
-	int		size_line;
+	int		bpp;
+	int		line_len;
 	int		endian;
 	int		width;
 	int		height;
@@ -59,13 +71,28 @@ typedef struct s_fdf_cont
 int	init_fdf(t_fdf_cont *cont, char *map_name);
 
 // Hooks 
-int	handle_expose_hook(t_fdf_cont *cont);
-int	handle_key_hook(int keysym, t_fdf_cont *cont);
-int	handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont);
-int	handle_default_hook(t_fdf_cont *cont);
+void	set_hooks(t_fdf_cont *cont);	
+int		handle_expose_hook(t_fdf_cont *cont);
+int		handle_key_hook(int keysym, t_fdf_cont *cont);
+int		handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont);
+int		handle_default_hook(t_fdf_cont *cont);
 
-//Basic draw functions
-int	display_square(t_fdf_cont *mlx);
+// Image manipulation
+//    Drawing
+void	fill_pixel(t_img *img, int x, int y, int color);
+void	fill_square_img_row(t_img *img, int size, int y, int color);
 
+//    Display
+int		display_img(t_fdf_cont *cont, t_img *img);
+int		display_default(t_fdf_cont *cont);
+
+//    Basic draw functions
+int		display_square(t_fdf_cont *cont);
+void	draw_square(t_img *img, int size);
+void	put_square(t_fdf_cont *cont, t_img *img, int size);
+
+// Cleanup
+int		fdf_clean_exit(t_fdf_cont *cont);
+void	fdf_cleanup(t_fdf_cont *cont);
 
 #endif

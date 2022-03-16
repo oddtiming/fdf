@@ -12,7 +12,9 @@ RED			=	\033[0;31m
 ON_RED		=	\033[41m
 RESET_COL	=	\033[0m
 
-CFILES	=	draw.c \
+CFILES	=	cleanup.c \
+			draw_square.c \
+			draw_img.c \
 			fdf.c \
 			init.c \
 			hooks.c

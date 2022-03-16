@@ -1,8 +1,18 @@
 #include "fdf.h"
 
+void	set_hooks(t_fdf_cont *cont)
+{
+	mlx_expose_hook(cont->win_ptr, handle_expose_hook, cont);
+	mlx_key_hook(cont->win_ptr, handle_key_hook, cont);
+	mlx_mouse_hook(cont->win_ptr, handle_mouse_hook, cont);
+	mlx_loop_hook(cont->mlx_ptr, handle_default_hook, cont);
+	mlx_hook(cont->win_ptr, DESTROY_NOTIFY, 0, fdf_cleanexit, cont);
+	return ;
+}
+
 int	handle_default_hook(t_fdf_cont *cont)
 {
-	display_square(cont);
+	(void)cont;
 	return (0);
 }
 
@@ -10,26 +20,16 @@ int	handle_default_hook(t_fdf_cont *cont)
 int	handle_expose_hook(t_fdf_cont *cont)
 {
 	t_fdf_cont	*mlx;
-	char	*data_addr;
-	void	*img_ptr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
 
 	mlx = (t_fdf_cont *)cont;
-	img_ptr = NULL;
-	bits_per_pixel = 0;
-	size_line = 0;
-	endian = 0;
-	data_addr = NULL;
 	if (DEBUG)
 	{
 		printf("Expose_hook has been called! \n");
-		printf("data_arrd = %p \n", data_addr);
-		printf("img_ptr = %p \n", img_ptr);
-		printf("bits_per_pixel = %d \n", bits_per_pixel);
-		printf("size_line = %d \n", size_line);
-		printf("endian = %d \n", endian);
+		printf("data_arrd = %p \n", cont->display_img->data_addr);
+		printf("img_ptr = %p \n", cont->display_img->img_ptr);
+		printf("bpp = %d \n", cont->display_img->bpp);
+		printf("line_len = %d \n", cont->display_img->line_len);
+		printf("endian = %d \n", cont->display_img->endian);
 	}
 	return (0);
 }
@@ -42,15 +42,27 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (DEBUG)
 	{
 		printf("Keysim = %d\n", keysym);
+		printf("cont->display_img->data_addr %p\n", cont->display_img->data_addr);
+		printf("cont->display_img->bpp %d\n", cont->display_img->bpp);
+		printf("cont->display_img->line_len %d\n", cont->display_img->line_len);
+		printf("cont->display_img->width %d\n", cont->display_img->width);
+		printf("cont->display_img->height %d\n", cont->display_img->height);
+		printf("cont->height %d\n", cont->height);
+		printf("cont->width %d\n", cont->width);
+		printf("Keysim = %d\n", keysym);
 	}
 	if (keysym == 53)
 	{
-		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-		exit(1);
+		fdf_cleanup(cont);
+		exit(0);
 	}
 	if (keysym == 1)
 	{
 		display_square(mlx);
+	}
+	if (keysym == 2)
+	{
+		display_default(mlx);
 	}
 	if (keysym == 40)
 	{
