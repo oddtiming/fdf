@@ -13,7 +13,8 @@ ON_RED		=	\033[41m
 RESET_COL	=	\033[0m
 
 CFILES	=	cleanup.c \
-			draw_square.c \
+			display.c \
+			draw.c \
 			draw_img.c \
 			fdf.c \
 			init.c \
@@ -27,10 +28,12 @@ OBJ_DIR	= obj
 OBJS	= $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
 INCL		= include
-INCLFLAGS	= -I$(INCL)
 HEADERS		= $(addprefix $(INCL)/, $(HFILES))
 
-MLX_FLAGS = -Lminilibx_macos -lmlx  -framework OpenGL -framework AppKit
+INCLFLAGS	= -I$(INCL)
+MLX_FLAGS 	= -Lminilibx_macos -lmlx  -framework OpenGL -framework AppKit
+LIBFT_FLAGS	= -lft -Llibft
+LIBM_FLAG	= -lm
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
@@ -46,7 +49,6 @@ DBG_CFLAGS = -D DEBUG=1 -g
 
 LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
-LIBFT_FLAGS	= -lft -Llibft
 
 RM_OBJS			=	rm -rf $(OBJ_DIR)
 RM_OBJS_OUT		=	$$($(RM_OBJS) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
@@ -55,7 +57,7 @@ RM_EXE_OUT		=	$$($(RM_EXE) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' 
 RM_LIBFT		=	make clean -sC ./libft
 RM_LIBFT_OUT	=	$$($(RM_LIBFT) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
 
-COMPILE_EXE		=	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(INCLFLAGS) $(OBJS) -o $(NAME)
+COMPILE_EXE		=	$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(LIBM_FLAG) $(MLX_FLAGS) $(INCLFLAGS) $(OBJS) -o $(NAME)
 COMPILE_EXE_OUT	=	$$($(COMPILE_EXE) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
 
 COMPILE_C		=	$(CC) $(CFLAGS) $(INCLFLAGS) -o $@ -c $<
@@ -68,7 +70,7 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
 #
 # DEBUG MACROS
 #
-COMPILE_DBG_EXE		=	$(CC) $(DBG_CFLAGS) $(MLX_FLAGS) $(LIBFT_FLAGS) $(INCLFLAGS) $(DBG_OBJS) -o $(DBG_EXE)
+COMPILE_DBG_EXE		=	$(CC) $(DBG_CFLAGS) $(LIBFT_FLAGS) $(LIBM_FLAG) $(MLX_FLAGS) $(INCLFLAGS) $(DBG_OBJS) -o $(DBG_EXE)
 COMPILE_DBG_EXE_OUT	=	$$($(COMPILE_DBG_EXE) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
 COMPILE_DBGC		=	$(CC) $(DBG_CFLAGS) $(INCLFLAGS) -o $@ -c $<
 COMPILE_DBGC_OUT	=	$$($(COMPILE_DBGC) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')

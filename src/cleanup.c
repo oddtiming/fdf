@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int	fdf_cleanexit(t_fdf_cont *cont)
+int	fdf_clean_exit(t_fdf_cont *cont)
 {
 	fdf_cleanup(cont);
 	exit(EXIT_SUCCESS);
