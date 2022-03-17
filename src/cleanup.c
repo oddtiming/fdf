@@ -9,8 +9,8 @@ int	fdf_clean_exit(t_fdf_cont *cont)
 void	fdf_cleanup(t_fdf_cont *cont)
 {
 	mlx_destroy_window(cont->mlx_ptr, cont->win_ptr);
-	mlx_destroy_image(cont->mlx_ptr, cont->display_img->img_ptr);
-	free(cont->display_img);
+	mlx_destroy_image(cont->mlx_ptr, cont->curr_img->img_ptr);
+	free(cont->curr_img);
 	free(cont);
 	return ;
 }

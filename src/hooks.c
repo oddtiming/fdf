@@ -6,7 +6,7 @@ void	set_hooks(t_fdf_cont *cont)
 	mlx_key_hook(cont->win_ptr, handle_key_hook, cont);
 	mlx_mouse_hook(cont->win_ptr, handle_mouse_hook, cont);
 	mlx_loop_hook(cont->mlx_ptr, handle_default_hook, cont);
-	mlx_hook(cont->win_ptr, DESTROY_NOTIFY, 0, fdf_cleanexit, cont);
+	mlx_hook(cont->win_ptr, DESTROY_NOTIFY, 0, fdf_clean_exit, cont);
 	return ;
 }
 
@@ -25,11 +25,11 @@ int	handle_expose_hook(t_fdf_cont *cont)
 	if (DEBUG)
 	{
 		printf("Expose_hook has been called! \n");
-		printf("data_arrd = %p \n", cont->display_img->data_addr);
-		printf("img_ptr = %p \n", cont->display_img->img_ptr);
-		printf("bpp = %d \n", cont->display_img->bpp);
-		printf("line_len = %d \n", cont->display_img->line_len);
-		printf("endian = %d \n", cont->display_img->endian);
+		printf("data_arrd = %p \n", cont->curr_img->data_addr);
+		printf("img_ptr = %p \n", cont->curr_img->img_ptr);
+		printf("bpp = %d \n", cont->curr_img->bpp);
+		printf("line_len = %d \n", cont->curr_img->line_len);
+		printf("endian = %d \n", cont->curr_img->endian);
 	}
 	return (0);
 }
@@ -42,11 +42,11 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (DEBUG)
 	{
 		printf("Keysim = %d\n", keysym);
-		printf("cont->display_img->data_addr %p\n", cont->display_img->data_addr);
-		printf("cont->display_img->bpp %d\n", cont->display_img->bpp);
-		printf("cont->display_img->line_len %d\n", cont->display_img->line_len);
-		printf("cont->display_img->width %d\n", cont->display_img->width);
-		printf("cont->display_img->height %d\n", cont->display_img->height);
+		printf("cont->curr_img->data_addr %p\n", cont->curr_img->data_addr);
+		printf("cont->curr_img->bpp %d\n", cont->curr_img->bpp);
+		printf("cont->curr_img->line_len %d\n", cont->curr_img->line_len);
+		printf("cont->curr_img->width %d\n", cont->curr_img->width);
+		printf("cont->curr_img->height %d\n", cont->curr_img->height);
 		printf("cont->height %d\n", cont->height);
 		printf("cont->width %d\n", cont->width);
 		printf("Keysim = %d\n", keysym);
@@ -63,6 +63,10 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (keysym == 2)
 	{
 		display_default(mlx);
+	}
+	if (keysym == 37)
+	{
+		test_display_lines(mlx);
 	}
 	if (keysym == 40)
 	{

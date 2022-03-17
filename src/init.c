@@ -8,8 +8,8 @@ int	init_fdf(t_fdf_cont *cont, char *map_name)
 	if (!cont->mlx_ptr)
 		return (EXIT_FAILURE);
 	cont->win_ptr = mlx_new_window(cont->mlx_ptr, cont->width, cont->height, map_name);
-	cont->display_img = malloc(sizeof(t_img));
-	img = cont->display_img;
+	cont->curr_img = malloc(sizeof(t_img));
+	img = cont->curr_img;
 	if (!img)
 		return (EXIT_FAILURE);
 	img->img_ptr = NULL;

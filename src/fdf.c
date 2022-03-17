@@ -18,14 +18,14 @@ int	main(void)
 	if (init_fdf(cont, title))
 		return (0);
 
-	display_square(cont);
+	// display_square(cont);
+	test_display_lines(cont);
 
-
-	printf("im main: img_ptr = %p \n", cont->display_img->img_ptr);
-	printf("im main: bpp = %d \n", cont->display_img->bpp);
-	printf("im main: line_len = %d \n", cont->display_img->line_len);
-	printf("im main: endian = %d \n", cont->display_img->endian);
-	printf("im main: data_addr = %p \n", cont->display_img->data_addr);
+	printf("im main: img_ptr = %p \n", cont->curr_img->img_ptr);
+	printf("im main: bpp = %d \n", cont->curr_img->bpp);
+	printf("im main: line_len = %d \n", cont->curr_img->line_len);
+	printf("im main: endian = %d \n", cont->curr_img->endian);
+	printf("im main: data_addr = %p \n", cont->curr_img->data_addr);
 
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);

@@ -16,9 +16,12 @@ CFILES	=	cleanup.c \
 			display.c \
 			draw.c \
 			draw_img.c \
+			errors.c \
 			fdf.c \
+			hooks.c \
 			init.c \
-			hooks.c
+			iterators.c \
+			utils.c
 
 SRC_DIR	= src
 SRCS	= $(addprefix $(SRC_DIR)/, $(CFILES))

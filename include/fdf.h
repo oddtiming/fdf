@@ -10,6 +10,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include "mlx.h"
+# include "iterators.h"
 # include "../libft/libft.h"
 
 
@@ -44,6 +45,23 @@ typedef struct s_2d_point
 	int	y;
 }	t_2d_point;
 
+typedef struct s_line
+{
+	t_2d_point	p1;
+	t_2d_point	p2;
+	int			*independent_var;
+	int			*dependent_var;
+	int			independent_max;
+	int			independent_step;
+	int			dependent_step;
+	int			offset_increment;
+	int			offset_decrement;
+	int			offset;
+	int			dx;
+	int			dy;
+}	t_line;
+
+
 typedef struct	s_img
 {
 	void	*img_ptr;
@@ -59,7 +77,7 @@ typedef struct s_fdf_cont
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_img	*display_img;
+	t_img	*curr_img;
 	int		height;
 	int		width;
 }	t_fdf_cont;
@@ -81,20 +99,27 @@ int		handle_default_hook(t_fdf_cont *cont);
 // Image manipulation
 //	draw_img.c
 void	fill_pixel(t_img *img, int x, int y, int color);
-void	fill_square_img_row(t_img *img, int size, int y, int color);
 
 //	display.c
 int		display_default(t_fdf_cont *cont);
 int		display_img(t_fdf_cont *cont, t_img *img);
 int		display_square(t_fdf_cont *cont);
+void	test_display_lines(t_fdf_cont *cont);
 
 //	draw.c
+void	draw_background(t_img *img, int color);
 void	draw_square(t_img *img, int size);
+void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
 void	put_square(t_fdf_cont *cont, t_img *img, int size);
+
+// Utils
+void	*ft_safealloc(size_t size);
 
 // Cleanup
 //	cleanup.c
 int		fdf_clean_exit(t_fdf_cont *cont);
 void	fdf_cleanup(t_fdf_cont *cont);
+void	exit_on_err(char *err_message);
+
 
 #endif
