@@ -20,5 +20,6 @@ int	init_fdf(t_fdf_cont *cont, char *map_name)
 	img->height = WIN_H;
 	img->img_ptr = mlx_new_image(cont->mlx_ptr, img->width, img->height);
 	img->data_addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->line_len, &img->endian);
+	draw_background(cont->curr_img, FDF_BLACK);
 	return (0);
 }

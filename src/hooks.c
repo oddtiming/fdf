@@ -68,6 +68,10 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	{
 		test_display_lines(mlx);
 	}
+	if (keysym == 15)
+	{
+		display_square_rainbow(mlx);
+	}
 	if (keysym == 40)
 	{
 		void	*img_ptr;

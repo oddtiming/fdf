@@ -104,11 +104,13 @@ void	fill_pixel(t_img *img, int x, int y, int color);
 int		display_default(t_fdf_cont *cont);
 int		display_img(t_fdf_cont *cont, t_img *img);
 int		display_square(t_fdf_cont *cont);
+int		display_square_rainbow(t_fdf_cont *cont);
 void	test_display_lines(t_fdf_cont *cont);
 
 //	draw.c
 void	draw_background(t_img *img, int color);
 void	draw_square(t_img *img, int size);
+void	draw_square_rainbow(t_img *img, int size);
 void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
 void	put_square(t_fdf_cont *cont, t_img *img, int size);
 

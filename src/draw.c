@@ -98,32 +98,44 @@ void	draw_square(t_img *img, int size)
 	return ;
 }
 
+void	change_color(int x, int y, int *color)
+{
+	int	red;
+	int	green;
+	int	blue;
+
+	red = x;
+	green = 0;
+	blue = y;
+	*color = (red << 16) + (green << 8) + blue;
+}
+
+void	draw_square_rainbow(t_img *img, int size)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	y = (img->height - size);
+	color = FDF_WHITE;
+	while (y <= (img->height + size))
+	{
+		x = (img->width - size);
+		while (x <= (img->width + size))
+		{
+			change_color(x - (img->width - size), y - (img->height - size), &color);
+			fill_pixel(img, x / 2, y / 2, color);
+			x++;
+		}
+		y++;
+	}
+	return ;
+}
+
 //This only takes black and white as inputs
 void	draw_background(t_img *img, int color)
 {
 	ft_memset(img->data_addr, color, img->line_len * img->height);
 	if (DEBUG)
 		printf("memset succeeded \n");
-}
-
-void	put_square(t_fdf_cont *cont, t_img *img, int size)
-{
-	int	half_length;
-	int	*map;
-	int	x;
-	int	y;
-
-	half_length = size / 2;
-	map = malloc (size * (size * sizeof(int)));
-	y = img->height / 2 - half_length;
-	while (y < img->height / 2 + half_length)
-	{
-		x = img->height / 2 - half_length;
-		while (x < img->width / 2 + half_length)
-		{
-			mlx_pixel_put(cont->mlx_ptr, cont->win_ptr, x, y, FDF_WHITE);
-			x++;
-		}
-		y++;
-	}
 }

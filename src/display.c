@@ -30,7 +30,6 @@ void	test_display_lines(t_fdf_cont *cont)
 	t_2d_point p8;
 	t_2d_point p9;
 
-	draw_background(cont->curr_img, FDF_BLACK);
 	p0_0.x = 0;
 	p0_0.y = 0;
 	p100_100.x = 100;
@@ -94,15 +93,25 @@ int	display_square(t_fdf_cont *cont)
 	
 	img = cont->curr_img;
 	
-	// put_square(cont, img, 400);
 	draw_square(img, 500);
 	cont->curr_img = img;
 	mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img->img_ptr, 0, 0);
 
-	printf("img_ptr = %p \n", img->img_ptr);
-	printf("bpp = %d \n", img->bpp);
-	printf("line_len = %d \n", img->line_len);
-	printf("endian = %d \n", img->endian);
-	printf("data_addr = %p \n", img->data_addr);
+	return (0);
+}
+
+int	display_square_rainbow(t_fdf_cont *cont)
+{
+	t_img	*img;
+	
+	img = cont->curr_img;
+	
+	for (int i = 0; i < 100; i++)
+	{
+		draw_square_rainbow(img, 500);
+		cont->curr_img = img;
+		mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img->img_ptr, 0, 0);
+	}
+
 	return (0);
 }
