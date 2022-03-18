@@ -106,13 +106,20 @@ int		display_img(t_fdf_cont *cont, t_img *img);
 int		display_square(t_fdf_cont *cont);
 int		display_square_rainbow(t_fdf_cont *cont);
 void	test_display_lines(t_fdf_cont *cont);
+void	test_display_lines_multicolor(t_fdf_cont *cont);
+void	display_lines_until_x(t_fdf_cont *cont);
 
 //	draw.c
 void	draw_background(t_img *img, int color);
+void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
+void	change_color(int x, int y, int *color);
+void	change_color_offset(int x, int y, int *color, int offset);
 void	draw_square(t_img *img, int size);
 void	draw_square_rainbow(t_img *img, int size);
-void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
-void	put_square(t_fdf_cont *cont, t_img *img, int size);
+void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2);
+void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offset);
+
+// 	colors
 
 // Utils
 void	*ft_safealloc(size_t size);

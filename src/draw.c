@@ -79,6 +79,60 @@ void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2)
 	return ;
 }
 
+void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2)
+{
+	t_line	*line;
+	int		color;
+
+	line = ft_safealloc(sizeof(t_line));
+	line->p1 = p1;
+	line->p2 = p2;
+	set_line_struct(line);
+	color = 0x010101;
+	fill_pixel(img, line->p1.x, line->p1.y, color);
+	while (*line->independent_var != line->independent_max)
+	{
+		*line->independent_var += line->independent_step;
+		if (line->offset >= 0)
+		{
+			*line->dependent_var += line->dependent_step;
+			line->offset -= line->offset_decrement;
+		}
+		line->offset += line->offset_increment;
+		change_color(line->p1.x, line->p1.y, &color);
+		fill_pixel(img, line->p1.x, line->p1.y, color);
+	}
+	free(line);
+	return ;
+}
+
+void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offset)
+{
+	t_line	*line;
+	int		color;
+
+	line = ft_safealloc(sizeof(t_line));
+	line->p1 = p1;
+	line->p2 = p2;
+	set_line_struct(line);
+	color = 0x010101;
+	fill_pixel(img, line->p1.x, line->p1.y, color);
+	while (*line->independent_var != line->independent_max)
+	{
+		*line->independent_var += line->independent_step;
+		if (line->offset >= 0)
+		{
+			*line->dependent_var += line->dependent_step;
+			line->offset -= line->offset_decrement;
+		}
+		line->offset += line->offset_increment;
+		change_color_offset(line->p1.x, line->p1.y, &color, offset);
+		fill_pixel(img, line->p1.x, line->p1.y, color);
+	}
+	free(line);
+	return ;
+}
+
 void	draw_square(t_img *img, int size)
 {
 	int	x;
@@ -98,15 +152,28 @@ void	draw_square(t_img *img, int size)
 	return ;
 }
 
+void	change_color_offset(int x, int y, int *color, int offset)
+{
+	int	red;
+	int	green;
+	int	blue;
+	
+	red = (x + offset) << 2;
+	green = abs(x - y) << 3;
+	blue = (y + offset) << 2;
+	*color = (red << 16) + (green << 8) + blue;
+}
+
 void	change_color(int x, int y, int *color)
 {
 	int	red;
 	int	green;
 	int	blue;
 
-	red = x;
-	green = 0;
-	blue = y;
+	
+	red = x >> 2;
+	green = (x + y) >> 1;
+	blue = y >> 2;
 	*color = (red << 16) + (green << 8) + blue;
 }
 

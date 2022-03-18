@@ -1,5 +1,5 @@
 #include "fdf.h"
-#include <sys/wait.h>
+#include <sys/time.h>
 
 void	do_mlx_loop(void *mlx_ptr)
 {
@@ -20,9 +20,8 @@ int	main(void)
 		return (0);
 
 	// display_square(cont);
-	test_display_lines(cont);
-	sleep(1);
-	display_square_rainbow(cont);
+	test_display_lines_multicolor(cont);
+	// display_square_rainbow(cont);
 
 	printf("im main: img_ptr = %p \n", cont->curr_img->img_ptr);
 	printf("im main: bpp = %d \n", cont->curr_img->bpp);
