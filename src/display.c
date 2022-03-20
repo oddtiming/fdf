@@ -102,6 +102,8 @@ void	test_display_lines_multicolor(t_fdf_cont *cont)
 	t_2d_point	p9;
 	static int	offset;
 
+	if (offset % 255 == 0)
+		offset += 50;
 	p0_0.x = 0;
 	p0_0.y = 0;
 	p100_100.x = 100;
@@ -155,7 +157,7 @@ void	test_display_lines_multicolor(t_fdf_cont *cont)
 	draw_line_rainbow_offset(cont->curr_img, p6, p7, offset);
 	draw_line_rainbow_offset(cont->curr_img, p8, p9, offset);
 	display_default(cont);
-	offset += 10;
+	offset += 5;
 	return ;
 }
 

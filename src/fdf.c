@@ -13,11 +13,9 @@ int	main(void)
 
 	cont = malloc(sizeof(t_fdf_cont));
 	if (!cont)
-		exit(1);
-	cont->height = WIN_H;
-	cont->width = WIN_W;
-	if (init_fdf(cont, title))
-		return (0);
+		exit (1);
+
+	fdf_init(cont, title);
 
 	// display_square(cont);
 	test_display_lines_multicolor(cont);
@@ -29,6 +27,7 @@ int	main(void)
 	printf("im main: endian = %d \n", cont->curr_img->endian);
 	printf("im main: data_addr = %p \n", cont->curr_img->data_addr);
 
+	mlx_do_key_autorepeaton(cont->mlx_ptr);
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);
 

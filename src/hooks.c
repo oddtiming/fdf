@@ -7,6 +7,7 @@ void	set_hooks(t_fdf_cont *cont)
 	mlx_mouse_hook(cont->win_ptr, handle_mouse_hook, cont);
 	mlx_loop_hook(cont->mlx_ptr, handle_default_hook, cont);
 	mlx_hook(cont->win_ptr, DESTROY_NOTIFY, 0, fdf_clean_exit, cont);
+	mlx_hook(cont->win_ptr, 2, 1L<<0, handle_keypress_hook, cont);
 	return ;
 }
 
@@ -47,8 +48,8 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		printf("cont->curr_img->line_len %d\n", cont->curr_img->line_len);
 		printf("cont->curr_img->width %d\n", cont->curr_img->width);
 		printf("cont->curr_img->height %d\n", cont->curr_img->height);
-		printf("cont->height %d\n", cont->height);
-		printf("cont->width %d\n", cont->width);
+		printf("cont->height %d\n", cont->map_height);
+		printf("cont->width %d\n", cont->map_width);
 		printf("Keysim = %d\n", keysym);
 	}
 	if (keysym == 53)
@@ -87,6 +88,30 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		width = 0;
 		img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, "./extra_stuff_not_important/sexy_kermit.xpm", &width, &height);
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img_ptr, 0, 0);
+	}
+	return (0);
+}
+
+int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
+{
+	t_fdf_cont	*mlx;
+
+	mlx = (t_fdf_cont *)cont;
+	if (DEBUG)
+	{
+		printf("Keysim = %d\n", keysym);
+		printf("cont->curr_img->data_addr %p\n", cont->curr_img->data_addr);
+		printf("cont->curr_img->bpp %d\n", cont->curr_img->bpp);
+		printf("cont->curr_img->line_len %d\n", cont->curr_img->line_len);
+		printf("cont->curr_img->width %d\n", cont->curr_img->width);
+		printf("cont->curr_img->height %d\n", cont->curr_img->height);
+		printf("cont->height %d\n", cont->map_height);
+		printf("cont->width %d\n", cont->map_width);
+		printf("Keysim = %d\n", keysym);
+	}
+	if (keysym == 18)
+	{
+		test_display_lines_multicolor(mlx);
 	}
 	return (0);
 }

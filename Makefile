@@ -21,6 +21,7 @@ CFILES	=	cleanup.c \
 			hooks.c \
 			init.c \
 			iterators.c \
+			parse.c \
 			utils.c
 
 SRC_DIR	= src

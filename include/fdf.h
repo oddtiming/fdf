@@ -45,6 +45,13 @@ typedef struct s_2d_point
 	int	y;
 }	t_2d_point;
 
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_point;
+
 typedef struct s_line
 {
 	t_2d_point	p1;
@@ -62,7 +69,7 @@ typedef struct s_line
 }	t_line;
 
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img_ptr;
 	char	*data_addr;
@@ -73,26 +80,33 @@ typedef struct	s_img
 	int		height;
 }	t_img;
 
+
 typedef struct s_fdf_cont
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	*curr_img;
-	int		height;
-	int		width;
+	t_point	*map;
+	int		map_height;
+	int		map_width;
 }	t_fdf_cont;
 
 
 //FUNCTIONS
 // Initialization
+
+//  parse.c
+
+
 //	init.c
-int	init_fdf(t_fdf_cont *cont, char *map_name);
+void	fdf_init(t_fdf_cont *cont, char *map_name);
 
 // Hooks
 //	hooks.c
 void	set_hooks(t_fdf_cont *cont);	
 int		handle_expose_hook(t_fdf_cont *cont);
 int		handle_key_hook(int keysym, t_fdf_cont *cont);
+int		handle_keypress_hook(int keysym, t_fdf_cont *cont);
 int		handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont);
 int		handle_default_hook(t_fdf_cont *cont);
 
