@@ -5,8 +5,8 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 	// t_2d_point	p1;
 	t_2d_point	p2;
 
-	p2.x = (int)(cont->map[x + y * cont->map_width].x * 20) + WIN_W / 2 - (cont->map_width / 2) * 20;
-	p2.y = (int)(cont->map[x + y * cont->map_width].y * 20) + WIN_H / 2 - (cont->map_height / 2) * 20;
+	p2.x = (cont->map[x + y * cont->map_width].x * 20) + WIN_W / 2 - (cont->map_width / 2) * 20;
+	p2.y = (cont->map[x + y * cont->map_width].y * 20) + WIN_H / 2 - (cont->map_height / 2) * 20;
 
 	// if (x > 0)
 	// {

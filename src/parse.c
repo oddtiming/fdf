@@ -11,7 +11,7 @@ void	print_map(t_fdf_cont *cont)
 		x = 0;
 		while (x < cont->map_width)
 		{
-			printf(" %3.3f ", cont->map[x + (y * cont->map_width)].z);
+			printf(" %3.3f ", cont->map[x + (y * cont->map_width)].x);
 			x++;
 		}
 		printf("\n");
