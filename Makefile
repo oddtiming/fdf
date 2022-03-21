@@ -14,6 +14,7 @@ RESET_COL	=	\033[0m
 
 CFILES	=	cleanup.c \
 			display.c \
+			display_map.c \
 			draw.c \
 			draw_img.c \
 			errors.c \
@@ -22,6 +23,7 @@ CFILES	=	cleanup.c \
 			init.c \
 			iterators.c \
 			parse.c \
+			rotate.c \
 			utils.c
 
 SRC_DIR	= src

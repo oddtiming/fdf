@@ -96,7 +96,12 @@ typedef struct s_fdf_cont
 // Initialization
 
 //  parse.c
-
+void	fdf_parse(t_fdf_cont *cont, char *filepath);
+void	parse_map_dimensions(t_fdf_cont *cont, int fd);
+int		parse_map_line(char *curr_line);
+void	assign_points_to_map(t_fdf_cont *cont, int fd);
+void	print_map(t_fdf_cont *cont);
+void	print_map_line(t_fdf_cont *cont, int y);
 
 //	init.c
 void	fdf_init(t_fdf_cont *cont, char *map_name);
@@ -123,6 +128,10 @@ void	test_display_lines(t_fdf_cont *cont);
 void	test_display_lines_multicolor(t_fdf_cont *cont);
 void	display_lines_until_x(t_fdf_cont *cont);
 
+//  display_map.c
+void	display_map(t_fdf_cont *cont);
+void	project_point(t_fdf_cont *cont, int x, int y);
+
 //	draw.c
 void	draw_background(t_img *img, int color);
 void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
@@ -132,6 +141,10 @@ void	draw_square(t_img *img, int size);
 void	draw_square_rainbow(t_img *img, int size);
 void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2);
 void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offset);
+
+// rotate.c
+void	rotate_map(t_fdf_cont *cont);
+void	rotate_x(t_fdf_cont *cont, int x, int y);
 
 // 	colors
 
