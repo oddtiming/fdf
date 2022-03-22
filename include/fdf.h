@@ -24,19 +24,19 @@
 
 //TYPEDEFS
 // Enums
-enum e_colors
+typedef enum
 {
 	FDF_BLACK	= 0x000000,
 	FDF_CYAN	= 0x00FFFF,
 	FDF_PINK	= 0xFF00FF,
 	FDF_WHITE	= 0xFFFFFF,
 	FDF_YELLOW	= 0xFFFF00
-};
+} e_colors;
 
-enum e_mlx_events
+typedef enum
 {
 	DESTROY_NOTIFY = 17
-};
+} e_mlx_events;
 
 // Structs
 typedef struct s_2d_point
@@ -144,7 +144,7 @@ void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offs
 
 // rotate.c
 void	rotate_map(t_fdf_cont *cont);
-void	rotate_x(t_fdf_cont *cont, int x, int y);
+void	rotate_z(t_fdf_cont *cont, double theta);
 
 // 	colors
 

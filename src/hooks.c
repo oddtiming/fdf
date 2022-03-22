@@ -77,6 +77,11 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	{
 		test_display_lines_multicolor(mlx);
 	}
+	if (keysym == 19)
+	{
+		rotate_z(mlx, -0.1);
+		display_map(cont);
+	}
 	if (keysym == 40)
 	{
 		void	*img_ptr;

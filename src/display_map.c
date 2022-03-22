@@ -2,30 +2,31 @@
 
 void	project_point(t_fdf_cont *cont, int x, int y)
 {
-	// t_2d_point	p1;
+	t_2d_point	p1;
 	t_2d_point	p2;
 
-	p2.x = (cont->map[x + y * cont->map_width].x * 20) + WIN_W / 2 - (cont->map_width / 2) * 20;
-	p2.y = (cont->map[x + y * cont->map_width].y * 20) + WIN_H / 2 - (cont->map_height / 2) * 20;
+	printf("x = %d\ny = %d\n", x, y);
+	p2.x = (int)(cont->map[x + y * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
+	p2.y = (int)(cont->map[x + y * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
 
-	// if (x > 0)
-	// {
-	// 	p1.x = (int)cont->map[x - 1 + y * cont->map_width].x;
-	// 	p1.y = (int)cont->map[x - 1 + y * cont->map_width].y;
-	// 	draw_line(cont->curr_img, p1, p2);
-	// }
-	// if (y > 0)
-	// {
-	// 	p1.x = (int)cont->map[x + (y - 1) * cont->map_width].x;
-	// 	p1.y = (int)cont->map[x + (y - 1) * cont->map_width].y;
-	// 	draw_line(cont->curr_img, p1, p2);
-	// }
-	printf("x = %d\ny = %d\n", p2.x, p2.y);
+	if (x > 0)
+	{
+		p1.x = (int)(cont->map[x - 1 + y * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
+		p1.y = (int)(cont->map[x - 1 + y * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
+		draw_line(cont->curr_img, p1, p2);
+	}
+	if (y > 0)
+	{
+		p1.x = (int)(cont->map[x + (y - 1) * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
+		p1.y = (int)(cont->map[x + (y - 1) * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
+		draw_line(cont->curr_img, p1, p2);
+	}
+	printf("p2.x = %d\np2.y = %d\n", p2.x, p2.y);
 	fill_pixel(cont->curr_img, p2.x, p2.y, 0xFF0000);
 	return ;
 }
 
-void	zoom_map(t_fdf_cont *cont)
+void	scale_map(t_fdf_cont *cont)
 {
 	int	x;
 	int	y;
@@ -82,8 +83,9 @@ void	display_map(t_fdf_cont *cont)
 	int	y;
 
 	rotate_map(cont);
-	// zoom_map(cont);
+	// scale_map(cont);
 	// center_map(cont);
+	draw_background(cont->curr_img, FDF_BLACK);
 	print_map(cont);
 	y = 0;
 	while (y < cont->map_height)
@@ -91,7 +93,7 @@ void	display_map(t_fdf_cont *cont)
 		x = 0;
 		while (x < cont->map_width)
 		{
-			project_point(cont, (int)cont->map[x + y * cont->map_width].x, (int)cont->map[x + y * cont->map_width].y);
+			project_point(cont, x, y);
 			x++;
 		}
 		y++;
