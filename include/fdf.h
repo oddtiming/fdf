@@ -145,6 +145,8 @@ void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offs
 // rotate.c
 void	rotate_map(t_fdf_cont *cont);
 void	rotate_z(t_fdf_cont *cont, double theta);
+void	rotate_y(t_fdf_cont *cont, double theta);
+void	rotate_x(t_fdf_cont *cont, double theta);
 
 // 	colors
 
