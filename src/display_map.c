@@ -82,7 +82,7 @@ void	display_map(t_fdf_cont *cont)
 	int	x;
 	int	y;
 
-	rotate_map(cont);
+	// rotate_map(cont);
 	// scale_map(cont);
 	// center_map(cont);
 	draw_background(cont->curr_img, FDF_BLACK);
