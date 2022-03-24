@@ -38,6 +38,7 @@ void	print_map_info(t_fdf_cont *cont, int map_val)
 	int			x;
 	int			y;
 
+
 	y = 0;
 	while (y < cont->map_height)
 	{
