@@ -13,10 +13,11 @@ void	set_hooks(t_fdf_cont *cont)
 
 int	handle_default_hook(t_fdf_cont *cont)
 {
-	rotate_x(cont, +0.01);
-	rotate_y(cont, +0.01);
-	rotate_z(cont, +0.01);
-	display_map(cont);
+	// rotate_x(cont, +0.01);
+	// rotate_y(cont, +0.01);
+	// rotate_z(cont, +0.01);
+	// display_map(cont);
+	(void) cont;
 	return (0);
 }
 
@@ -40,9 +41,6 @@ int	handle_expose_hook(t_fdf_cont *cont)
 
 int	handle_key_hook(int keysym, t_fdf_cont *cont)
 {
-	t_fdf_cont	*mlx;
-
-	mlx = (t_fdf_cont *)cont;
 	if (DEBUG)
 	{
 		printf("Keysim = %d\n", keysym);
@@ -60,25 +58,25 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		fdf_cleanup(cont);
 		exit(0);
 	}
-	if (keysym == 1) //KEY_S
-	{
-		display_square(mlx);
-	}
 	if (keysym == 2) //KEY_D
 	{
-		display_default(mlx);
+		display_default(cont);
 	}
 	if (keysym == 37) //KEY_L
 	{
-		test_display_lines(mlx);
+		test_display_lines(cont);
 	}
 	if (keysym == 15) //KEY_R
 	{
-		display_square_rainbow(mlx);
+		display_square_rainbow(cont);
 	}
 	if (keysym == 18) //KEY_1
 	{
-		test_display_lines_multicolor(mlx);
+		test_display_lines_multicolor(cont);
+	}
+	if (keysym == 76) //NUMPAD_ENTER
+	{
+		print_map_info(cont, 0);
 	}
 
 	if (keysym == 40) //KEY_K
@@ -90,8 +88,8 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		img_ptr = NULL;
 		height = 0;
 		width = 0;
-		img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, "./extra_stuff_not_important/sexy_kermit.xpm", &width, &height);
-		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img_ptr, 0, 0);
+		img_ptr = mlx_xpm_file_to_image(cont->mlx_ptr, "./extra_stuff_not_important/sexy_kermit.xpm", &width, &height);
+		mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img_ptr, 0, 0);
 	}
 	return (0);
 }

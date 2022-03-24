@@ -50,6 +50,7 @@ typedef struct s_point
 	double	x;
 	double	y;
 	double	z;
+	int		color;
 }	t_point;
 
 typedef struct s_line
@@ -85,10 +86,12 @@ typedef struct s_fdf_cont
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	char	*win_name;
 	t_img	*curr_img;
 	t_point	*map;
 	int		map_height;
 	int		map_width;
+	int		max_altitude;
 }	t_fdf_cont;
 
 
@@ -100,11 +103,9 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath);
 void	parse_map_dimensions(t_fdf_cont *cont, int fd);
 int		parse_map_line(char *curr_line);
 void	assign_points_to_map(t_fdf_cont *cont, int fd);
-void	print_map(t_fdf_cont *cont);
-void	print_map_line(t_fdf_cont *cont, int y);
 
 //	init.c
-void	fdf_init(t_fdf_cont *cont, char *map_name);
+void	fdf_init(t_fdf_cont *cont, char *filepath);
 
 // Hooks
 //	hooks.c
@@ -122,7 +123,6 @@ void	fill_pixel(t_img *img, int x, int y, int color);
 //	display.c
 int		display_default(t_fdf_cont *cont);
 int		display_img(t_fdf_cont *cont, t_img *img);
-int		display_square(t_fdf_cont *cont);
 int		display_square_rainbow(t_fdf_cont *cont);
 void	test_display_lines(t_fdf_cont *cont);
 void	test_display_lines_multicolor(t_fdf_cont *cont);
@@ -135,9 +135,6 @@ void	project_point(t_fdf_cont *cont, int x, int y);
 //	draw.c
 void	draw_background(t_img *img, int color);
 void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
-void	change_color(int x, int y, int *color);
-void	change_color_offset(int x, int y, int *color, int offset);
-void	draw_square(t_img *img, int size);
 void	draw_square_rainbow(t_img *img, int size);
 void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2);
 void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offset);
@@ -148,10 +145,16 @@ void	rotate_z(t_fdf_cont *cont, double theta);
 void	rotate_y(t_fdf_cont *cont, double theta);
 void	rotate_x(t_fdf_cont *cont, double theta);
 
-// 	colors
+// 	color.c
+void	change_color(int x, int y, int *color);
+void	change_color_offset(int x, int y, int *color, int offset);
 
 // Utils
+//	utils.c
 void	*ft_safealloc(size_t size);
+void	print_map(t_fdf_cont *cont);
+void	print_map_info(t_fdf_cont *cont, int map_val);
+double	fdf_strtodbl(char *str);
 
 // Cleanup
 //	cleanup.c

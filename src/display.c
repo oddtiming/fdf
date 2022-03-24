@@ -161,19 +161,6 @@ void	test_display_lines_multicolor(t_fdf_cont *cont)
 	return ;
 }
 
-int	display_square(t_fdf_cont *cont)
-{
-	t_img	*img;
-	
-	img = cont->curr_img;
-	
-	draw_square(img, 500);
-	cont->curr_img = img;
-	mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img->img_ptr, 0, 0);
-
-	return (0);
-}
-
 int	display_square_rainbow(t_fdf_cont *cont)
 {
 	t_img	*img;

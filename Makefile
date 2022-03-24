@@ -1,7 +1,7 @@
 NAME	=	fdf
 
 # FOR TESTING PURPOSES
-RUN_ARGS = test_maps/basictest.fdf
+RUN_ARGS = test_maps/pentenegpos.fdf
 
 SHELL	=	bash
 
@@ -12,7 +12,8 @@ RED			=	\033[0;31m
 ON_RED		=	\033[41m
 RESET_COL	=	\033[0m
 
-CFILES	=	cleanup.c \
+CFILES	=	color.c \
+			cleanup.c \
 			display.c \
 			display_map.c \
 			draw.c \
