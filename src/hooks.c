@@ -13,10 +13,10 @@ void	set_hooks(t_fdf_cont *cont)
 
 int	handle_default_hook(t_fdf_cont *cont)
 {
-	// rotate_x(cont, +0.01);
-	// rotate_y(cont, +0.01);
-	// rotate_z(cont, +0.01);
-	// display_map(cont);
+	rotate_x(cont, +0.01);
+	rotate_y(cont, +0.01);
+	rotate_z(cont, +0.01);
+	display_map(cont);
 	(void) cont;
 	return (0);
 }

@@ -10,6 +10,7 @@ int	main(int argc, char *argv[])
 {
 	t_fdf_cont	*cont;
 
+
 	cont = malloc(sizeof(t_fdf_cont));
 	if (!cont)
 		exit (1);
@@ -18,19 +19,12 @@ int	main(int argc, char *argv[])
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
 	print_map_info(cont, 0);
-	display_map(cont);
-
-	printf("im main: img_ptr = %p \n", cont->curr_img->img_ptr);
-	printf("im main: bpp = %d \n", cont->curr_img->bpp);
-	printf("im main: line_len = %d \n", cont->curr_img->line_len);
-	printf("im main: endian = %d \n", cont->curr_img->endian);
-	printf("im main: data_addr = %p \n", cont->curr_img->data_addr);
+	// display_map(cont);
 
 	mlx_do_key_autorepeaton(cont->mlx_ptr);
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);
 
-	// free(mlx_ptr);
 	fdf_cleanup(cont);
 	return (0);
 }

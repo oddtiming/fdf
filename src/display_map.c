@@ -5,7 +5,8 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 	t_2d_point	p1;
 	t_2d_point	p2;
 
-	printf("x = %d\ny = %d\n", x, y);
+	if (DEBUG)
+		printf("x = %d\ny = %d\n", x, y);
 	p2.x = (int)(cont->map[x + y * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
 	p2.y = (int)(cont->map[x + y * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
 
@@ -21,7 +22,8 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 		p1.y = (int)(cont->map[x + (y - 1) * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
 		draw_line(cont->curr_img, p1, p2);
 	}
-	printf("p2.x = %d\np2.y = %d\n", p2.x, p2.y);
+	if (DEBUG)
+		printf("p2.x = %d\np2.y = %d\n", p2.x, p2.y);
 	fill_pixel(cont->curr_img, p2.x, p2.y, 0xFF0000);
 	return ;
 }
@@ -37,7 +39,8 @@ void	scale_map(t_fdf_cont *cont)
 		zoom = WIN_W / cont->map_width / 2;
 	if (cont->map_height && WIN_H / cont->map_height - 1 < zoom)
 		zoom = WIN_H / cont->map_height / 2;
-	printf("zoom = %d \n", zoom);
+	if (DEBUG)
+		printf("zoom = %d \n", zoom);
 	while (y < cont->map_height)
 	{
 		x = 0;
@@ -82,11 +85,12 @@ void	display_map(t_fdf_cont *cont)
 	int	x;
 	int	y;
 
-	rotate_map(cont);
+	// rotate_map(cont);
 	// scale_map(cont);
 	// center_map(cont);
 	draw_background(cont->curr_img, FDF_BLACK);
-	print_map_info(cont, 0);
+	if (DEBUG)
+		print_map_info(cont, 0);
 	y = 0;
 	while (y < cont->map_height)
 	{

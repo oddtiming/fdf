@@ -47,10 +47,10 @@ typedef struct s_2d_point
 
 typedef struct s_point
 {
-	double	x;
-	double	y;
-	double	z;
-	int		color;
+	double			x;
+	double			y;
+	double			z;
+	unsigned int	color;
 }	t_point;
 
 typedef struct s_line
@@ -92,6 +92,8 @@ typedef struct s_fdf_cont
 	int		map_height;
 	int		map_width;
 	int		max_altitude;
+	int		min_altitude;
+	int		median_altitude;
 }	t_fdf_cont;
 
 
@@ -148,6 +150,7 @@ void	rotate_x(t_fdf_cont *cont, double theta);
 // 	color.c
 void	change_color(int x, int y, int *color);
 void	change_color_offset(int x, int y, int *color, int offset);
+void	fdf_assign_map_colors(t_fdf_cont *cont);
 
 // Utils
 //	utils.c

@@ -56,18 +56,24 @@ void	print_map_info(t_fdf_cont *cont, int map_val)
 					printf("\t==> Y values \n");
 				printf(" %3.3f ", cont->map[x + (y * cont->map_width)].y);
 			}
-			else
+			else if (map_val == 2)
 			{
 				if (x == 0 && y == 0)
 					printf("\t==> Z values \n");
 				printf(" %3.3f ", cont->map[x + (y * cont->map_width)].z);
+			}
+			else
+			{
+				if (x == 0 && y == 0)
+					printf("\t==> Colors \n");
+				printf(" %8X ", cont->map[x + (y * cont->map_width)].color);
 			}
 			x++;
 		}
 		printf("\n");
 		y++;
 	}
-	if (map_val < 3)
+	if (map_val < 4)
 	{
 		printf("\n\n");
 		print_map_info(cont, map_val + 1);

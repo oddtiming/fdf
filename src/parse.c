@@ -10,6 +10,7 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 	parse_map_dimensions(cont, fd);
 	fd = open(filepath, O_RDONLY);
 	assign_points_to_map(cont, fd);
+	fdf_assign_map_colors(cont);
 	close(fd);
 	return ;
 }
@@ -104,7 +105,6 @@ void	assign_map_line(t_fdf_cont *cont, char *line, int y)
 		point->x = x;
 		point->y = y;
 		point->z = -fdf_strtodbl(&line[index]);
-		point->color = fdf_get_map_color(point);
 		while (ft_isspace(line[index]))
 			index++;
 		while (is_set(line[index], "0123456789ABCDEFabcdefx,."))
