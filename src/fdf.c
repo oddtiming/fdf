@@ -9,7 +9,6 @@ void	do_mlx_loop(void *mlx_ptr)
 int	main(int argc, char *argv[])
 {
 	t_fdf_cont	*cont;
-	char		*title = "open_window_test";
 
 	cont = malloc(sizeof(t_fdf_cont));
 	if (!cont)
@@ -17,7 +16,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		exit_on_err("Error: FdF only accepts one input \n");
 	fdf_parse(cont, argv[1]);
-	fdf_init(cont, title);
+	fdf_init(cont, argv[1]);
 	// display_square(cont);
 	// test_display_lines_multicolor(cont);
 	// display_square_rainbow(cont);

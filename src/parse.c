@@ -1,39 +1,5 @@
 #include "fdf.h"
 
-void	print_map(t_fdf_cont *cont)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < cont->map_height)
-	{
-		x = 0;
-		while (x < cont->map_width)
-		{
-			printf(" %3.3f ", cont->map[x + (y * cont->map_width)].z);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	return ;
-}
-
-void	print_map_line(t_fdf_cont *cont, int y)
-{
-	int	x;
-
-	x = 0;
-	while (x < cont->map_width)
-	{
-		printf("%3.0f", cont->map[x + (y * cont->map_width)].z);
-		x++;
-	}
-	printf("\n");
-	return ;
-}
-
 void	fdf_parse(t_fdf_cont *cont, char *filepath)
 {
 	int	fd;
@@ -48,27 +14,53 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 	return ;
 }
 
+int	is_valid_input(const char *input)
+{
+	int	index;
+
+	index = 0;
+	while (ft_isspace(input[index]))
+		index++;
+	if (input[index] == '-')
+		index++;
+	if (ft_isdigit(input[index]))
+	{
+		while (ft_isdigit(input[index]))
+			index++;
+		if (input[index] == ',')
+			index++;
+		while (ft_isdigit(input[index]))
+			index++;
+		if (input[index] == 'x')
+			index++;
+		while (is_set(input[index], "0123456789ABCDEFabcdef"))
+			index++;
+	}
+	else
+		return (0);
+	if (!ft_isspace(input[index]) && input[index] != 0)
+		return (0);
+	return (index);
+}
+
 int	parse_map_line(char *curr_line)
 {
 	int		curr_line_width;
-	int		i;
+	int		index;
+	int		prev_i;
 
-	i = 0;
+	index = 0;
 	curr_line_width = 0;
-	while (curr_line[i])
+	while (curr_line[index])
 	{
-		while (ft_isspace(curr_line[i]))
-			i++;
-		if (curr_line[i] == '-')
-			i++;
-		if (ft_isdigit(curr_line[i]))
-		{
+		prev_i = index;
+		index += is_valid_input(&curr_line[index]);
+		if (prev_i != index)
 			curr_line_width++;
-			while (ft_isdigit(curr_line[i]))
-				i++;
-		}
-		if (!ft_isspace(curr_line[i]) && curr_line[i] != 0)
-			exit_on_err("Map error: one of the inputs is not an int\n");
+		else
+			return (0);
+		while (ft_isspace(curr_line[index]))
+			index++;
 	}
 	return (curr_line_width);
 }
@@ -84,12 +76,13 @@ void	parse_map_dimensions(t_fdf_cont *cont, int fd)
 	while (curr_line)
 	{
 		curr_line_width = parse_map_line(curr_line);
-		if (cont->map_width == 0)
+		if (curr_line_width == 0)
+			exit_on_err("Map error: one of the inputs is not an int\n");
+		else if (cont->map_width == 0)
 			cont->map_width = curr_line_width;
 		else if (cont->map_width != curr_line_width)
 			exit_on_err("Map error: map is not rectangular\n");
-		if (ft_isdigit(curr_line[0]))
-			cont->map_height += 1;
+		cont->map_height += 1;
 		free(curr_line);
 		curr_line = get_next_line(fd);
 	}
@@ -99,20 +92,20 @@ void	parse_map_dimensions(t_fdf_cont *cont, int fd)
 
 void	assign_map_line(t_fdf_cont *cont, char *curr_line, int y)
 {
-	int		i;
+	int		index;
 	int		x;
 
-	i = 0;
+	index = 0;
 	x = 0;
 	while (x < cont->map_width)
 	{
 		cont->map[x + (y * cont->map_width)].x = x;
 		cont->map[x + (y * cont->map_width)].y = y;
-		cont->map[x + (y * cont->map_width)].z = ft_atoi(&curr_line[i]);
-		while (ft_isspace(curr_line[i]))
-			i++;
-		while (ft_isdigit(curr_line[i]))
-			i++;
+		cont->map[x + (y * cont->map_width)].z = ft_atoi(&curr_line[index]);
+		while (ft_isspace(curr_line[index]))
+			index++;
+		while (ft_isdigit(curr_line[index]))
+			index++;
 		x++;
 	}
 }

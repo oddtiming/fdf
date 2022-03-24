@@ -85,6 +85,7 @@ typedef struct s_fdf_cont
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	char	*win_name;
 	t_img	*curr_img;
 	t_point	*map;
 	int		map_height;
@@ -101,10 +102,10 @@ void	parse_map_dimensions(t_fdf_cont *cont, int fd);
 int		parse_map_line(char *curr_line);
 void	assign_points_to_map(t_fdf_cont *cont, int fd);
 void	print_map(t_fdf_cont *cont);
-void	print_map_line(t_fdf_cont *cont, int y);
+void	print_map_info(t_fdf_cont *cont, int map_val);
 
 //	init.c
-void	fdf_init(t_fdf_cont *cont, char *map_name);
+void	fdf_init(t_fdf_cont *cont, char *filepath);
 
 // Hooks
 //	hooks.c

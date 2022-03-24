@@ -1,7 +1,7 @@
 NAME	=	fdf
 
 # FOR TESTING PURPOSES
-RUN_ARGS = test_maps/basictest.fdf
+RUN_ARGS = test_maps/pentenegpos.fdf
 
 SHELL	=	bash
 

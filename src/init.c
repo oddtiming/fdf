@@ -1,13 +1,14 @@
 #include "fdf.h"
 
-void	fdf_init(t_fdf_cont *cont, char *map_name)
+void	fdf_init(t_fdf_cont *cont, char *filepath)
 {
-	t_img *img;
+	t_img	*img;
 
 	cont->mlx_ptr = mlx_init();
 	if (!cont->mlx_ptr)
 		exit_on_err("mlx: mlx_init() error \n");
-	cont->win_ptr = mlx_new_window(cont->mlx_ptr, WIN_W, WIN_H, map_name);
+	cont->win_name = ft_get_last_token(filepath, '/');
+	cont->win_ptr = mlx_new_window(cont->mlx_ptr, WIN_W, WIN_H, cont->win_name);
 	if (!cont->win_ptr)
 		exit_on_err("mlx: mlx_new_window() error \n");
 	cont->curr_img = malloc(sizeof(t_img));
