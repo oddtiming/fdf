@@ -5,7 +5,7 @@ int	display_default(t_fdf_cont *cont)
 {
 	t_img	*img;
 	
-	img = cont->curr_img;
+	img = cont->img;
 	mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img->img_ptr, 0, 0);
 
 	return (0);
@@ -53,36 +53,36 @@ void	test_display_lines(t_fdf_cont *cont)
 	p8.y = 127;
 	p9.x = 1087;
 	p9.y = 170;
-	draw_line_rainbow(cont->curr_img, p0_0, p100_100);
-	draw_line_rainbow(cont->curr_img, p0_0, p1);
-	draw_line_rainbow(cont->curr_img, p0_0, p2);
-	draw_line_rainbow(cont->curr_img, p0_0, p3);
-	draw_line_rainbow(cont->curr_img, p0_0, p4);
-	draw_line_rainbow(cont->curr_img, p0_0, p5);
-	draw_line_rainbow(cont->curr_img, p0_0, p6);
-	draw_line_rainbow(cont->curr_img, p100_100, p1);
-	draw_line_rainbow(cont->curr_img, p100_100, p2);
-	draw_line_rainbow(cont->curr_img, p100_100, p3);
-	draw_line_rainbow(cont->curr_img, p100_100, p4);
-	draw_line_rainbow(cont->curr_img, p100_100, p5);
-	draw_line_rainbow(cont->curr_img, p100_100, p6);
-	draw_line_rainbow(cont->curr_img, p1, p2);
-	draw_line_rainbow(cont->curr_img, p1, p3);
-	draw_line_rainbow(cont->curr_img, p1, p4);
-	draw_line_rainbow(cont->curr_img, p1, p5);
-	draw_line_rainbow(cont->curr_img, p1, p6);
-	draw_line_rainbow(cont->curr_img, p2, p3);
-	draw_line_rainbow(cont->curr_img, p2, p4);
-	draw_line_rainbow(cont->curr_img, p2, p5);
-	draw_line_rainbow(cont->curr_img, p2, p6);
-	draw_line_rainbow(cont->curr_img, p3, p4);
-	draw_line_rainbow(cont->curr_img, p3, p5);
-	draw_line_rainbow(cont->curr_img, p3, p6);
-	draw_line_rainbow(cont->curr_img, p4, p5);
-	draw_line_rainbow(cont->curr_img, p4, p6);
-	draw_line_rainbow(cont->curr_img, p5, p6);
-	draw_line_rainbow(cont->curr_img, p6, p7);
-	draw_line_rainbow(cont->curr_img, p8, p9);
+	draw_line_rainbow(cont->img, p0_0, p100_100);
+	draw_line_rainbow(cont->img, p0_0, p1);
+	draw_line_rainbow(cont->img, p0_0, p2);
+	draw_line_rainbow(cont->img, p0_0, p3);
+	draw_line_rainbow(cont->img, p0_0, p4);
+	draw_line_rainbow(cont->img, p0_0, p5);
+	draw_line_rainbow(cont->img, p0_0, p6);
+	draw_line_rainbow(cont->img, p100_100, p1);
+	draw_line_rainbow(cont->img, p100_100, p2);
+	draw_line_rainbow(cont->img, p100_100, p3);
+	draw_line_rainbow(cont->img, p100_100, p4);
+	draw_line_rainbow(cont->img, p100_100, p5);
+	draw_line_rainbow(cont->img, p100_100, p6);
+	draw_line_rainbow(cont->img, p1, p2);
+	draw_line_rainbow(cont->img, p1, p3);
+	draw_line_rainbow(cont->img, p1, p4);
+	draw_line_rainbow(cont->img, p1, p5);
+	draw_line_rainbow(cont->img, p1, p6);
+	draw_line_rainbow(cont->img, p2, p3);
+	draw_line_rainbow(cont->img, p2, p4);
+	draw_line_rainbow(cont->img, p2, p5);
+	draw_line_rainbow(cont->img, p2, p6);
+	draw_line_rainbow(cont->img, p3, p4);
+	draw_line_rainbow(cont->img, p3, p5);
+	draw_line_rainbow(cont->img, p3, p6);
+	draw_line_rainbow(cont->img, p4, p5);
+	draw_line_rainbow(cont->img, p4, p6);
+	draw_line_rainbow(cont->img, p5, p6);
+	draw_line_rainbow(cont->img, p6, p7);
+	draw_line_rainbow(cont->img, p8, p9);
 	display_default(cont);
 	return ;
 }
@@ -126,36 +126,36 @@ void	test_display_lines_multicolor(t_fdf_cont *cont)
 	p8.y = 127;
 	p9.x = 1087;
 	p9.y = 170;
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p100_100, offset);
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p1, offset);
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p2, offset);
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p3, offset);
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p4, offset);
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p5, offset);
-	draw_line_rainbow_offset(cont->curr_img, p0_0, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p100_100, p1, offset);
-	draw_line_rainbow_offset(cont->curr_img, p100_100, p2, offset);
-	draw_line_rainbow_offset(cont->curr_img, p100_100, p3, offset);
-	draw_line_rainbow_offset(cont->curr_img, p100_100, p4, offset);
-	draw_line_rainbow_offset(cont->curr_img, p100_100, p5, offset);
-	draw_line_rainbow_offset(cont->curr_img, p100_100, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p1, p2, offset);
-	draw_line_rainbow_offset(cont->curr_img, p1, p3, offset);
-	draw_line_rainbow_offset(cont->curr_img, p1, p4, offset);
-	draw_line_rainbow_offset(cont->curr_img, p1, p5, offset);
-	draw_line_rainbow_offset(cont->curr_img, p1, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p2, p3, offset);
-	draw_line_rainbow_offset(cont->curr_img, p2, p4, offset);
-	draw_line_rainbow_offset(cont->curr_img, p2, p5, offset);
-	draw_line_rainbow_offset(cont->curr_img, p2, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p3, p4, offset);
-	draw_line_rainbow_offset(cont->curr_img, p3, p5, offset);
-	draw_line_rainbow_offset(cont->curr_img, p3, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p4, p5, offset);
-	draw_line_rainbow_offset(cont->curr_img, p4, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p5, p6, offset);
-	draw_line_rainbow_offset(cont->curr_img, p6, p7, offset);
-	draw_line_rainbow_offset(cont->curr_img, p8, p9, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p100_100, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p1, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p2, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p3, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p4, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p5, offset);
+	draw_line_rainbow_offset(cont->img, p0_0, p6, offset);
+	draw_line_rainbow_offset(cont->img, p100_100, p1, offset);
+	draw_line_rainbow_offset(cont->img, p100_100, p2, offset);
+	draw_line_rainbow_offset(cont->img, p100_100, p3, offset);
+	draw_line_rainbow_offset(cont->img, p100_100, p4, offset);
+	draw_line_rainbow_offset(cont->img, p100_100, p5, offset);
+	draw_line_rainbow_offset(cont->img, p100_100, p6, offset);
+	draw_line_rainbow_offset(cont->img, p1, p2, offset);
+	draw_line_rainbow_offset(cont->img, p1, p3, offset);
+	draw_line_rainbow_offset(cont->img, p1, p4, offset);
+	draw_line_rainbow_offset(cont->img, p1, p5, offset);
+	draw_line_rainbow_offset(cont->img, p1, p6, offset);
+	draw_line_rainbow_offset(cont->img, p2, p3, offset);
+	draw_line_rainbow_offset(cont->img, p2, p4, offset);
+	draw_line_rainbow_offset(cont->img, p2, p5, offset);
+	draw_line_rainbow_offset(cont->img, p2, p6, offset);
+	draw_line_rainbow_offset(cont->img, p3, p4, offset);
+	draw_line_rainbow_offset(cont->img, p3, p5, offset);
+	draw_line_rainbow_offset(cont->img, p3, p6, offset);
+	draw_line_rainbow_offset(cont->img, p4, p5, offset);
+	draw_line_rainbow_offset(cont->img, p4, p6, offset);
+	draw_line_rainbow_offset(cont->img, p5, p6, offset);
+	draw_line_rainbow_offset(cont->img, p6, p7, offset);
+	draw_line_rainbow_offset(cont->img, p8, p9, offset);
 	display_default(cont);
 	offset += 5;
 	return ;
@@ -165,12 +165,12 @@ int	display_square_rainbow(t_fdf_cont *cont)
 {
 	t_img	*img;
 	
-	img = cont->curr_img;
+	img = cont->img;
 	
 	for (int i = 0; i < 100; i++)
 	{
 		draw_square_rainbow(img, 500);
-		cont->curr_img = img;
+		cont->img = img;
 		mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img->img_ptr, 0, 0);
 	}
 

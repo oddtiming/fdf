@@ -23,7 +23,7 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 		p1.y = (int)(cont->map[x - 1 + y * cont->map_width].y * cont->square_width) + cont->win_height / 2;
 		p1.z = cont->map[x - 1 + y * cont->map_width].z;
 		if (both_points_are_within_bounds(cont, p1, p2))
-			draw_line(cont->curr_img, p1, p2);
+			draw_line(cont, p1, p2);
 	}
 	if (y > 0)
 	{
@@ -31,7 +31,7 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 		p1.y = (int)(cont->map[x + (y - 1) * cont->map_width].y * cont->square_width) + cont->win_height / 2;
 		p1.z = cont->map[x + (y - 1) * cont->map_width].z;
 		if (both_points_are_within_bounds(cont, p1, p2))
-			draw_line(cont->curr_img, p1, p2);
+			draw_line(cont, p1, p2);
 	}
 	return ;
 }
@@ -94,7 +94,7 @@ void	display_map(t_fdf_cont *cont)
 	// rotate_map(cont);
 	// scale_map(cont);
 	// center_map(cont);
-	draw_background(cont->curr_img, FDF_BLACK);
+	draw_background(cont->img, FDF_BLACK);
 	if (DEBUG)
 		print_map_info(cont, 0);
 	y = 0;

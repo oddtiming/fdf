@@ -11,10 +11,10 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	cont->win_ptr = mlx_new_window(cont->mlx_ptr, cont->win_width, cont->win_height, cont->win_name);
 	if (!cont->win_ptr)
 		exit_on_err("mlx: mlx_new_window() error \n");
-	cont->curr_img = malloc(sizeof(t_img));
-	if (!cont->curr_img)
+	cont->img = malloc(sizeof(t_img));
+	if (!cont->img)
 		exit_on_err("fdf_init: malloc error \n");
-	img = cont->curr_img;
+	img = cont->img;
 	img->img_ptr = NULL;
 	img->bpp = 0;
 	img->line_len = 0;
@@ -23,7 +23,7 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	img->height = cont->win_height;
 	img->img_ptr = mlx_new_image(cont->mlx_ptr, img->width, img->height);
 	img->data_addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->line_len, &img->endian);
-	draw_background(cont->curr_img, FDF_BLACK);
+	draw_background(cont->img, FDF_BLACK);
 	cont->toggle_rot_x = false;
 	cont->toggle_rot_y = false;
 	cont->toggle_rot_z = false;

@@ -24,7 +24,8 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 		printf("cont->win_height = %d \n", cont->win_height);
 	}
 
-	assign_colors(cont);
+	if (cont->map_is_colored == false)
+		assign_colors(cont);
 	close(fd);
 	return ;
 }
@@ -89,6 +90,7 @@ void	parse_map(t_fdf_cont *cont, int fd)
 
 	cont->map_height = 0;
 	cont->map_width = 0;
+	cont->map_is_colored = false;
 	curr_line = get_next_line(fd);
 	while (curr_line)
 	{

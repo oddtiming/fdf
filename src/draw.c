@@ -45,7 +45,7 @@ static void	set_line_struct(t_line *line)
 	return ;
 }
 
-void	draw_line(t_img *img, t_point p1, t_point p2)
+void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
 {
 	t_line	*line;
 	int		pixel_color;
@@ -68,8 +68,10 @@ void	draw_line(t_img *img, t_point p1, t_point p2)
 			color_percent = fabs(*line->independent_var - p1.x) / fabs(p1.x - p2.x);
 		else
 			color_percent = fabs(*line->independent_var - p1.y) / fabs(p1.y - p2.y);
-		pixel_color = average_color(p1.color, p2.color, color_percent);
-		fill_pixel(img, line->p1.x, line->p1.y, pixel_color);
+		pixel_color = FDF_WHITE;
+		if (cont->map_is_colored == true)
+			pixel_color = average_color(p1.color, p2.color, color_percent);
+		fill_pixel(cont->img, line->p1.x, line->p1.y, pixel_color);
 	}
 	free(line);
 	return ;

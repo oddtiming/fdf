@@ -35,11 +35,11 @@ int	handle_expose_hook(t_fdf_cont *cont)
 	if (DEBUG)
 	{
 		printf("Expose_hook has been called! \n");
-		printf("data_arrd = %p \n", cont->curr_img->data_addr);
-		printf("img_ptr = %p \n", cont->curr_img->img_ptr);
-		printf("bpp = %d \n", cont->curr_img->bpp);
-		printf("line_len = %d \n", cont->curr_img->line_len);
-		printf("endian = %d \n", cont->curr_img->endian);
+		printf("data_arrd = %p \n", cont->img->data_addr);
+		printf("img_ptr = %p \n", cont->img->img_ptr);
+		printf("bpp = %d \n", cont->img->bpp);
+		printf("line_len = %d \n", cont->img->line_len);
+		printf("endian = %d \n", cont->img->endian);
 	}
 	return (0);
 }
@@ -49,11 +49,11 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (DEBUG)
 	{
 		printf("Keysim = %d\n", keysym);
-		printf("cont->curr_img->data_addr %p\n", cont->curr_img->data_addr);
-		printf("cont->curr_img->bpp %d\n", cont->curr_img->bpp);
-		printf("cont->curr_img->line_len %d\n", cont->curr_img->line_len);
-		printf("cont->curr_img->width %d\n", cont->curr_img->width);
-		printf("cont->curr_img->height %d\n", cont->curr_img->height);
+		printf("cont->img->data_addr %p\n", cont->img->data_addr);
+		printf("cont->img->bpp %d\n", cont->img->bpp);
+		printf("cont->img->line_len %d\n", cont->img->line_len);
+		printf("cont->img->width %d\n", cont->img->width);
+		printf("cont->img->height %d\n", cont->img->height);
 		printf("cont->height %d\n", cont->map_height);
 		printf("cont->width %d\n", cont->map_width);
 		printf("Keysim = %d\n", keysym);
@@ -119,11 +119,11 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	if (DEBUG)
 	{
 		printf("Keysim = %d\n", keysym);
-		printf("cont->curr_img->data_addr %p\n", cont->curr_img->data_addr);
-		printf("cont->curr_img->bpp %d\n", cont->curr_img->bpp);
-		printf("cont->curr_img->line_len %d\n", cont->curr_img->line_len);
-		printf("cont->curr_img->width %d\n", cont->curr_img->width);
-		printf("cont->curr_img->height %d\n", cont->curr_img->height);
+		printf("cont->img->data_addr %p\n", cont->img->data_addr);
+		printf("cont->img->bpp %d\n", cont->img->bpp);
+		printf("cont->img->line_len %d\n", cont->img->line_len);
+		printf("cont->img->width %d\n", cont->img->width);
+		printf("cont->img->height %d\n", cont->img->height);
 		printf("cont->height %d\n", cont->map_height);
 		printf("cont->width %d\n", cont->map_width);
 		printf("Keysim = %d\n", keysym);

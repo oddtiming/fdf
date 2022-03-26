@@ -58,10 +58,12 @@ void	assign_map_line(t_fdf_cont *cont, char *line, int y)
 			index++;
 		while (ft_isdigit(line[index]))
 			index++;
+		point->color = FDF_WHITE;
 		if (line[index] == ',' || line[index] == '.')
+		{
 			point->color = ft_atox(&line[++index]);
-		else
-			point->color = FDF_WHITE;
+			cont->map_is_colored = true;
+		}
 		while (is_set(line[index], "0123456789ABCDEFabcdefx"))
 			index++;
 		x++;

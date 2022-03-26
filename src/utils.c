@@ -109,3 +109,12 @@ double	fdf_strtodbl(char *str)
 		index++;
 	return (integer + (decimal / __exp10(ft_log_calc(decimal, 10))));
 }
+
+double	linear_interpolation(double start, double end, double curr)
+{
+	if (curr == start)
+		return (0.0F);
+	else if (curr == end)
+		return (1.0F);
+	return ((curr - start) / (end - start));
+}

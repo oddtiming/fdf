@@ -82,7 +82,7 @@ typedef struct s_fdf_cont
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	*win_name;
-	t_img	*curr_img;
+	t_img	*img;
 	t_point	*map;
 	int		map_height;
 	int		map_width;
@@ -91,6 +91,7 @@ typedef struct s_fdf_cont
 	int		max_alt;
 	int		min_alt;
 	int		square_width;
+	bool	map_is_colored;
 	bool	toggle_rot_x;
 	bool	toggle_rot_y;
 	bool	toggle_rot_z;
@@ -142,7 +143,7 @@ void	project_point(t_fdf_cont *cont, int x, int y);
 
 //	draw.c
 void	draw_background(t_img *img, int color);
-void	draw_line(t_img *img, t_point p1, t_point p2);
+void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2);
 void	draw_square_rainbow(t_img *img, int size);
 void	draw_line_rainbow(t_img *img, t_point p1, t_point p2);
 void	draw_line_rainbow_offset(t_img *img, t_point p1, t_point p2, int offset);
@@ -164,6 +165,7 @@ void	*ft_safealloc(size_t size);
 void	print_map(t_fdf_cont *cont);
 void	print_map_info(t_fdf_cont *cont, int map_val);
 double	fdf_strtodbl(char *str);
+double	linear_interpolation(double start, double end, double curr);
 
 // Cleanup
 //	cleanup.c
