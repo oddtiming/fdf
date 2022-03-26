@@ -14,7 +14,16 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 	parse_map(cont, fd);
 	fd = open(filepath, O_RDONLY);
 	assign_map(cont, fd);
-	// assign_limits(cont);
+	assign_limits(cont);
+	if (DEBUG)
+	{
+		printf("cont->max_alt = %d \n", cont->max_alt);
+		printf("cont->min_alt = %d \n", cont->min_alt);
+		printf("cont->square_width = %d \n", cont->square_width);
+		printf("cont->win_width = %d \n", cont->win_width);
+		printf("cont->win_height = %d \n", cont->win_height);
+	}
+
 	// assign_colors(cont);
 	close(fd);
 	return ;

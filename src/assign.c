@@ -23,11 +23,11 @@ void	assign_limits(t_fdf_cont *cont)
 	}
 	cont->square_width = 5;
 	if (ft_max(cont->map_height, cont->map_width) < 100)
-		cont->square_width = ft_max(20, ft_max(683 / cont->map_height, 853 / cont->map_width));
+		cont->square_width = ft_min(20, ft_max(683 / cont->map_height, 853 / cont->map_width));
 	if (DEBUG)
 		printf("square_width = %d\n", cont->square_width);
-	cont->win_height = cont->map_height * cont->square_width * 1.5F;
-	cont->win_width = cont->map_width * cont->square_width * 1.5F;
+	cont->win_height = cont->map_height * cont->square_width * 3;
+	cont->win_width = cont->map_width * cont->square_width * 3;
 	if (cont->win_width < 300)
 		cont->win_width = 300;
 	else if (cont->win_width > 1280)

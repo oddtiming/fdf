@@ -109,8 +109,12 @@ typedef struct s_fdf_cont
 void	fdf_parse(t_fdf_cont *cont, char *filepath);
 void	parse_map(t_fdf_cont *cont, int fd);
 int		parse_map_line(char *curr_line);
+
+// assign.c
+void	assign_limits(t_fdf_cont *cont);
 void	assign_map(t_fdf_cont *cont, int fd);
 void	assign_map_line(t_fdf_cont *cont, char *line, int y);
+void	assign_colors(t_fdf_cont *cont);
 
 //	init.c
 void	fdf_init(t_fdf_cont *cont, char *filepath);
@@ -156,7 +160,7 @@ void	rotate_x(t_fdf_cont *cont, double theta);
 // 	color.c
 void	change_color(int x, int y, int *color);
 void	change_color_offset(int x, int y, int *color, int offset);
-void	assign_colors(t_fdf_cont *cont);
+
 
 // Utils
 //	utils.c
