@@ -13,7 +13,7 @@ ON_RED		=	\033[41m
 RESET_COL	=	\033[0m
 
 CFILES	=	assign.c \
-			color.c \
+			colors.c \
 			cleanup.c \
 			display.c \
 			display_map.c \

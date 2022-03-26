@@ -95,22 +95,33 @@ void	assign_map(t_fdf_cont *cont, int fd)
 //If z is positive, go from 0xFFFFFF to 0xFFFF00 at median, and 0xFF00FF at max_alt
 void	assign_colors(t_fdf_cont *cont)
 {
-	int	r;
-	int	g;
-	int	b;
-	int	x;
-	int	y;
+	double	altitude_percent;
+	int		curr_color;
+	int		x;
+	int		y;
 
-	r = 0xFF;
 	y = 0;
 	while (y < cont->map_height)
 	{
 		x = 0;
 		while (x < cont->map_width)
 		{
-			g = 255 - fabs(cont->map[x + y * cont->map_width].z) / 10 * 255;
-			b = 255 - fabs(cont->map[x + y * cont->map_width].z) / 10 * 255;
-			cont->map[x + y * cont->map_width].color = r << 16 | g << 8 | b;
+			
+			if (cont->map[x + y * cont->map_width].z == 0)
+			{
+				cont->map[x + y * cont->map_width].color = FDF_WHITE;
+				x++;
+				continue;
+			}
+			else if (cont->map[x + y * cont->map_width].z > 0)
+				altitude_percent = cont->map[x + y * cont->map_width].z / cont->max_alt;
+			else
+				altitude_percent = cont->map[x + y * cont->map_width].z / cont->min_alt;
+			if (cont->map[x + y * cont->map_width].z > 0)
+				curr_color = average_color(0, 0xFF0000, altitude_percent);
+			else
+				curr_color = average_color(0, 0xFF, altitude_percent);
+			cont->map[x + y * cont->map_width].color = curr_color;
 			x++;
 		}
 		y++;

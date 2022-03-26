@@ -21,8 +21,8 @@ static void	set_line_struct_x_fct_of_y(t_line *line)
 
 static void	set_line_struct(t_line *line)
 {
-	line->dx = abs(line->p1.x - line->p2.x);
-	line->dy = abs(line->p1.y - line->p2.y);
+	line->dx = fabs(line->p1.x - line->p2.x);
+	line->dy = fabs(line->p1.y - line->p2.y);
 	if (line->dx >= line->dy)
 	{
 		line->independent_var = &(line->p1.x);
@@ -45,15 +45,15 @@ static void	set_line_struct(t_line *line)
 	return ;
 }
 
-void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2)
+void	draw_line(t_img *img, t_point p1, t_point p2)
 {
 	t_line	*line;
+	int		pixel_color;
 
 	line = ft_safealloc(sizeof(t_line));
 	line->p1 = p1;
 	line->p2 = p2;
 	set_line_struct(line);
-	fill_pixel(img, line->p1.x, line->p1.y, FDF_WHITE);
 	while (*line->independent_var != line->independent_max)
 	{
 		*line->independent_var += line->independent_step;
@@ -63,13 +63,17 @@ void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2)
 			line->offset -= line->offset_decrement;
 		}
 		line->offset += line->offset_increment;
+		// if (p1.color == FDF_WHITE && p2.color == FDF_WHITE)
+		// 	pixel_color = FDF_WHITE;
+		// else
+		pixel_color = average_color(p1.color, p2.color, *line->independent_var / line->independent_max);
 		fill_pixel(img, line->p1.x, line->p1.y, FDF_WHITE);
 	}
 	free(line);
 	return ;
 }
 
-void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2)
+void	draw_line_rainbow(t_img *img, t_point p1, t_point p2)
 {
 	t_line	*line;
 	int		color;
@@ -96,7 +100,7 @@ void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2)
 	return ;
 }
 
-void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offset)
+void	draw_line_rainbow_offset(t_img *img, t_point p1, t_point p2, int offset)
 {
 	t_line	*line;
 	int		color;

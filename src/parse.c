@@ -24,7 +24,7 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 		printf("cont->win_height = %d \n", cont->win_height);
 	}
 
-	// assign_colors(cont);
+	assign_colors(cont);
 	close(fd);
 	return ;
 }

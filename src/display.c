@@ -19,17 +19,17 @@ int	display_img(t_fdf_cont *cont, t_img *img)
 
 void	test_display_lines(t_fdf_cont *cont)
 {
-	t_2d_point p0_0;
-	t_2d_point p100_100;
-	t_2d_point p1;
-	t_2d_point p2;
-	t_2d_point p3;
-	t_2d_point p4;
-	t_2d_point p5;
-	t_2d_point p6;
-	t_2d_point p7;
-	t_2d_point p8;
-	t_2d_point p9;
+	t_point p0_0;
+	t_point p100_100;
+	t_point p1;
+	t_point p2;
+	t_point p3;
+	t_point p4;
+	t_point p5;
+	t_point p6;
+	t_point p7;
+	t_point p8;
+	t_point p9;
 
 	p0_0.x = 0;
 	p0_0.y = 0;
@@ -89,17 +89,17 @@ void	test_display_lines(t_fdf_cont *cont)
 
 void	test_display_lines_multicolor(t_fdf_cont *cont)
 {
-	t_2d_point	p0_0;
-	t_2d_point	p100_100;
-	t_2d_point	p1;
-	t_2d_point	p2;
-	t_2d_point	p3;
-	t_2d_point	p4;
-	t_2d_point	p5;
-	t_2d_point	p6;
-	t_2d_point	p7;
-	t_2d_point	p8;
-	t_2d_point	p9;
+	t_point	p0_0;
+	t_point	p100_100;
+	t_point	p1;
+	t_point	p2;
+	t_point	p3;
+	t_point	p4;
+	t_point	p5;
+	t_point	p6;
+	t_point	p7;
+	t_point	p8;
+	t_point	p9;
 	static int	offset;
 
 	if (offset % 255 == 0)

@@ -18,8 +18,9 @@ int	main(int argc, char *argv[])
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
 	print_map_info(cont, 0);
+	center_map(cont);
 	display_map(cont);
-
+	
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);
 

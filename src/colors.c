@@ -23,3 +23,17 @@ void	change_color(int x, int y, int *color)
 	blue = y >> 2;
 	*color = (red << 16) + (green << 8) + blue;
 }
+
+int	average_color(int color1, int color2, double percent)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	if (color1 == color2)
+		return (color1);
+	r = ((color2 >> 16 & 0xFF) - (color1 >> 16 & 0xFF)) * percent + (color1 >> 16 & 0xFF);
+	g = ((color2 >> 8 & 0xFF) - (color1 >> 8 & 0xFF)) * percent + (color1 >> 8 & 0xFF);
+	b = ((color2 & 0xFF) - (color1 & 0xFF)) * percent + (color1 & 0xFF);
+	return ((r << 16) | (g << 8) | (b));
+}

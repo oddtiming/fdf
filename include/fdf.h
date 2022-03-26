@@ -39,11 +39,6 @@ typedef enum
 } e_mlx_events;
 
 // Structs
-typedef struct s_2d_point
-{
-	int	x;
-	int	y;
-}	t_2d_point;
 
 typedef struct s_point
 {
@@ -55,18 +50,18 @@ typedef struct s_point
 
 typedef struct s_line
 {
-	t_2d_point	p1;
-	t_2d_point	p2;
-	int			*independent_var;
-	int			*dependent_var;
-	int			independent_max;
-	int			independent_step;
-	int			dependent_step;
-	int			offset_increment;
-	int			offset_decrement;
-	int			offset;
-	int			dx;
-	int			dy;
+	t_point	p1;
+	t_point	p2;
+	double	*independent_var;
+	double	*dependent_var;
+	int		independent_max;
+	int		independent_step;
+	int		dependent_step;
+	int		offset_increment;
+	int		offset_decrement;
+	int		offset;
+	int		dx;
+	int		dy;
 }	t_line;
 
 
@@ -142,14 +137,15 @@ void	display_lines_until_x(t_fdf_cont *cont);
 
 //  display_map.c
 void	display_map(t_fdf_cont *cont);
+void	center_map(t_fdf_cont *cont);
 void	project_point(t_fdf_cont *cont, int x, int y);
 
 //	draw.c
 void	draw_background(t_img *img, int color);
-void	draw_line(t_img *img, t_2d_point p1, t_2d_point p2);
+void	draw_line(t_img *img, t_point p1, t_point p2);
 void	draw_square_rainbow(t_img *img, int size);
-void	draw_line_rainbow(t_img *img, t_2d_point p1, t_2d_point p2);
-void	draw_line_rainbow_offset(t_img *img, t_2d_point p1, t_2d_point p2, int offset);
+void	draw_line_rainbow(t_img *img, t_point p1, t_point p2);
+void	draw_line_rainbow_offset(t_img *img, t_point p1, t_point p2, int offset);
 
 // rotate.c
 void	rotate_map(t_fdf_cont *cont);
@@ -160,7 +156,7 @@ void	rotate_x(t_fdf_cont *cont, double theta);
 // 	color.c
 void	change_color(int x, int y, int *color);
 void	change_color_offset(int x, int y, int *color, int offset);
-
+int		average_color(int color1, int color2, double percent);
 
 // Utils
 //	utils.c
