@@ -2,6 +2,7 @@
 
 void	set_hooks(t_fdf_cont *cont)
 {
+	mlx_do_key_autorepeaton(cont->mlx_ptr);
 	mlx_expose_hook(cont->win_ptr, handle_expose_hook, cont);
 	mlx_key_hook(cont->win_ptr, handle_key_hook, cont);
 	mlx_mouse_hook(cont->win_ptr, handle_mouse_hook, cont);
@@ -13,10 +14,14 @@ void	set_hooks(t_fdf_cont *cont)
 
 int	handle_default_hook(t_fdf_cont *cont)
 {
-	rotate_x(cont, +0.01);
-	rotate_y(cont, +0.01);
-	rotate_z(cont, +0.01);
-	display_map(cont);
+	if (cont->toggle_rot_x == true)
+		rotate_x(cont, +0.0145);
+	if (cont->toggle_rot_y == true)
+		rotate_y(cont, +0.0145);
+	if (cont->toggle_rot_z == true)
+		rotate_z(cont, +0.0145);
+	if (cont->toggle_rot_x || cont->toggle_rot_y || cont->toggle_rot_z)
+		display_map(cont);
 	(void) cont;
 	return (0);
 }
@@ -77,6 +82,18 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (keysym == 76) //NUMPAD_ENTER
 	{
 		print_map_info(cont, 0);
+	}
+	if (keysym == 92) //NUMPAD9
+	{
+		cont->toggle_rot_z = !cont->toggle_rot_z;
+	}
+	if (keysym == 88) //NUMPAD6
+	{
+		cont->toggle_rot_y = !cont->toggle_rot_y;
+	}
+	if (keysym == 85) //NUMPAD3
+	{
+		cont->toggle_rot_x = !cont->toggle_rot_x;
 	}
 
 	if (keysym == 40) //KEY_K

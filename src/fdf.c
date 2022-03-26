@@ -10,7 +10,6 @@ int	main(int argc, char *argv[])
 {
 	t_fdf_cont	*cont;
 
-
 	cont = malloc(sizeof(t_fdf_cont));
 	if (!cont)
 		exit (1);
@@ -19,9 +18,8 @@ int	main(int argc, char *argv[])
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
 	print_map_info(cont, 0);
-	// display_map(cont);
+	display_map(cont);
 
-	mlx_do_key_autorepeaton(cont->mlx_ptr);
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);
 

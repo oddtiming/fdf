@@ -91,9 +91,14 @@ typedef struct s_fdf_cont
 	t_point	*map;
 	int		map_height;
 	int		map_width;
-	int		max_altitude;
-	int		min_altitude;
-	int		median_altitude;
+	int		win_height;
+	int		win_width;
+	int		max_alt;
+	int		min_alt;
+	int		square_width;
+	bool	toggle_rot_x;
+	bool	toggle_rot_y;
+	bool	toggle_rot_z;
 }	t_fdf_cont;
 
 
@@ -102,9 +107,10 @@ typedef struct s_fdf_cont
 
 //  parse.c
 void	fdf_parse(t_fdf_cont *cont, char *filepath);
-void	parse_map_dimensions(t_fdf_cont *cont, int fd);
+void	parse_map(t_fdf_cont *cont, int fd);
 int		parse_map_line(char *curr_line);
-void	assign_points_to_map(t_fdf_cont *cont, int fd);
+void	assign_map(t_fdf_cont *cont, int fd);
+void	assign_map_line(t_fdf_cont *cont, char *line, int y);
 
 //	init.c
 void	fdf_init(t_fdf_cont *cont, char *filepath);
@@ -150,7 +156,7 @@ void	rotate_x(t_fdf_cont *cont, double theta);
 // 	color.c
 void	change_color(int x, int y, int *color);
 void	change_color_offset(int x, int y, int *color, int offset);
-void	fdf_assign_map_colors(t_fdf_cont *cont);
+void	assign_colors(t_fdf_cont *cont);
 
 // Utils
 //	utils.c

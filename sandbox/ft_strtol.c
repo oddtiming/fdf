@@ -50,10 +50,7 @@ double	fdf_strtodbl(char *str, char **endptr)
 	{
 		index++;
 		decimal = ft_atox(&str[index]);
-		printf("decimal = %d \n", decimal);
 	}
-	printf("ft_log_calc(decimal) = %d \n", ft_log_calc(decimal, 10));
-	printf("__exp10(ft_log_calc(decimal)) = %f \n", __exp10(ft_log_calc(decimal, 10)));
 	while (is_set(str[index], "0123456789ABCDEFabcdefx"))
 		index++;
 	*endptr = &str[index];

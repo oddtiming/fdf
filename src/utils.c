@@ -100,11 +100,10 @@ double	fdf_strtodbl(char *str)
 		if (integer < 0)
 			index++;
 	}
-	if ((str[index] == ',' || str[index] == '.') && ft_isdigit(str[index - 1]) && index !=0)
+	if (str[index] == ',')
 	{
 		index++;
 		decimal = ft_atox(&str[index]);
-		printf("decimal = %d \n", decimal);
 	}
 	while (is_set(str[index], "0123456789ABCDEFabcdefx"))
 		index++;

@@ -7,23 +7,21 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 
 	if (DEBUG)
 		printf("x = %d\ny = %d\n", x, y);
-	p2.x = (int)(cont->map[x + y * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
-	p2.y = (int)(cont->map[x + y * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
+	p2.x = (int)(cont->map[x + y * cont->map_width].x * 5) + WIN_W / 2 - (cont->map_width / 2) * 5;
+	p2.y = (int)(cont->map[x + y * cont->map_width].y * 5) + WIN_H / 2 - (cont->map_height / 2) * 5;
 
 	if (x > 0)
 	{
-		p1.x = (int)(cont->map[x - 1 + y * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
-		p1.y = (int)(cont->map[x - 1 + y * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
+		p1.x = (int)(cont->map[x - 1 + y * cont->map_width].x * 5) + WIN_W / 2 - (cont->map_width / 2) * 5;
+		p1.y = (int)(cont->map[x - 1 + y * cont->map_width].y * 5) + WIN_H / 2 - (cont->map_height / 2) * 5;
 		draw_line(cont->curr_img, p1, p2);
 	}
 	if (y > 0)
 	{
-		p1.x = (int)(cont->map[x + (y - 1) * cont->map_width].x * 10) + WIN_W / 2 - (cont->map_width / 2) * 10;
-		p1.y = (int)(cont->map[x + (y - 1) * cont->map_width].y * 10) + WIN_H / 2 - (cont->map_height / 2) * 10;
+		p1.x = (int)(cont->map[x + (y - 1) * cont->map_width].x * 5) + WIN_W / 2 - (cont->map_width / 2) * 5;
+		p1.y = (int)(cont->map[x + (y - 1) * cont->map_width].y * 5) + WIN_H / 2 - (cont->map_height / 2) * 5;
 		draw_line(cont->curr_img, p1, p2);
 	}
-	if (DEBUG)
-		printf("p2.x = %d\np2.y = %d\n", p2.x, p2.y);
 	fill_pixel(cont->curr_img, p2.x, p2.y, 0xFF0000);
 	return ;
 }
@@ -39,8 +37,6 @@ void	scale_map(t_fdf_cont *cont)
 		zoom = WIN_W / cont->map_width / 2;
 	if (cont->map_height && WIN_H / cont->map_height - 1 < zoom)
 		zoom = WIN_H / cont->map_height / 2;
-	if (DEBUG)
-		printf("zoom = %d \n", zoom);
 	while (y < cont->map_height)
 	{
 		x = 0;
