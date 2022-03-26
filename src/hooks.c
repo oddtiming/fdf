@@ -54,8 +54,8 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		printf("cont->img->line_len %d\n", cont->img->line_len);
 		printf("cont->img->width %d\n", cont->img->width);
 		printf("cont->img->height %d\n", cont->img->height);
-		printf("cont->height %d\n", cont->map_height);
-		printf("cont->width %d\n", cont->map_width);
+		printf("cont->height %d\n", cont->map_h);
+		printf("cont->width %d\n", cont->map_w);
 		printf("Keysim = %d\n", keysym);
 	}
 	if (keysym == 53) //KEY_ESC
@@ -124,8 +124,8 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 		printf("cont->img->line_len %d\n", cont->img->line_len);
 		printf("cont->img->width %d\n", cont->img->width);
 		printf("cont->img->height %d\n", cont->img->height);
-		printf("cont->height %d\n", cont->map_height);
-		printf("cont->width %d\n", cont->map_width);
+		printf("cont->height %d\n", cont->map_h);
+		printf("cont->width %d\n", cont->map_w);
 		printf("Keysim = %d\n", keysym);
 	}
 	if (keysym == 18) //KEY_1

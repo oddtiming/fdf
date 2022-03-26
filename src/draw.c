@@ -13,9 +13,9 @@ static void	set_line_struct_x_fct_of_y(t_line *line)
 		line->dependent_step = 1;
 	else
 		line->dependent_step = -1;
-	line->offset_increment = line->dx << 1;
-	line->offset_decrement = line->dy << 1;
-	line->offset = (line->dx << 1) - line->dy;
+	line->offset_increment = line->dx * 2;
+	line->offset_decrement = line->dy * 2;
+	line->offset = (line->dx * 2) - line->dy;
 	return ;
 }
 
@@ -36,41 +36,126 @@ static void	set_line_struct(t_line *line)
 			line->dependent_step = 1;
 		else
 			line->dependent_step = -1;
-		line->offset_increment = line->dy << 1;
-		line->offset_decrement = line->dx << 1;
-		line->offset = (line->dy << 1) - line->dx;
+		line->offset_increment = line->dy * 2;
+		line->offset_decrement = line->dx * 2;
+		line->offset = (line->dy * 2) - line->dx;
 	}
 	else
 		set_line_struct_x_fct_of_y(line);
 	return ;
 }
 
+void	adjust_bounds_again_wtf(t_fdf_cont *cont, t_line *line)
+{
+	if (line->p1.x >= 0 && line->p1.x <= cont->win_w && \
+		line->p1.y >= 0 && line->p1.y <= cont->win_h && \
+		line->p2.x >= 0 && line->p2.x <= cont->win_w && \
+		line->p2.y >= 0 && line->p2.y <= cont->win_h)
+		return ;
+	line->p1.x = nearbyint(line->p1.x);
+	line->p1.x = nearbyint(line->p1.x);
+	line->p2.x = nearbyint(line->p2.x);
+	line->p2.x = nearbyint(line->p2.x);
+	line->p1.y = nearbyint(line->p1.y);
+	line->p1.y = nearbyint(line->p1.y);
+	line->p2.y = nearbyint(line->p2.y);
+	line->p2.y = nearbyint(line->p2.y);
+}
+
+int	adjust_bounds(t_fdf_cont *cont, t_point *p1, t_point *p2)
+{
+	if ((p1->x < 0 || (int)p1->x >= cont->win_w - 1 || \
+		p1->y < 0 || (int)p1->y >= cont->win_h - 1) && \
+		(p2->x < 0 || (int)p2->x >= cont->win_w - 1 || \
+		p2->y < 0 || (int)p2->y >= cont->win_h - 1))
+		return (EXIT_FAILURE);
+	else if (p1->x >= 0 && p1->x <= cont->win_w && \
+		p1->y >= 0 && p1->y <= cont->win_h && \
+		p2->x >= 0 && p2->x <= cont->win_w && \
+		p2->y >= 0 && p2->y <= cont->win_h)
+		return (EXIT_SUCCESS);
+	else if ((int)p1->x <= 0)
+	{
+		p1->y += linear_interpolation(p1->x, p2->x, 1) * (p2->y - p1->y);
+		p1->x = 0;
+	}
+	else if ((int)p1->x >= cont->win_w - 1)
+	{
+		p1->y += linear_interpolation(p1->x, p2->x, cont->win_w - 1) * (p2->y - p1->y);
+		p1->x = cont->win_w - 1;
+	}
+	else if ((int)p2->x <= 0)
+	{
+		p2->y += linear_interpolation(p2->x, p1->x, 1) * (p1->y - p2->y);
+		p2->x = 0;
+	}
+	else if ((int)p2->x >= cont->win_w - 1)
+	{
+		p2->y += linear_interpolation(p2->x, p1->x, cont->win_w - 1) * (p1->y - p2->y);
+		p2->x = cont->win_w - 1;
+	}
+	if ((int)p1->y <= 0)
+	{
+		p1->x += linear_interpolation(p1->y, p2->y, 1) * (p2->x - p1->x);
+		p1->y = 0;
+	}
+	else if ((int)p1->y >= cont->win_h - 1)
+	{
+		p1->x += linear_interpolation(p1->y, p2->y, cont->win_h - 1) * (p2->x - p1->x);
+		p1->y = cont->win_h - 1;
+	}
+	else if ((int)p2->y <= 0)
+	{
+		p2->x += linear_interpolation(p2->y, p1->y, 1) * (p1->x - p2->x);
+		p2->y = 0;
+	}
+	else if ((int)p2->y >= cont->win_h - 1)
+	{
+		p2->x += linear_interpolation(p2->y, p1->y, cont->win_h - 1) * (p1->x - p2->x);
+		p2->y = cont->win_h - 1;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
 {
 	t_line	*line;
+	double	color_percent;
 	int		pixel_color;
-	int		color_percent;
 
 	line = ft_safealloc(sizeof(t_line));
+	if (adjust_bounds(cont, &p1, &p2))
+		return ;
 	line->p1 = p1;
 	line->p2 = p2;
 	set_line_struct(line);
-	while (*line->independent_var != line->independent_max)
+	while (*line->independent_var != line->independent_max && \
+			*line->independent_var >= 0 && *line->independent_var < 1280 && \
+			*line->dependent_var >= 0 && *line->dependent_var < 1280)
 	{
-		*line->independent_var += line->independent_step;
+		*line->independent_var = (int)(line->independent_step + *line->independent_var);
 		if (line->offset >= 0)
 		{
-			*line->dependent_var += line->dependent_step;
+			*line->dependent_var = (int)(line->dependent_step + *line->dependent_var);
 			line->offset -= line->offset_decrement;
 		}
 		line->offset += line->offset_increment;
-		if (line->independent_max == p2.x)
-			color_percent = fabs(*line->independent_var - p1.x) / fabs(p1.x - p2.x);
+		if (line->dx >= line->dy)
+			color_percent = linear_interpolation(p1.x, p2.x, line->p1.x);
 		else
-			color_percent = fabs(*line->independent_var - p1.y) / fabs(p1.y - p2.y);
-		pixel_color = FDF_WHITE;
-		if (cont->map_is_colored == true)
-			pixel_color = average_color(p1.color, p2.color, color_percent);
+			color_percent = linear_interpolation(p1.y, p2.y, line->p1.y);
+		pixel_color = average_color(p1.color, p2.color, color_percent);
+		// if (p1.x <= 0 || p1.x >= cont->win_w || \
+		// 	p1.y <= 0 || p1.y >= cont->win_h || \
+		// 	p2.x <= 0 || p2.x >= cont->win_w || \
+		// 	p2.y <= 0 || p2.y >= cont->win_h)
+		// {
+		// 	printf("wtf \n");
+		// 	printf("p1 = [%3.3f, %3.3f] \n", p1.x, p1.y);
+		// 	printf("p2 = [%3.3f, %3.3f] \n", p2.x, p2.y);
+		// 	adjust_bounds_again_wtf(cont, line);
+		// 	continue;
+		// }
 		fill_pixel(cont->img, line->p1.x, line->p1.y, pixel_color);
 	}
 	free(line);

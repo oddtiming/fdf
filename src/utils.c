@@ -19,12 +19,12 @@ void	print_map(t_fdf_cont *cont)
 	int			y;
 
 	y = 0;
-	while (y < cont->map_height)
+	while (y < cont->map_h)
 	{
 		x = 0;
-		while (x < cont->map_width)
+		while (x < cont->map_w)
 		{
-			printf(" %3.3f ", cont->map[x + (y * cont->map_width)].z);
+			printf(" %3.3f ", cont->map[x + (y * cont->map_w)].z);
 			x++;
 		}
 		printf("\n");
@@ -40,34 +40,34 @@ void	print_map_info(t_fdf_cont *cont, int map_val)
 
 
 	y = 0;
-	while (y < cont->map_height)
+	while (y < cont->map_h)
 	{
 		x = 0;
-		while (x < cont->map_width)
+		while (x < cont->map_w)
 		{
 			if (map_val == 0)
 			{
 				if (x == 0 && y == 0)
 					printf("\t==> X values \n");
-				printf(" %3.3f ", cont->map[x + (y * cont->map_width)].x);
+				printf(" %3.3f ", cont->map[x + (y * cont->map_w)].x);
 			}
 			else if (map_val == 1)
 			{
 				if (x == 0 && y == 0)
 					printf("\t==> Y values \n");
-				printf(" %3.3f ", cont->map[x + (y * cont->map_width)].y);
+				printf(" %3.3f ", cont->map[x + (y * cont->map_w)].y);
 			}
 			else if (map_val == 2)
 			{
 				if (x == 0 && y == 0)
 					printf("\t==> Z values \n");
-				printf(" %3.3f ", cont->map[x + (y * cont->map_width)].z);
+				printf(" %3.3f ", cont->map[x + (y * cont->map_w)].z);
 			}
 			else
 			{
 				if (x == 0 && y == 0)
 					printf("\t==> Colors \n");
-				printf(" %8X ", cont->map[x + (y * cont->map_width)].color);
+				printf(" %8X ", cont->map[x + (y * cont->map_w)].color);
 			}
 			x++;
 		}
@@ -78,6 +78,13 @@ void	print_map_info(t_fdf_cont *cont, int map_val)
 	{
 		printf("\n\n");
 		print_map_info(cont, map_val + 1);
+	}
+	else
+	{
+		printf("cont->map_w = %d \n", cont->map_w);
+		printf("cont->map_h = %d \n", cont->map_h);
+		printf("cont->win_w = %d \n", cont->win_w);
+		printf("cont->win_h = %d \n", cont->win_h);
 	}
 	return ;
 }
@@ -112,7 +119,7 @@ double	fdf_strtodbl(char *str)
 
 double	linear_interpolation(double start, double end, double curr)
 {
-	if (curr == start)
+	if (curr == start || end == start)
 		return (0.0F);
 	else if (curr == end)
 		return (1.0F);

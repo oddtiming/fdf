@@ -20,8 +20,8 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 		printf("cont->max_alt = %d \n", cont->max_alt);
 		printf("cont->min_alt = %d \n", cont->min_alt);
 		printf("cont->square_width = %d \n", cont->square_width);
-		printf("cont->win_width = %d \n", cont->win_width);
-		printf("cont->win_height = %d \n", cont->win_height);
+		printf("cont->win_w = %d \n", cont->win_w);
+		printf("cont->win_h = %d \n", cont->win_h);
 	}
 
 	if (cont->map_is_colored == false)
@@ -88,8 +88,8 @@ void	parse_map(t_fdf_cont *cont, int fd)
 	char	*curr_line;
 	int		curr_line_width;
 
-	cont->map_height = 0;
-	cont->map_width = 0;
+	cont->map_h = 0;
+	cont->map_w = 0;
 	cont->map_is_colored = false;
 	curr_line = get_next_line(fd);
 	while (curr_line)
@@ -97,11 +97,11 @@ void	parse_map(t_fdf_cont *cont, int fd)
 		curr_line_width = parse_map_line(curr_line);
 		if (curr_line_width == 0)
 			exit_on_err("Map error: one of the inputs is not an int \n");
-		else if (cont->map_width == 0)
-			cont->map_width = curr_line_width;
-		else if (cont->map_width != curr_line_width)
+		else if (cont->map_w == 0)
+			cont->map_w = curr_line_width;
+		else if (cont->map_w != curr_line_width)
 			exit_on_err("Map error: map is not rectangular \n");
-		cont->map_height += 1;
+		cont->map_h += 1;
 		free(curr_line);
 		curr_line = get_next_line(fd);
 	}

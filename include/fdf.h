@@ -54,14 +54,14 @@ typedef struct s_line
 	t_point	p2;
 	double	*independent_var;
 	double	*dependent_var;
-	int		independent_max;
-	int		independent_step;
-	int		dependent_step;
-	int		offset_increment;
-	int		offset_decrement;
-	int		offset;
-	int		dx;
-	int		dy;
+	int	independent_max;
+	int	independent_step;
+	int	dependent_step;
+	int	offset_increment;
+	int	offset_decrement;
+	int	offset;
+	int	dx;
+	int	dy;
 }	t_line;
 
 
@@ -84,10 +84,10 @@ typedef struct s_fdf_cont
 	char	*win_name;
 	t_img	*img;
 	t_point	*map;
-	int		map_height;
-	int		map_width;
-	int		win_height;
-	int		win_width;
+	int		map_h;
+	int		map_w;
+	int		win_h;
+	int		win_w;
 	int		max_alt;
 	int		min_alt;
 	int		square_width;
