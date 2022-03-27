@@ -17,25 +17,13 @@ int	main(int argc, char *argv[])
 		exit_on_err("Error: FdF only accepts one input \n");
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
-	// display_square(cont);
-	// test_display_lines_multicolor(cont);
-	// display_square_rainbow(cont);
+	// print_map_info(cont, 0);
+	center_map(cont);
 	display_map(cont);
-
-	printf("im main: img_ptr = %p \n", cont->curr_img->img_ptr);
-	printf("im main: bpp = %d \n", cont->curr_img->bpp);
-	printf("im main: line_len = %d \n", cont->curr_img->line_len);
-	printf("im main: endian = %d \n", cont->curr_img->endian);
-	printf("im main: data_addr = %p \n", cont->curr_img->data_addr);
-
-	mlx_do_key_autorepeaton(cont->mlx_ptr);
+	
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);
 
-	// free(mlx_ptr);
 	fdf_cleanup(cont);
 	return (0);
 }
-
-
-//Tutorial : https://www.youtube.com/c/BrendanGalea/videos

@@ -12,12 +12,13 @@ RED			=	\033[0;31m
 ON_RED		=	\033[41m
 RESET_COL	=	\033[0m
 
-CFILES	=	cleanup.c \
+CFILES	=	assign.c \
+			colors.c \
+			cleanup.c \
 			display.c \
 			display_map.c \
 			draw.c \
 			draw_img.c \
-			errors.c \
 			fdf.c \
 			hooks.c \
 			init.c \
@@ -80,7 +81,7 @@ COMPILE_DBG_EXE		=	$(CC) $(DBG_CFLAGS) $(LIBFT_FLAGS) $(LIBM_FLAG) $(MLX_FLAGS) 
 COMPILE_DBG_EXE_OUT	=	$$($(COMPILE_DBG_EXE) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
 COMPILE_DBGC		=	$(CC) $(DBG_CFLAGS) $(INCLFLAGS) -o $@ -c $<
 COMPILE_DBGC_OUT	=	$$($(COMPILE_DBGC) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
-RM_DBG_EXE			=	rm $(DBG_EXE)
+RM_DBG_EXE			=	rm -rf $(DBG_EXE) $(DBG_DIR)
 RM_DBG_EXE_OUT		=	$$($(RM_DBG_EXE) 2>&1 | sed -e 's/error/\\\033[0;31merror\\\033[0m/g' -e 's/warning/\\\033[0;33mwarning\\\033[0m/g')
 
 $(DBG_DIR)/%.o: $(SRC_DIR)/%.c
