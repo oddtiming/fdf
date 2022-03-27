@@ -28,5 +28,10 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	cont->toggle_rot_y = false;
 	cont->toggle_rot_z = false;
 	cont->toggle_menu = false;
+	cont->map_is_colored = true;
+	cont->alt_offset = 1;
+	cont->x_offset = cont->win_w >> 1;
+	cont->y_offset = cont->win_h >> 1;
+	cont->z_divisor = 1;
 	return ;
 }

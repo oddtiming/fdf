@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-bool	is_within_bounds(t_fdf_cont *cont, t_point *p)
+bool	is_within_bounds(t_fdf_cont *cont, t_point const *const p)
 {
 	if (p->x < 0 || p->y < 0 || p->x > cont->win_w || p->y > cont->win_h)
 		return (false);
@@ -12,28 +12,76 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 	t_point	p1;
 	t_point	p2;
 
-	p2.x = (int)(cont->map[x + y * cont->map_w].x * cont->square_width) + (cont->win_w >> 1);
-	p2.y = (int)(cont->map[x + y * cont->map_w].y * cont->square_width) + (cont->win_h >> 1);
-	p2.z = cont->map[x + y * cont->map_w].z;
+	p2.x = (int)(cont->map[x + y * cont->map_w].x * cont->square_width) + cont->x_offset;
+	p2.y = (int)(cont->map[x + y * cont->map_w].y * cont->square_width) + cont->y_offset;
+	p2.z = cont->map[x + y * cont->map_w].z * cont->alt_offset * cont->z_divisor;
 	p2.color = cont->map[x + y * cont->map_w].color;
-	if (!is_within_bounds(cont, &p2))
-		return ;
-	if (x > 0)
+	if (x)
 	{
-		p1.x = (int)(cont->map[x - 1 + y * cont->map_w].x * cont->square_width) + (cont->win_w >> 1);
-		p1.y = (int)(cont->map[x - 1 + y * cont->map_w].y * cont->square_width) + (cont->win_h >> 1);
-		p1.z = cont->map[x - 1 + y * cont->map_w].z;
+		p1.x = (int)(cont->map[x - 1 + y * cont->map_w].x * cont->square_width) + cont->x_offset;
+		p1.y = (int)(cont->map[x - 1 + y * cont->map_w].y * cont->square_width) + cont->y_offset;
+		p1.z = cont->map[x - 1 + y * cont->map_w].z * cont->alt_offset * cont->z_divisor;
 		p1.color = cont->map[x - 1 + y * cont->map_w].color;
-		draw_line(cont, p1, p2);
+		if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+			draw_line(cont, p1, p2);
 	}
-	if (y > 0)
+	if (y)
 	{
-		p1.x = (int)(cont->map[x + (y - 1) * cont->map_w].x * cont->square_width) + (cont->win_w >> 1);
-		p1.y = (int)(cont->map[x + (y - 1) * cont->map_w].y * cont->square_width) + (cont->win_h >> 1);
-		p1.z = cont->map[x + (y - 1) * cont->map_w].z;
+		p1.x = (int)(cont->map[x + (y - 1) * cont->map_w].x * cont->square_width) + cont->x_offset;
+		p1.y = (int)(cont->map[x + (y - 1) * cont->map_w].y * cont->square_width) + cont->y_offset;
+		p1.z = cont->map[x + (y - 1) * cont->map_w].z * cont->alt_offset * cont->z_divisor;
 		p1.color = cont->map[x + (y - 1) * cont->map_w].color;
-		draw_line(cont, p1, p2);
+		if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+			draw_line(cont, p1, p2);
 	}
+	// p1.x = (int)(cont->map[x + (y - 2) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y - 2) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y - 2) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + (y - 3) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y - 3) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y - 3) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + (y - 4) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y - 4) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y - 4) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + 1 + y * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + 1 + y * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = cont->map[x + 1 + y * cont->map_w].z * cont->alt_offset * cont->z_divisor;
+	// p1.color = cont->map[x + 1 + y * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + (y + 1) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y + 0) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + (y + 2) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y + 0) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + (y + 3) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y + 0) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
+	// p1.x = (int)(cont->map[x + (y + 4) * cont->map_w].x * cont->square_width) + cont->x_offset;
+	// p1.y = (int)(cont->map[x + (y + 0) * cont->map_w].y * cont->square_width) + cont->y_offset;
+	// p1.z = 1000;
+	// p1.color = cont->map[x + (y) * cont->map_w].color;
+	// if (is_within_bounds(cont, &p2) || is_within_bounds(cont, &p1))
+	// 	draw_line(cont, p1, p2);
 }
 
 void	scale_map(t_fdf_cont *cont)
@@ -95,8 +143,6 @@ void	display_map(t_fdf_cont *cont)
 	// scale_map(cont);
 	// center_map(cont);
 	draw_background(cont->img, FDF_BLACK);
-	if (DEBUG)
-		print_map_info(cont, 0);
 	y = 0;
 	while (y < cont->map_h)
 	{

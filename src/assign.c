@@ -24,8 +24,6 @@ void	assign_limits(t_fdf_cont *cont)
 	cont->square_width = 5;
 	if (ft_max(cont->map_h, cont->map_w) < 100)
 		cont->square_width = ft_min(20, ft_max(683 / cont->map_h, 853 / cont->map_w));
-	if (DEBUG)
-		printf("square_width = %d\n", cont->square_width);
 	cont->win_h = cont->map_h * cont->square_width * 3;
 	cont->win_w = cont->map_w * cont->square_width * 3;
 	if (cont->win_w < 300)
@@ -36,6 +34,20 @@ void	assign_limits(t_fdf_cont *cont)
 		cont->win_h = 300;
 	else if (cont->win_h > 1024)
 		cont->win_h = 1024;
+	if (ft_max(cont->max_alt, abs(cont->min_alt)) > ft_max(cont->map_h, cont->map_w) / 3)
+	{
+		y = 0;
+		while (y < cont->map_h)
+		{
+			x = 0;
+			while (x < cont->map_w)
+			{
+				cont->max_alt = cont->map[x + y * cont->map_w].z /= 3;
+				x++;
+			}
+			y++;
+		}
+	}
 }
 
 void	assign_map_line(t_fdf_cont *cont, char *line, int y)
@@ -88,10 +100,6 @@ void	assign_map(t_fdf_cont *cont, int fd)
 	}
 	while (curr_line)
 		curr_line = get_next_line(fd);
-	if (DEBUG)
-	{
-		print_map(cont);
-	}
 	return ;
 }
 

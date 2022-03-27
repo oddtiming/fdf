@@ -140,22 +140,16 @@ void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
 			line->offset -= line->offset_decrement;
 		}
 		line->offset += line->offset_increment;
-		if (line->dx >= line->dy)
-			color_percent = linear_interpolation(p1.x, p2.x, line->p1.x);
+		if (cont->map_is_colored)
+		{
+			if (line->dx >= line->dy)
+				color_percent = linear_interpolation(p1.x, p2.x, line->p1.x);
+			else
+				color_percent = linear_interpolation(p1.y, p2.y, line->p1.y);
+			pixel_color = average_color(p1.color, p2.color, color_percent);
+		}
 		else
-			color_percent = linear_interpolation(p1.y, p2.y, line->p1.y);
-		pixel_color = average_color(p1.color, p2.color, color_percent);
-		// if (p1.x <= 0 || p1.x >= cont->win_w || \
-		// 	p1.y <= 0 || p1.y >= cont->win_h || \
-		// 	p2.x <= 0 || p2.x >= cont->win_w || \
-		// 	p2.y <= 0 || p2.y >= cont->win_h)
-		// {
-		// 	printf("wtf \n");
-		// 	printf("p1 = [%3.3f, %3.3f] \n", p1.x, p1.y);
-		// 	printf("p2 = [%3.3f, %3.3f] \n", p2.x, p2.y);
-		// 	adjust_bounds_again_wtf(cont, line);
-		// 	continue;
-		// }
+			pixel_color = FDF_WHITE;
 		fill_pixel(cont->img, line->p1.x, line->p1.y, pixel_color);
 	}
 	free(line);
@@ -242,6 +236,4 @@ void	draw_square_rainbow(t_img *img, int size)
 void	draw_background(t_img *img, int color)
 {
 	ft_memset(img->data_addr, color, img->line_len * img->height);
-	if (DEBUG)
-		printf("memset succeeded \n");
 }

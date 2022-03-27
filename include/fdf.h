@@ -86,12 +86,16 @@ typedef struct s_fdf_cont
 	char	*win_name;
 	t_img	*img;
 	t_point	*map;
+	double	alt_offset;
 	int		map_h;
 	int		map_w;
 	int		win_h;
 	int		win_w;
 	int		max_alt;
 	int		min_alt;
+	int		x_offset;
+	int		y_offset;
+	int		z_divisor;
 	int		square_width;
 	bool	map_is_colored;
 	bool	toggle_rot_x;

@@ -20,7 +20,7 @@ int	handle_default_hook(t_fdf_cont *cont)
 		rotate_y(cont, +0.0145);
 	if (cont->toggle_rot_z == true && !cont->toggle_menu)
 		rotate_z(cont, +0.0145);
-	if (cont->toggle_rot_x || cont->toggle_rot_y || cont->toggle_rot_z)
+	if (!cont->toggle_menu)
 		display_map(cont);
 	(void) cont;
 	return (0);
@@ -32,15 +32,6 @@ int	handle_expose_hook(t_fdf_cont *cont)
 	t_fdf_cont	*mlx;
 
 	mlx = (t_fdf_cont *)cont;
-	if (DEBUG)
-	{
-		printf("Expose_hook has been called! \n");
-		printf("data_arrd = %p \n", cont->img->data_addr);
-		printf("img_ptr = %p \n", cont->img->img_ptr);
-		printf("bpp = %d \n", cont->img->bpp);
-		printf("line_len = %d \n", cont->img->line_len);
-		printf("endian = %d \n", cont->img->endian);
-	}
 	return (0);
 }
 
@@ -48,15 +39,7 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 {
 	if (DEBUG)
 	{
-		printf("Keysim = %d\n", keysym);
-		printf("cont->img->data_addr %p\n", cont->img->data_addr);
-		printf("cont->img->bpp %d\n", cont->img->bpp);
-		printf("cont->img->line_len %d\n", cont->img->line_len);
-		printf("cont->img->width %d\n", cont->img->width);
-		printf("cont->img->height %d\n", cont->img->height);
-		printf("cont->height %d\n", cont->map_h);
-		printf("cont->width %d\n", cont->map_w);
-		printf("Keysim = %d\n", keysym);
+		printf("keysym = %d \n", keysym);
 	}
 	if (keysym == 53) //KEY_ESC
 	{
@@ -66,6 +49,10 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (keysym == 2) //KEY_D
 	{
 		display_default(cont);
+	}
+	if (keysym == 8) //KEY_C
+	{
+		cont->map_is_colored = !cont->map_is_colored;
 	}
 	if (keysym == 37) //KEY_L
 	{
@@ -79,8 +66,6 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	{
 		test_display_lines_multicolor(cont);
 	}
-	//69 == KEYPAD_+
-	//78 == KEYPAD_-
 	if (keysym == 76) //NUMPAD_ENTER
 	{
 		print_map_info(cont, 0);
@@ -131,51 +116,70 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	t_fdf_cont	*mlx;
 
 	mlx = (t_fdf_cont *)cont;
-	if (DEBUG)
-	{
-		printf("Keysim = %d\n", keysym);
-		printf("cont->img->data_addr %p\n", cont->img->data_addr);
-		printf("cont->img->bpp %d\n", cont->img->bpp);
-		printf("cont->img->line_len %d\n", cont->img->line_len);
-		printf("cont->img->width %d\n", cont->img->width);
-		printf("cont->img->height %d\n", cont->img->height);
-		printf("cont->height %d\n", cont->map_h);
-		printf("cont->width %d\n", cont->map_w);
-		printf("Keysim = %d\n", keysym);
-	}
 	if (keysym == 18) //KEY_1
 	{
 		test_display_lines_multicolor(mlx);
 	}
+	if (keysym == 69) //KEYPAD_+
+	{
+		if (cont->square_width < 80)
+		{
+			cont->square_width++;
+			cont->alt_offset += 0.1F;
+		}
+		display_map(cont);
+	}
+	if (keysym == 78) //KEYPAD_-
+	{
+		if (cont->square_width > 2)
+		{
+			cont->square_width--;
+			cont->alt_offset -= 0.1F;
+		}
+	}
 	if (keysym == 89) //NUMPAD7
 	{
 		rotate_z(mlx, -0.1);
-		display_map(cont);
 	}
 	if (keysym == 91) //NUMPAD8
 	{
 		rotate_z(mlx, +0.1);
-		display_map(cont);
 	}
 	if (keysym == 86) //NUMPAD4
 	{
 		rotate_y(mlx, -0.1);
-		display_map(cont);
 	}
 	if (keysym == 87) //NUMPAD5
 	{
 		rotate_y(mlx, +0.1);
-		display_map(cont);
 	}
 	if (keysym == 83) //NUMPAD1
 	{
 		rotate_x(mlx, -0.1);
-		display_map(cont);
 	}
 	if (keysym == 84) //NUMPAD2
 	{
 		rotate_x(mlx, +0.1);
-		display_map(cont);
+	}
+	if (keysym == 124) //KEY_RIGHT
+	{
+		if (cont->x_offset < cont->win_w)
+			cont->x_offset += 20;
+	}
+	if (keysym == 123) //KEY_LEFT
+	{
+		if (cont->x_offset > 0)
+			cont->x_offset -= 20;
+	}
+	if (keysym == 125) //KEY_DOWN
+	{
+		if (cont->y_offset < cont->win_h)
+			cont->y_offset += 20;
+	}
+	if (keysym == 126) //KEY_UP
+	{
+		if (cont->y_offset > 0)
+			cont->y_offset -= 20;
 	}
 	return (0);
 }
@@ -189,7 +193,6 @@ int	handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont)
 	{
 		printf("Mouse coordinates (X: %d, Y: %d)\n", x, y);
 		printf("Button pressed: %d \n", button);
-
 	}
 	return (0);
 }
