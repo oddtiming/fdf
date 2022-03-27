@@ -19,6 +19,7 @@ int	main(int argc, char *argv[])
 	fdf_init(cont, argv[1]);
 	// print_map_info(cont, 0);
 	center_map(cont);
+	rotate_map(cont);
 	display_map(cont);
 	
 	set_hooks(cont);
