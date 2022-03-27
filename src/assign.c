@@ -108,16 +108,16 @@ void	assign_point_color(t_fdf_cont *cont, int x, int y)
 	curr_color = FDF_WHITE;
 	if (curr_alt > 0)
 	{
-		curr_color = average_color(0xFFFFFF, 0xFF00FF, curr_alt / median_max);
+		curr_color = average_color(FDF_WHITE, FDF_RED, curr_alt / median_max);
 		if (curr_alt > median_max)
-			curr_color = average_color(0xFF00FF, 0xFF0000, \
+			curr_color = average_color(FDF_RED, FDF_PINK, \
 				linear_interpolation(median_max, cont->max_alt, curr_alt));
 	}
 	else if (curr_alt < 0)
 	{
-		curr_color = average_color(0xFFFFFF, 0xFFFF, curr_alt / median_min);
+		curr_color = average_color(FDF_WHITE, FDF_BLUE, curr_alt / median_min);
 		if (curr_alt < median_min)
-			curr_color = average_color(0xFFFF, 0xFF, \
+			curr_color = average_color(FDF_BLUE, FDF_CYAN, \
 				linear_interpolation(median_min, cont->min_alt, curr_alt));
 	}
 	cont->map[x + y * cont->map_w].color = curr_color;

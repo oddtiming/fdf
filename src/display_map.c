@@ -12,29 +12,28 @@ void	project_point(t_fdf_cont *cont, int x, int y)
 	t_point	p1;
 	t_point	p2;
 
-	p2.x = (int)(cont->map[x + y * cont->map_w].x * cont->square_width) + cont->win_w / 2;
-	p2.y = (int)(cont->map[x + y * cont->map_w].y * cont->square_width) + cont->win_h / 2;
+	p2.x = (int)(cont->map[x + y * cont->map_w].x * cont->square_width) + (cont->win_w >> 1);
+	p2.y = (int)(cont->map[x + y * cont->map_w].y * cont->square_width) + (cont->win_h >> 1);
 	p2.z = cont->map[x + y * cont->map_w].z;
 	p2.color = cont->map[x + y * cont->map_w].color;
 	if (!is_within_bounds(cont, &p2))
 		return ;
 	if (x > 0)
 	{
-		p1.x = (int)(cont->map[x - 1 + y * cont->map_w].x * cont->square_width) + cont->win_w / 2;
-		p1.y = (int)(cont->map[x - 1 + y * cont->map_w].y * cont->square_width) + cont->win_h / 2;
+		p1.x = (int)(cont->map[x - 1 + y * cont->map_w].x * cont->square_width) + (cont->win_w >> 1);
+		p1.y = (int)(cont->map[x - 1 + y * cont->map_w].y * cont->square_width) + (cont->win_h >> 1);
 		p1.z = cont->map[x - 1 + y * cont->map_w].z;
 		p1.color = cont->map[x - 1 + y * cont->map_w].color;
 		draw_line(cont, p1, p2);
 	}
 	if (y > 0)
 	{
-		p1.x = (int)(cont->map[x + (y - 1) * cont->map_w].x * cont->square_width) + cont->win_w / 2;
-		p1.y = (int)(cont->map[x + (y - 1) * cont->map_w].y * cont->square_width) + cont->win_h / 2;
+		p1.x = (int)(cont->map[x + (y - 1) * cont->map_w].x * cont->square_width) + (cont->win_w >> 1);
+		p1.y = (int)(cont->map[x + (y - 1) * cont->map_w].y * cont->square_width) + (cont->win_h >> 1);
 		p1.z = cont->map[x + (y - 1) * cont->map_w].z;
 		p1.color = cont->map[x + (y - 1) * cont->map_w].color;
 		draw_line(cont, p1, p2);
 	}
-	return ;
 }
 
 void	scale_map(t_fdf_cont *cont)

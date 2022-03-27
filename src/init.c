@@ -27,5 +27,6 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	cont->toggle_rot_x = false;
 	cont->toggle_rot_y = false;
 	cont->toggle_rot_z = false;
+	cont->toggle_menu = false;
 	return ;
 }

@@ -14,11 +14,11 @@ void	set_hooks(t_fdf_cont *cont)
 
 int	handle_default_hook(t_fdf_cont *cont)
 {
-	if (cont->toggle_rot_x == true)
+	if (cont->toggle_rot_x == true && !cont->toggle_menu)
 		rotate_x(cont, +0.0145);
-	if (cont->toggle_rot_y == true)
+	if (cont->toggle_rot_y == true && !cont->toggle_menu)
 		rotate_y(cont, +0.0145);
-	if (cont->toggle_rot_z == true)
+	if (cont->toggle_rot_z == true && !cont->toggle_menu)
 		rotate_z(cont, +0.0145);
 	if (cont->toggle_rot_x || cont->toggle_rot_y || cont->toggle_rot_z)
 		display_map(cont);
@@ -79,6 +79,8 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	{
 		test_display_lines_multicolor(cont);
 	}
+	//69 == KEYPAD_+
+	//78 == KEYPAD_-
 	if (keysym == 76) //NUMPAD_ENTER
 	{
 		print_map_info(cont, 0);
@@ -94,6 +96,19 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	if (keysym == 85) //NUMPAD3
 	{
 		cont->toggle_rot_x = !cont->toggle_rot_x;
+	}
+
+	if (keysym == 122) //KEY_F1
+	{ 
+		void	*img_ptr;
+		int		height;
+		int		width;
+
+		img_ptr = NULL;
+		height = 0;
+		width = 0;
+		img_ptr = mlx_xpm_file_to_image(cont->mlx_ptr, "./extra_stuff_not_important/banner.xpm", &width, &height);
+		mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img_ptr, 0, 0);
 	}
 
 	if (keysym == 40) //KEY_K

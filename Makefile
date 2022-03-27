@@ -19,7 +19,6 @@ CFILES	=	assign.c \
 			display_map.c \
 			draw.c \
 			draw_img.c \
-			errors.c \
 			fdf.c \
 			hooks.c \
 			init.c \

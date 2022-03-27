@@ -27,7 +27,9 @@
 typedef enum
 {
 	FDF_BLACK	= 0x000000,
+	FDF_BLUE	= 0x0000FF,
 	FDF_CYAN	= 0x00FFFF,
+	FDF_RED		= 0xFF0000,
 	FDF_PINK	= 0xFF00FF,
 	FDF_WHITE	= 0xFFFFFF,
 	FDF_YELLOW	= 0xFFFF00
@@ -95,6 +97,7 @@ typedef struct s_fdf_cont
 	bool	toggle_rot_x;
 	bool	toggle_rot_y;
 	bool	toggle_rot_z;
+	bool	toggle_menu;
 }	t_fdf_cont;
 
 
