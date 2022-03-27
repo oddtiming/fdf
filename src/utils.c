@@ -74,7 +74,7 @@ void	print_map_info(t_fdf_cont *cont, int map_val)
 		printf("\n");
 		y++;
 	}
-	if (map_val < 4)
+	if (map_val < 3)
 	{
 		printf("\n\n");
 		print_map_info(cont, map_val + 1);
@@ -124,4 +124,11 @@ double	linear_interpolation(double start, double end, double curr)
 	else if (curr == end)
 		return (1.0F);
 	return ((curr - start) / (end - start));
+}
+
+bool	is_within_bounds(t_fdf_cont *cont, t_point const *const p)
+{
+	if (p->x < 0 || p->y < 0 || p->x > cont->win_w || p->y > cont->win_h)
+		return (false);
+	return (true);
 }

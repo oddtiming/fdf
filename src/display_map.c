@@ -1,38 +1,37 @@
 #include "fdf.h"
 
-bool	is_within_bounds(t_fdf_cont *cont, t_point const *const p)
-{
-	if (p->x < 0 || p->y < 0 || p->x > cont->win_w || p->y > cont->win_h)
-		return (false);
-	return (true);
-}
-
 void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
 {
 	double	prev_x;
 	double	prev_y;
 	double	prev_z;
 
+	(void) angles;
+	//rotate_x
 	prev_y = p->y;
 	prev_z = p->z;
-	p->z /= 3;
 	p->y = angles->cos_x * prev_y - angles->sin_x * prev_z;
 	p->z = angles->cos_x * prev_z + angles->sin_x * prev_y;
+	//rotate_y
 	prev_x = p->x;
 	prev_z = p->z;
 	p->x = angles->cos_y * prev_x + angles->sin_y * prev_z;
 	p->z = angles->cos_y * prev_z - angles->sin_y * prev_x ;
+	//rotate_z
 	prev_x = p->x;
 	prev_y = p->y;
 	p->x = angles->cos_z * prev_x - angles->sin_z * prev_y;
 	p->y = angles->cos_z * prev_y + angles->sin_z * prev_x;
 	if (!cont->toggle_proj)
 	{
-		p->x *= angles->cos_x;
-		p->y *= angles->cos_y;
+		prev_x = p->x;
+		// p->x = (p->x - p->y) * cos(-0.5236);
+		// p->y = -p->z + (prev_x + p->y) * sin(-0.5236);
+		p->x = (p->x - p->y) * angles->cos_x;
+		p->y = -p->z + (prev_x - p->y) * angles->sin_x;
 	}
-	p->x *= cont->square_width;
-	p->y *= cont->square_width;
+	p->x = p->x * cont->square_width;
+	p->y = p->y * cont->square_width;
 	p->x += cont->x_offset;
 	p->y += cont->y_offset;
 	p->x = (int)p->x;
@@ -98,21 +97,21 @@ void	scale_map(t_fdf_cont *cont)
 
 void	center_map(t_fdf_cont *cont)
 {
-	double	x_offset;
-	double	y_offset;
+	double	x_center;
+	double	y_center;
 	int		x;
 	int		y;
 
-	x_offset = -cont->map_w / 2;
-	y_offset = -cont->map_h / 2;
+	x_center = -cont->map_w / 2;
+	y_center = -cont->map_h / 2;
 	y = 0;
 	while (y < cont->map_h)
 	{
 		x = 0;
 		while (x < cont->map_w)
 		{
-			cont->map[x + y * cont->map_w].x += x_offset;
-			cont->map[x + y * cont->map_w].y += y_offset;
+			cont->map[x + y * cont->map_w].x += x_center;
+			cont->map[x + y * cont->map_w].y += y_center;
 			x++;
 		}
 		y++;

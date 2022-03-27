@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 		exit_on_err("Error: FdF only accepts one input \n");
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
-	// print_map_info(cont, 0);
+	print_map_info(cont, 0);
 	center_map(cont);
 	display_map(cont);
 	

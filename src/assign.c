@@ -56,7 +56,7 @@ void	assign_map_line(t_fdf_cont *cont, char *line, int y)
 		point = &cont->map[x + (y * cont->map_w)];
 		point->x = x;
 		point->y = y;
-		point->z = -ft_atoi(&line[index]);
+		point->z = ft_atoi(&line[index]);
 		while (ft_isspace(line[index]))
 			index++;
 		if (line[index] == '-')

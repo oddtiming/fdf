@@ -187,6 +187,7 @@ void	print_map(t_fdf_cont *cont);
 void	print_map_info(t_fdf_cont *cont, int map_val);
 double	fdf_strtodbl(char *str);
 double	linear_interpolation(double start, double end, double curr);
+bool	is_within_bounds(t_fdf_cont *cont, t_point const *const p);
 
 // Cleanup
 //	cleanup.c
