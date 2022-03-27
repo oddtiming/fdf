@@ -87,9 +87,6 @@ void	rotate_matrix(t_fdf_cont *cont, int x, int y)
 	double	prev_y;
 	double	prev_z;
 
-	(void)prev_x;
-	(void)prev_y;
-	(void)prev_z;
 	prev_y = cont->map[x + y * cont->map_w].y;
 	prev_z = cont->map[x + y * cont->map_w].z;
 	cont->map[x + y * cont->map_w].y = cos(-0.5236) * prev_y - sin(-0.5236) * prev_z;

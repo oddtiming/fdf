@@ -54,6 +54,10 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	{
 		cont->map_is_colored = !cont->map_is_colored;
 	}
+	if (keysym == 35) //KEY_P
+	{
+		cont->toggle_proj = !cont->toggle_proj;
+	}
 	if (keysym == 37) //KEY_L
 	{
 		test_display_lines(cont);
@@ -122,10 +126,11 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 69) //KEYPAD_+
 	{
-		if (cont->square_width < 80)
+		if (cont->square_width < 150)
 		{
-			cont->square_width++;
-			cont->alt_offset += 0.1F;
+			//fixme: need to test if proper
+			cont->square_width <<= 1;
+			cont->z_divisor += 0.1F;
 		}
 		display_map(cont);
 	}
@@ -133,52 +138,53 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	{
 		if (cont->square_width > 2)
 		{
-			cont->square_width--;
-			cont->alt_offset -= 0.1F;
+			//fixme: need to test if proper
+			cont->square_width >>= 1;
+			cont->z_divisor -= 0.1F;
 		}
 	}
 	if (keysym == 89) //NUMPAD7
 	{
-		rotate_z(mlx, -0.1);
+		cont->theta_z -= 0.1;
 	}
 	if (keysym == 91) //NUMPAD8
 	{
-		rotate_z(mlx, +0.1);
+		cont->theta_z += 0.1;
 	}
 	if (keysym == 86) //NUMPAD4
 	{
-		rotate_y(mlx, -0.1);
+		cont->theta_y -= 0.1;
 	}
 	if (keysym == 87) //NUMPAD5
 	{
-		rotate_y(mlx, +0.1);
+		cont->theta_y += 0.1;
 	}
 	if (keysym == 83) //NUMPAD1
 	{
-		rotate_x(mlx, -0.1);
+		cont->theta_x -= 0.1;
 	}
 	if (keysym == 84) //NUMPAD2
 	{
-		rotate_x(mlx, +0.1);
-	}
-	if (keysym == 124) //KEY_RIGHT
-	{
-		if (cont->x_offset < cont->win_w)
-			cont->x_offset += 20;
+		cont->theta_x += 0.1;
 	}
 	if (keysym == 123) //KEY_LEFT
 	{
-		if (cont->x_offset > 0)
-			cont->x_offset -= 20;
+		if (cont->x_offset < cont->win_w * 1.2F)
+			cont->x_offset += 20;
 	}
-	if (keysym == 125) //KEY_DOWN
+	if (keysym == 124) //KEY_RIGHT
 	{
-		if (cont->y_offset < cont->win_h)
-			cont->y_offset += 20;
+		if (cont->x_offset > -cont->win_w / 1.2F)
+			cont->x_offset -= 20;
 	}
 	if (keysym == 126) //KEY_UP
 	{
-		if (cont->y_offset > 0)
+		if (cont->y_offset < cont->win_h * 1.2F)
+			cont->y_offset += 20;
+	}
+	if (keysym == 125) //KEY_DOWN
+	{
+		if (cont->y_offset > -cont->win_h / 1.2F)
 			cont->y_offset -= 20;
 	}
 	return (0);

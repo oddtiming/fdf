@@ -64,56 +64,56 @@ void	adjust_bounds_again_wtf(t_fdf_cont *cont, t_line *line)
 
 int	adjust_bounds(t_fdf_cont *cont, t_point *p1, t_point *p2)
 {
-	if ((p1->x < 0 || (int)p1->x >= cont->win_w - 1 || \
-		p1->y < 0 || (int)p1->y >= cont->win_h - 1) && \
-		(p2->x < 0 || (int)p2->x >= cont->win_w - 1 || \
-		p2->y < 0 || (int)p2->y >= cont->win_h - 1))
-		return (EXIT_FAILURE);
-	else if (p1->x >= 0 && p1->x <= cont->win_w && \
-		p1->y >= 0 && p1->y <= cont->win_h && \
-		p2->x >= 0 && p2->x <= cont->win_w && \
-		p2->y >= 0 && p2->y <= cont->win_h)
-		return (EXIT_SUCCESS);
-	else if ((int)p1->x <= 0)
+	// if ((p1->x >= 0 || p1->x <= cont->win_w || \
+	// 	p1->y >= 0 || p1->y <= cont->win_h) && \
+	// 	(p2->x >= 0 || p2->x <= cont->win_w || \
+	// 	p2->y >= 0 || p2->y <= cont->win_h))
+	// 	return (EXIT_SUCCESS);
+	if (p1->x < 0)
 	{
-		p1->y += linear_interpolation(p1->x, p2->x, 1) * (p2->y - p1->y);
+		p1->y += linear_interpolation(p1->x, p2->x, 0) * (p2->y - p1->y);
 		p1->x = 0;
 	}
-	else if ((int)p1->x >= cont->win_w - 1)
+	else if (p1->x > cont->win_w - 1)
 	{
 		p1->y += linear_interpolation(p1->x, p2->x, cont->win_w - 1) * (p2->y - p1->y);
 		p1->x = cont->win_w - 1;
 	}
-	else if ((int)p2->x <= 0)
+	else if (p2->x < 0)
 	{
-		p2->y += linear_interpolation(p2->x, p1->x, 1) * (p1->y - p2->y);
+		p2->y += linear_interpolation(p2->x, p1->x, 0) * (p1->y - p2->y);
 		p2->x = 0;
 	}
-	else if ((int)p2->x >= cont->win_w - 1)
+	else if (p2->x > cont->win_w - 1)
 	{
 		p2->y += linear_interpolation(p2->x, p1->x, cont->win_w - 1) * (p1->y - p2->y);
 		p2->x = cont->win_w - 1;
 	}
-	if ((int)p1->y <= 0)
+	if (p1->y < 0)
 	{
-		p1->x += linear_interpolation(p1->y, p2->y, 1) * (p2->x - p1->x);
+		p1->x += linear_interpolation(p1->y, p2->y, 0) * (p2->x - p1->x);
 		p1->y = 0;
 	}
-	else if ((int)p1->y >= cont->win_h - 1)
+	else if (p1->y > cont->win_h - 1)
 	{
 		p1->x += linear_interpolation(p1->y, p2->y, cont->win_h - 1) * (p2->x - p1->x);
 		p1->y = cont->win_h - 1;
 	}
-	else if ((int)p2->y <= 0)
+	else if (p2->y < 0)
 	{
-		p2->x += linear_interpolation(p2->y, p1->y, 1) * (p1->x - p2->x);
+		p2->x += linear_interpolation(p2->y, p1->y, 0) * (p1->x - p2->x);
 		p2->y = 0;
 	}
-	else if ((int)p2->y >= cont->win_h - 1)
+	else if (p2->y > cont->win_h - 1)
 	{
 		p2->x += linear_interpolation(p2->y, p1->y, cont->win_h - 1) * (p1->x - p2->x);
 		p2->y = cont->win_h - 1;
 	}
+	if ((p1->x < 0 || p1->x > cont->win_w - 1 || \
+		p1->y < 0 || p1->y > cont->win_h - 1) || \
+		(p2->x < 0 || p2->x > cont->win_w - 1 || \
+		p2->y < 0 || p2->y > cont->win_h - 1))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

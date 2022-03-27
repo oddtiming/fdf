@@ -29,8 +29,9 @@ typedef enum
 	FDF_BLACK	= 0x000000,
 	FDF_BLUE	= 0x0000FF,
 	FDF_CYAN	= 0x00FFFF,
-	FDF_RED		= 0xFF0000,
+	FDF_GREY	= 0x222222,
 	FDF_PINK	= 0xFF00FF,
+	FDF_RED		= 0xFF0000,
 	FDF_WHITE	= 0xFFFFFF,
 	FDF_YELLOW	= 0xFFFF00
 } e_colors;
@@ -49,6 +50,16 @@ typedef struct s_point
 	double			z;
 	unsigned int	color;
 }	t_point;
+
+typedef struct s_angles
+{
+	double	sin_x;
+	double	sin_y;
+	double	sin_z;
+	double	cos_x;
+	double	cos_y;
+	double	cos_z;
+}	t_angles;
 
 typedef struct s_line
 {
@@ -86,7 +97,10 @@ typedef struct s_fdf_cont
 	char	*win_name;
 	t_img	*img;
 	t_point	*map;
-	double	alt_offset;
+	double	z_divisor;
+	double	theta_x;
+	double	theta_y;
+	double	theta_z;
 	int		map_h;
 	int		map_w;
 	int		win_h;
@@ -95,13 +109,13 @@ typedef struct s_fdf_cont
 	int		min_alt;
 	int		x_offset;
 	int		y_offset;
-	int		z_divisor;
 	int		square_width;
 	bool	map_is_colored;
 	bool	toggle_rot_x;
 	bool	toggle_rot_y;
 	bool	toggle_rot_z;
 	bool	toggle_menu;
+	bool	toggle_proj;
 }	t_fdf_cont;
 
 
@@ -146,7 +160,7 @@ void	display_lines_until_x(t_fdf_cont *cont);
 //  display_map.c
 void	display_map(t_fdf_cont *cont);
 void	center_map(t_fdf_cont *cont);
-void	project_point(t_fdf_cont *cont, int x, int y);
+void	project_point(t_fdf_cont *cont, t_angles *angles, int x, int y);
 
 //	draw.c
 void	draw_background(t_img *img, int color);

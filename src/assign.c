@@ -22,7 +22,7 @@ void	assign_limits(t_fdf_cont *cont)
 		y++;
 	}
 	cont->square_width = 5;
-	if (ft_max(cont->map_h, cont->map_w) < 100)
+	if (ft_max(cont->map_h, cont->map_w) < 60)
 		cont->square_width = ft_min(20, ft_max(683 / cont->map_h, 853 / cont->map_w));
 	cont->win_h = cont->map_h * cont->square_width * 3;
 	cont->win_w = cont->map_w * cont->square_width * 3;
@@ -34,20 +34,13 @@ void	assign_limits(t_fdf_cont *cont)
 		cont->win_h = 300;
 	else if (cont->win_h > 1024)
 		cont->win_h = 1024;
-	if (ft_max(cont->max_alt, abs(cont->min_alt)) > ft_max(cont->map_h, cont->map_w) / 3)
-	{
-		y = 0;
-		while (y < cont->map_h)
-		{
-			x = 0;
-			while (x < cont->map_w)
-			{
-				cont->max_alt = cont->map[x + y * cont->map_w].z /= 3;
-				x++;
-			}
-			y++;
-		}
-	}
+	//todo: will become useful when rotation is calculated at projection
+	// if (ft_max(cont->max_alt, abs(cont->min_alt)) > ft_max(cont->map_h, cont->map_w) / 3)
+	// {
+	// 	cont->z_divisor = 0.25F;
+	// 	cont->max_alt /= 4.0F;
+	// 	cont->min_alt /= 4.0F;
+	// }
 }
 
 void	assign_map_line(t_fdf_cont *cont, char *line, int y)
@@ -63,7 +56,7 @@ void	assign_map_line(t_fdf_cont *cont, char *line, int y)
 		point = &cont->map[x + (y * cont->map_w)];
 		point->x = x;
 		point->y = y;
-		point->z = ft_atoi(&line[index]);
+		point->z = -ft_atoi(&line[index]);
 		while (ft_isspace(line[index]))
 			index++;
 		if (line[index] == '-')
@@ -116,14 +109,14 @@ void	assign_point_color(t_fdf_cont *cont, int x, int y)
 	curr_color = FDF_WHITE;
 	if (curr_alt > 0)
 	{
-		curr_color = average_color(FDF_WHITE, FDF_RED, curr_alt / median_max);
+		curr_color = average_color(FDF_YELLOW, FDF_RED, curr_alt / median_max);
 		if (curr_alt > median_max)
 			curr_color = average_color(FDF_RED, FDF_PINK, \
 				linear_interpolation(median_max, cont->max_alt, curr_alt));
 	}
 	else if (curr_alt < 0)
 	{
-		curr_color = average_color(FDF_WHITE, FDF_BLUE, curr_alt / median_min);
+		curr_color = average_color(FDF_YELLOW, FDF_BLUE, curr_alt / median_min);
 		if (curr_alt < median_min)
 			curr_color = average_color(FDF_BLUE, FDF_CYAN, \
 				linear_interpolation(median_min, cont->min_alt, curr_alt));
