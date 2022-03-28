@@ -30,13 +30,13 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	cont->toggle_menu = false;
 	cont->map_is_colored = true;
 	cont->toggle_proj = false;
-	cont->x_offset = cont->win_w >> 1;
-	cont->y_offset = cont->win_h >> 1;
+	cont->x_offset = 0;
+	cont->y_offset = 0;
 	// rotate_x(cont, -0.5236);
 	// rotate_y(cont, -0.5236);
-	cont->theta_x = 0.5236;
-	cont->theta_y = 0.5236;
-	cont->theta_z = 0.5236;
+	cont->theta_x = 0.788;
+	cont->theta_y = 0.788;
+	cont->theta_z = 0.788;
 	cont->z_divisor = 1.0F;
 	return ;
 }

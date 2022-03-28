@@ -7,6 +7,14 @@ void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
 	double	prev_z;
 
 	(void) angles;
+	(void) prev_x;
+	(void) prev_y;
+	(void) prev_z;
+	p->z = (p->z * cont->square_width + 1) / 3;
+	p->x = p->x * cont->square_width;
+	p->y = p->y * cont->square_width;
+	p->x -= (cont->map_w * cont->square_width) / 2;
+	p->y -= (cont->map_h * cont->square_width) / 2;
 	//rotate_x
 	prev_y = p->y;
 	prev_z = p->z;
@@ -16,27 +24,24 @@ void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
 	prev_x = p->x;
 	prev_z = p->z;
 	p->x = angles->cos_y * prev_x + angles->sin_y * prev_z;
-	p->z = angles->cos_y * prev_z - angles->sin_y * prev_x ;
+	p->z = angles->cos_y * prev_z - angles->sin_y * prev_x;
 	//rotate_z
 	prev_x = p->x;
 	prev_y = p->y;
 	p->x = angles->cos_z * prev_x - angles->sin_z * prev_y;
 	p->y = angles->cos_z * prev_y + angles->sin_z * prev_x;
+
 	if (!cont->toggle_proj)
 	{
 		prev_x = p->x;
-		// p->x = (p->x - p->y) * cos(-0.5236);
-		// p->y = -p->z + (prev_x + p->y) * sin(-0.5236);
-		p->x = (p->x - p->y) * angles->cos_x;
-		p->y = -p->z + (prev_x - p->y) * angles->sin_x;
+		p->x = (p->x * 0.866) - (p->y * 0.5);
+		p->y = prev_x * 0.5 + p->y * 0.866;
 	}
-	p->x = p->x * cont->square_width;
-	p->y = p->y * cont->square_width;
-	p->x += cont->x_offset;
-	p->y += cont->y_offset;
-	p->x = (int)p->x;
-	p->y = (int)p->y;
-	p->z = (int)p->z;
+	p->x += (cont->win_w - cont->map_w) / 2 - cont->x_offset;
+	p->y += (cont->win_h - cont->map_h) / 2 - cont->y_offset;
+	p->x = round(p->x);
+	p->y = round(p->y);
+	p->z = round(p->z);
 }
 
 void	project_point(t_fdf_cont *cont, t_angles *angles, int x, int y)
@@ -102,16 +107,16 @@ void	center_map(t_fdf_cont *cont)
 	int		x;
 	int		y;
 
-	x_center = -cont->map_w / 2;
-	y_center = -cont->map_h / 2;
+	x_center = cont->map_w / 2;
+	y_center = cont->map_h / 2;
 	y = 0;
 	while (y < cont->map_h)
 	{
 		x = 0;
 		while (x < cont->map_w)
 		{
-			cont->map[x + y * cont->map_w].x += x_center;
-			cont->map[x + y * cont->map_w].y += y_center;
+			cont->map[x + y * cont->map_w].x -= x_center;
+			cont->map[x + y * cont->map_w].y -= y_center;
 			x++;
 		}
 		y++;
@@ -152,5 +157,6 @@ void	display_map(t_fdf_cont *cont)
 		y++;
 	}
 	display_default(cont);
+	// print_map_info(cont, 0);
 	return ;
 }

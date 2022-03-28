@@ -64,7 +64,9 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 15) //KEY_R
 	{
-		display_square_rainbow(cont);
+		cont->toggle_rot_x = !cont->toggle_rot_x;
+		cont->toggle_rot_y = !cont->toggle_rot_y;
+		cont->toggle_rot_z = !cont->toggle_rot_z;
 	}
 	if (keysym == 18) //KEY_1
 	{
