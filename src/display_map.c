@@ -10,33 +10,27 @@ void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
 	(void) prev_x;
 	(void) prev_y;
 	(void) prev_z;
-	p->z = (p->z * cont->square_width + 1) / 3;
 	p->x = p->x * cont->square_width;
 	p->y = p->y * cont->square_width;
+	p->z = p->z * cont->square_width / 3;
 	p->x -= (cont->map_w * cont->square_width) / 2;
 	p->y -= (cont->map_h * cont->square_width) / 2;
-	//rotate_x
-	prev_y = p->y;
-	prev_z = p->z;
-	p->y = angles->cos_x * prev_y - angles->sin_x * prev_z;
-	p->z = angles->cos_x * prev_z + angles->sin_x * prev_y;
-	//rotate_y
-	prev_x = p->x;
-	prev_z = p->z;
-	p->x = angles->cos_y * prev_x + angles->sin_y * prev_z;
-	p->z = angles->cos_y * prev_z - angles->sin_y * prev_x;
-	//rotate_z
-	prev_x = p->x;
-	prev_y = p->y;
-	p->x = angles->cos_z * prev_x - angles->sin_z * prev_y;
-	p->y = angles->cos_z * prev_y + angles->sin_z * prev_x;
+	// //rotate_x
+	// prev_y = p->y;
+	// prev_z = p->z;
+	// p->y = angles->cos_x * prev_y - angles->sin_x * prev_z;
+	// p->z = angles->cos_x * prev_z + angles->sin_x * prev_y;
+	// //rotate_y
+	// prev_x = p->x;
+	// prev_z = p->z;
+	// p->x = angles->cos_y * prev_x + angles->sin_y * prev_z;
+	// p->z = angles->cos_y * prev_z - angles->sin_y * prev_x;
+	// //rotate_z
+	// prev_x = p->x;
+	// prev_y = p->y;
+	// p->x = angles->cos_z * prev_x - angles->sin_z * prev_y;
+	// p->y = angles->cos_z * prev_y + angles->sin_z * prev_x;
 
-	if (!cont->toggle_proj)
-	{
-		prev_x = p->x;
-		p->x = (p->x * 0.866) - (p->y * 0.5);
-		p->y = prev_x * 0.5 + p->y * 0.866;
-	}
 	p->x += (cont->win_w - cont->map_w) / 2 - cont->x_offset;
 	p->y += (cont->win_h - cont->map_h) / 2 - cont->y_offset;
 	p->x = round(p->x);
