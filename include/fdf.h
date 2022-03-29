@@ -18,9 +18,6 @@
 #  define DEBUG 0
 # endif
 
-# define WIN_W 1280
-# define WIN_H 1024
-
 
 //TYPEDEFS
 // Enums
