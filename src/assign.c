@@ -35,12 +35,12 @@ void	assign_limits(t_fdf_cont *cont)
 	else if (cont->win_h > 1024)
 		cont->win_h = 1024;
 	//todo: will become useful when rotation is calculated at projection
-	// if (ft_max(cont->max_alt, abs(cont->min_alt)) > ft_max(cont->map_h, cont->map_w) / 3)
-	// {
-	// 	cont->z_divisor = 0.25F;
-	// 	cont->max_alt /= 4.0F;
-	// 	cont->min_alt /= 4.0F;
-	// }
+	if (ft_max(cont->max_alt, abs(cont->min_alt)) > ft_max(cont->map_h, cont->map_w) / 3)
+	{
+		cont->z_divisor = 0.25F;
+		cont->max_alt /= 4.0F;
+		cont->min_alt /= 4.0F;
+	}
 }
 
 void	assign_map_line(t_fdf_cont *cont, char *line, int y)

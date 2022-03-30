@@ -43,7 +43,7 @@ LIBFT_FLAGS	= -lft -Llibft
 LIBM_FLAG	= -lm
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror -g -O3
 
 #
 # DEBUG build settings

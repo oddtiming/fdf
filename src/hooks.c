@@ -15,11 +15,11 @@ void	set_hooks(t_fdf_cont *cont)
 int	handle_default_hook(t_fdf_cont *cont)
 {
 	if (cont->toggle_rot_x == true && !cont->toggle_menu)
-		rotate_x(cont, +0.0145);
+		cont->theta_x += 0.0145;
 	if (cont->toggle_rot_y == true && !cont->toggle_menu)
-		rotate_y(cont, +0.0145);
+		cont->theta_y += 0.0145;
 	if (cont->toggle_rot_z == true && !cont->toggle_menu)
-		rotate_z(cont, +0.0145);
+		cont->theta_z += 0.0145;
 	if (!cont->toggle_menu)
 		display_map(cont);
 	(void) cont;
