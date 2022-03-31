@@ -107,6 +107,7 @@ typedef struct s_fdf_cont
 	int		min_alt;
 	int		x_offset;
 	int		y_offset;
+	int		z_offset;
 	int		square_width;
 	bool	map_is_colored;
 	bool	toggle_rot_x;

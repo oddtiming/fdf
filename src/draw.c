@@ -64,11 +64,11 @@ void	adjust_bounds_again_wtf(t_fdf_cont *cont, t_line *line)
 
 int	adjust_bounds(t_fdf_cont *cont, t_point *p1, t_point *p2)
 {
-	// if ((p1->x >= 0 || p1->x <= cont->win_w || \
-	// 	p1->y >= 0 || p1->y <= cont->win_h) && \
-	// 	(p2->x >= 0 || p2->x <= cont->win_w || \
-	// 	p2->y >= 0 || p2->y <= cont->win_h))
-	// 	return (EXIT_SUCCESS);
+	if ((p1->x >= 0 && p1->x <= cont->win_w && \
+		p1->y >= 0 && p1->y <= cont->win_h) && \
+		(p2->x >= 0 && p2->x <= cont->win_w && \
+		p2->y >= 0 && p2->y <= cont->win_h))
+		return (EXIT_SUCCESS);
 	if (p1->x < 0)
 	{
 		p1->y += linear_interpolation(p1->x, p2->x, 0) * (p2->y - p1->y);
@@ -124,6 +124,8 @@ void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
 	int		pixel_color;
 
 	line = ft_safealloc(sizeof(t_line));
+	if (!cont->toggle_proj && (p1.z <= 1 || p2.z <= 1))
+		return ;
 	if (adjust_bounds(cont, &p1, &p2))
 		return ;
 	line->p1 = p1;

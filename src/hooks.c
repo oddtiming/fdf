@@ -126,23 +126,23 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	{
 		test_display_lines_multicolor(mlx);
 	}
-	if (keysym == 69) //KEYPAD_+
+	if (keysym == 69 || keysym == 24) //'+'
 	{
 		if (cont->square_width < 150)
 		{
 			//fixme: need to test if proper
 			cont->square_width += 1;
-			cont->z_divisor += 0.1F;
+			// cont->z_divisor += 0.1F;
 		}
 		display_map(cont);
 	}
-	if (keysym == 78) //KEYPAD_-
+	if (keysym == 78 || keysym == 27) //'-'
 	{
 		if (cont->square_width > 2)
 		{
 			//fixme: need to test if proper
 			cont->square_width -= 1;
-			cont->z_divisor -= 0.1F;
+			// cont->z_divisor -= 0.1F;
 		}
 	}
 	if (keysym == 89) //NUMPAD7
@@ -169,24 +169,40 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	{
 		cont->theta_x += 0.1;
 	}
+	if (keysym == 13) //KEY_W
+	{
+		cont->z_offset -= 5;
+	}
+	if (keysym == 1) //KEY_S
+	{
+		cont->z_offset += 5;
+	}
+	if (keysym == 12) //KEY_Q
+	{
+		cont->z_divisor -= 0.12;
+	}
+	if (keysym == 14) //KEY_E
+	{
+		cont->z_divisor += 0.12;
+	}
 	if (keysym == 123) //KEY_LEFT
 	{
-		if (cont->x_offset < cont->win_w * 1.2F)
+		if (cont->x_offset < cont->win_w * 0.1F * cont->square_width)
 			cont->x_offset += 20;
 	}
 	if (keysym == 124) //KEY_RIGHT
 	{
-		if (cont->x_offset > -cont->win_w / 1.2F)
+		if (cont->x_offset > cont->win_w * -0.1F * cont->square_width)
 			cont->x_offset -= 20;
 	}
 	if (keysym == 126) //KEY_UP
 	{
-		if (cont->y_offset < cont->win_h * 1.2F)
+		if (cont->y_offset < cont->win_h * 0.1F * cont->square_width)
 			cont->y_offset += 20;
 	}
 	if (keysym == 125) //KEY_DOWN
 	{
-		if (cont->y_offset > -cont->win_h / 1.2F)
+		if (cont->y_offset > cont->win_h * -0.1F * cont->square_width)
 			cont->y_offset -= 20;
 	}
 	return (0);
