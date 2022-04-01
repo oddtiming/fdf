@@ -17,6 +17,7 @@ CFILES	=	assign.c \
 			cleanup.c \
 			display.c \
 			display_map.c \
+			display_menu.c \
 			draw.c \
 			draw_img.c \
 			fdf.c \

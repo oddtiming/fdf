@@ -161,6 +161,9 @@ void	display_map(t_fdf_cont *cont);
 void	center_map(t_fdf_cont *cont);
 void	project_point(t_fdf_cont *cont, t_angles *angles, int x, int y);
 
+//	display_menu.c
+void	display_menu(t_fdf_cont *cont);
+
 //	draw.c
 void	draw_background(t_img *img, int color);
 void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2);

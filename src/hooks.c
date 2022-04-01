@@ -95,25 +95,18 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		cont->toggle_rot_z = false;
 		cont->x_offset = 0;
 		cont->y_offset = 0;
-		cont->z_offset = 50;
-		cont->square_width = 5;
+		cont->z_offset = 15;
+		cont->square_width = ft_min(20, ft_max(683 / cont->map_h, 853 / cont->map_w));
 		cont->z_divisor = 1;
 		cont->map_is_colored = true;
-		cont->theta_x = 0.788;
-		cont->theta_y = 0.788;
-		cont->theta_z = 0.788;
+		cont->theta_x = 0.5236;
+		cont->theta_y = 0.5236;
+		cont->theta_z = 0.5236;
 	}
 	if (keysym == 122) //KEY_F1
 	{ 
-		void	*img_ptr;
-		int		height;
-		int		width;
-
-		img_ptr = NULL;
-		height = 0;
-		width = 0;
-		img_ptr = mlx_xpm_file_to_image(cont->mlx_ptr, "./extra_stuff_not_important/banner.xpm", &width, &height);
-		mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img_ptr, 0, 0);
+		cont->toggle_menu = !cont->toggle_menu;
+		display_menu(cont);
 	}
 
 	if (keysym == 40) //KEY_K
@@ -136,6 +129,8 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	t_fdf_cont	*mlx;
 
 	mlx = (t_fdf_cont *)cont;
+	if (cont->toggle_menu)
+		return (1);
 	if (keysym == 18) //KEY_1
 	{
 		test_display_lines_multicolor(mlx);
@@ -193,12 +188,12 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 12) //KEY_Q
 	{
-		if (cont->z_divisor > -10)
+		if (cont->z_divisor > -7)
 			cont->z_divisor -= 0.12;
 	}
 	if (keysym == 14) //KEY_E
 	{
-		if (cont->z_divisor < 10)
+		if (cont->z_divisor < 7)
 			cont->z_divisor += 0.12;
 	}
 	if (keysym == 123) //KEY_LEFT
