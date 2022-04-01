@@ -17,10 +17,15 @@ int	main(int argc, char *argv[])
 		exit_on_err("Error: FdF only accepts one input \n");
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
-	print_map_info(cont, 0);
+	// print_map_info(cont, 0);
 	center_map(cont);
 	display_map(cont);
-	
+	printf("sizeof(t_fdf_cont) %zu", sizeof(t_fdf_cont));
+	printf("sizeof(t_img) %zu", sizeof(t_img));
+	printf("sizeof(t_line) %zu", sizeof(t_line));
+	printf("sizeof(t_angles) %zu", sizeof(t_angles));
+	printf("sizeof(t_point) %zu", sizeof(t_point));
+
 	set_hooks(cont);
 	do_mlx_loop(cont->mlx_ptr);
 

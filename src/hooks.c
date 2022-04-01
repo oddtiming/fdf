@@ -88,7 +88,21 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 	{
 		cont->toggle_rot_x = !cont->toggle_rot_x;
 	}
-
+	if (keysym == 82) //NUMPAD0
+	{
+		cont->toggle_rot_x = false;
+		cont->toggle_rot_y = false;
+		cont->toggle_rot_z = false;
+		cont->x_offset = 0;
+		cont->y_offset = 0;
+		cont->z_offset = 50;
+		cont->square_width = 5;
+		cont->z_divisor = 1;
+		cont->map_is_colored = true;
+		cont->theta_x = 0.788;
+		cont->theta_y = 0.788;
+		cont->theta_z = 0.788;
+	}
 	if (keysym == 122) //KEY_F1
 	{ 
 		void	*img_ptr;
@@ -132,7 +146,7 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 		{
 			//fixme: need to test if proper
 			cont->square_width += 1;
-			// cont->z_divisor += 0.1F;
+			// cont->z_divisor *= 1.05F;
 		}
 		display_map(cont);
 	}
@@ -142,7 +156,7 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 		{
 			//fixme: need to test if proper
 			cont->square_width -= 1;
-			// cont->z_divisor -= 0.1F;
+			// cont->z_divisor *= 0.95F;
 		}
 	}
 	if (keysym == 89) //NUMPAD7
@@ -179,11 +193,13 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 12) //KEY_Q
 	{
-		cont->z_divisor -= 0.12;
+		if (cont->z_divisor > -10)
+			cont->z_divisor -= 0.12;
 	}
 	if (keysym == 14) //KEY_E
 	{
-		cont->z_divisor += 0.12;
+		if (cont->z_divisor < 10)
+			cont->z_divisor += 0.12;
 	}
 	if (keysym == 123) //KEY_LEFT
 	{

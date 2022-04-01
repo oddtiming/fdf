@@ -124,10 +124,12 @@ void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
 	int		pixel_color;
 
 	line = ft_safealloc(sizeof(t_line));
-	if (!cont->toggle_proj && (p1.z <= 1 || p2.z <= 1))
+	// if (adjust_bounds(cont, &p1, &p2))
+	if ((!cont->toggle_proj && (p1.z <= 0 || p2.z <= 0)) || adjust_bounds(cont, &p1, &p2))
+	{
+		free(line);
 		return ;
-	if (adjust_bounds(cont, &p1, &p2))
-		return ;
+	}
 	line->p1 = p1;
 	line->p2 = p2;
 	set_line_struct(line);

@@ -85,6 +85,15 @@ void	print_map_info(t_fdf_cont *cont, int map_val)
 		printf("cont->map_h = %d \n", cont->map_h);
 		printf("cont->win_w = %d \n", cont->win_w);
 		printf("cont->win_h = %d \n", cont->win_h);
+		printf("cont->x_offset = %d \n", cont->x_offset);
+		printf("cont->y_offset = %d \n", cont->y_offset);
+		printf("cont->z_offset = %d \n", cont->z_offset);
+		printf("cont->theta_x = %f \n", cont->theta_x);
+		printf("cont->theta_y = %f \n", cont->theta_y);
+		printf("cont->theta_z = %f \n", cont->theta_z);
+		printf("cont->square_width = %d \n", cont->square_width);
+		printf("cont->z_divisor = %f \n", cont->z_divisor);
+		printf("cont->toggle_proj = %d \n", cont->toggle_proj);
 	}
 	return ;
 }
