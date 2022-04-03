@@ -153,7 +153,7 @@ void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
 			pixel_color = average_color(p1.color, p2.color, color_percent);
 		}
 		else
-			pixel_color = FDF_WHITE;
+			pixel_color = FDF_WH;
 		fill_pixel(cont->img, line->p1.x, line->p1.y, pixel_color);
 	}
 	free(line);
@@ -221,7 +221,7 @@ void	draw_square_rainbow(t_img *img, int size)
 	int	color;
 
 	y = (img->height - size);
-	color = FDF_WHITE;
+	color = FDF_WH;
 	while (y <= (img->height + size))
 	{
 		x = (img->width - size);

@@ -14,14 +14,15 @@ void	set_hooks(t_fdf_cont *cont)
 
 int	handle_default_hook(t_fdf_cont *cont)
 {
-	if (cont->toggle_rot_x == true && !cont->toggle_menu)
+	if (cont->toggle_menu)
+		return (0);
+	if (cont->toggle_rot_x == true)
 		cont->theta_x += 0.0145;
-	if (cont->toggle_rot_y == true && !cont->toggle_menu)
+	if (cont->toggle_rot_y == true)
 		cont->theta_y += 0.0145;
-	if (cont->toggle_rot_z == true && !cont->toggle_menu)
+	if (cont->toggle_rot_z == true)
 		cont->theta_z += 0.0145;
-	if (!cont->toggle_menu)
-		display_map(cont);
+	display_map(cont);
 	(void) cont;
 	return (0);
 }
@@ -46,49 +47,35 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		fdf_cleanup(cont);
 		exit(0);
 	}
-	if (keysym == 2) //KEY_D
-	{
-		display_default(cont);
+	if (keysym == 122) //KEY_F1
+	{ 
+		cont->toggle_menu = !cont->toggle_menu;
+		display_menu(cont);
+		return (0);
 	}
-	if (keysym == 8) //KEY_C
-	{
+	if (cont->toggle_menu)
+		return (1);
+	else if (keysym == 8) //KEY_C
 		cont->map_is_colored = !cont->map_is_colored;
-	}
-	if (keysym == 35) //KEY_P
-	{
+	else if (keysym == 35) //KEY_P
 		cont->toggle_proj = !cont->toggle_proj;
-	}
-	if (keysym == 37) //KEY_L
-	{
-		test_display_lines(cont);
-	}
-	if (keysym == 15) //KEY_R
+	else if (keysym == 15) //KEY_R
 	{
 		cont->toggle_rot_x = !cont->toggle_rot_x;
 		cont->toggle_rot_y = !cont->toggle_rot_y;
 		cont->toggle_rot_z = !cont->toggle_rot_z;
 	}
-	if (keysym == 18) //KEY_1
-	{
+	else if (keysym == 18) //KEY_1
 		test_display_lines_multicolor(cont);
-	}
-	if (keysym == 76) //NUMPAD_ENTER
-	{
+	else if (keysym == 76) //NUMPAD_ENTER
 		print_map_info(cont, 0);
-	}
-	if (keysym == 92) //NUMPAD9
-	{
+	else if (keysym == 92) //NUMPAD9
 		cont->toggle_rot_z = !cont->toggle_rot_z;
-	}
-	if (keysym == 88) //NUMPAD6
-	{
+	else if (keysym == 88) //NUMPAD6
 		cont->toggle_rot_y = !cont->toggle_rot_y;
-	}
-	if (keysym == 85) //NUMPAD3
-	{
+	else if (keysym == 85) //NUMPAD3
 		cont->toggle_rot_x = !cont->toggle_rot_x;
-	}
-	if (keysym == 82) //NUMPAD0
+	else if (keysym == 82) //NUMPAD0
 	{
 		cont->toggle_rot_x = false;
 		cont->toggle_rot_y = false;
@@ -103,12 +90,6 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 		cont->theta_y = 0.5236;
 		cont->theta_z = 0.5236;
 	}
-	if (keysym == 122) //KEY_F1
-	{ 
-		cont->toggle_menu = !cont->toggle_menu;
-		display_menu(cont);
-	}
-
 	if (keysym == 40) //KEY_K
 	{ 
 		void	*img_ptr;
@@ -126,32 +107,25 @@ int	handle_key_hook(int keysym, t_fdf_cont *cont)
 
 int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 {
-	t_fdf_cont	*mlx;
-
-	mlx = (t_fdf_cont *)cont;
 	if (cont->toggle_menu)
 		return (1);
-	if (keysym == 18) //KEY_1
+	else if (keysym == 18) //KEY_1
 	{
-		test_display_lines_multicolor(mlx);
+		test_display_lines_multicolor(cont);
 	}
 	if (keysym == 69 || keysym == 24) //'+'
 	{
 		if (cont->square_width < 150)
 		{
-			//fixme: need to test if proper
 			cont->square_width += 1;
-			// cont->z_divisor *= 1.05F;
 		}
-		display_map(cont);
+		// display_map(cont);
 	}
 	if (keysym == 78 || keysym == 27) //'-'
 	{
 		if (cont->square_width > 2)
 		{
-			//fixme: need to test if proper
 			cont->square_width -= 1;
-			// cont->z_divisor *= 0.95F;
 		}
 	}
 	if (keysym == 89) //NUMPAD7
@@ -180,20 +154,22 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 13) //KEY_W
 	{
-		cont->z_offset -= 5;
+		if (cont->z_offset > 5)
+			cont->z_offset -= 5;
 	}
 	if (keysym == 1) //KEY_S
 	{
-		cont->z_offset += 5;
+		if (cont->z_offset < 100)
+			cont->z_offset += 5;
 	}
 	if (keysym == 12) //KEY_Q
 	{
-		if (cont->z_divisor > -7)
+		if (cont->z_divisor > -6)
 			cont->z_divisor -= 0.12;
 	}
 	if (keysym == 14) //KEY_E
 	{
-		if (cont->z_divisor < 7)
+		if (cont->z_divisor < 6)
 			cont->z_divisor += 0.12;
 	}
 	if (keysym == 123) //KEY_LEFT

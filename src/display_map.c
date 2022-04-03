@@ -10,13 +10,11 @@ void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
 	(void) prev_x;
 	(void) prev_y;
 	(void) prev_z;
-	// p->x -= (cont->map_w) / 2;
-	// p->y -= (cont->map_h) / 2;
 	p->x = p->x * cont->square_width;
 	p->y = p->y * cont->square_width;
-	if (!cont->toggle_proj)
-		p->z = p->z * cont->square_width * cont->z_divisor + cont->z_offset;
-	else
+	// if (!cont->toggle_proj)
+	// 	p->z = p->z * cont->square_width * cont->z_divisor + cont->z_offset;
+	// else
 		p->z = p->z * cont->square_width * cont->z_divisor;
 	//rotate_x
 	prev_y = p->y;
