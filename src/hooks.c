@@ -154,22 +154,22 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 13) //KEY_W
 	{
-		if (cont->z_offset > 5)
+		if (cont->z_offset > -500)
 			cont->z_offset -= 5;
 	}
 	if (keysym == 1) //KEY_S
 	{
-		if (cont->z_offset < 100)
+		if (cont->z_offset < 500)
 			cont->z_offset += 5;
 	}
 	if (keysym == 12) //KEY_Q
 	{
-		if (cont->z_divisor > -6)
+		if (cont->z_divisor > -5)
 			cont->z_divisor -= 0.12;
 	}
 	if (keysym == 14) //KEY_E
 	{
-		if (cont->z_divisor < 6)
+		if (cont->z_divisor < 5)
 			cont->z_divisor += 0.12;
 	}
 	if (keysym == 123) //KEY_LEFT

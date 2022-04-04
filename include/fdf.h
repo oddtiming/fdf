@@ -30,7 +30,7 @@ typedef enum
 	FDF_ORANGE	= 0xFF7700,
 	FDF_PINK	= 0xFF00FF,
 	FDF_RED		= 0xFF0000,
-	FDF_WH	= 0xFFFFFF,
+	FDF_WH		= 0xFFFFFF,
 	FDF_YELLOW	= 0xFFFF00
 } e_colors;
 
