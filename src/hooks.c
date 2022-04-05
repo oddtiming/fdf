@@ -155,12 +155,12 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	if (keysym == 13) //KEY_W
 	{
 		if (cont->z_offset > -500)
-			cont->z_offset -= 5;
+			cont->z_offset -= 10;
 	}
 	if (keysym == 1) //KEY_S
 	{
 		if (cont->z_offset < 500)
-			cont->z_offset += 5;
+			cont->z_offset += 10;
 	}
 	if (keysym == 12) //KEY_Q
 	{
@@ -172,25 +172,25 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 		if (cont->z_divisor < 5)
 			cont->z_divisor += 0.12;
 	}
-	if (keysym == 123) //KEY_LEFT
+	if (keysym == 123 || keysym == 0) //KEY_LEFT || KEY_A
 	{
 		if (cont->x_offset < cont->win_w * 0.1F * cont->square_width)
-			cont->x_offset += 20;
+			cont->x_offset += 10;
 	}
-	if (keysym == 124) //KEY_RIGHT
+	if (keysym == 124 || keysym == 2) //KEY_RIGHT || KEY_D
 	{
 		if (cont->x_offset > cont->win_w * -0.1F * cont->square_width)
-			cont->x_offset -= 20;
+			cont->x_offset -= 10;
 	}
-	if (keysym == 126) //KEY_UP
+	if (keysym == 126 || keysym == 6) //KEY_UP || KEY_Z
 	{
 		if (cont->y_offset < cont->win_h * 0.1F * cont->square_width)
-			cont->y_offset += 20;
+			cont->y_offset += 10;
 	}
-	if (keysym == 125) //KEY_DOWN
+	if (keysym == 125 || keysym == 7) //KEY_DOWN || KEY_X
 	{
 		if (cont->y_offset > cont->win_h * -0.1F * cont->square_width)
-			cont->y_offset -= 20;
+			cont->y_offset -= 10;
 	}
 	return (0);
 }
