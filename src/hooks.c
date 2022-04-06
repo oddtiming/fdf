@@ -154,13 +154,13 @@ int	handle_keypress_hook(int keysym, t_fdf_cont *cont)
 	}
 	if (keysym == 13) //KEY_W
 	{
-		if (cont->z_offset > -500)
-			cont->z_offset -= 10;
+		if (cont->z_offset > -1000)
+			cont->z_offset -= 8;
 	}
 	if (keysym == 1) //KEY_S
 	{
-		if (cont->z_offset < 500)
-			cont->z_offset += 10;
+		if (cont->z_offset < 1000)
+			cont->z_offset += 8;
 	}
 	if (keysym == 12) //KEY_Q
 	{

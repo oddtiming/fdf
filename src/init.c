@@ -33,11 +33,9 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	cont->x_offset = 0;
 	cont->y_offset = 0;
 	cont->z_offset = 200;
-	// rotate_x(cont, -0.5236);
-	// rotate_y(cont, -0.5236);
 	cont->theta_x = 0.5236;
 	cont->theta_y = 0.5236;
 	cont->theta_z = 0.5236;
-	cont->z_divisor = 1.0F;
+	// cont->z_divisor = 1.0F;
 	return ;
 }

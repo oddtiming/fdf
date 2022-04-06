@@ -115,20 +115,24 @@ int	adjust_bounds(t_fdf_cont *cont, t_point *p1, t_point *p2)
 		p2->y = cont->win_h - 1;
 	}
 
-	if (!cont->toggle_proj)
-	{
-		if (p1->y < 0)
-		{
-			p1->x += linear_interpolation(p1->z, p2->z, 0) * (p2->x - p1->x);
-			p1->y += linear_interpolation(p1->z, p2->z, 0) * (p2->y - p1->y);
-		}
+	// if (!cont->toggle_proj)
+	// {
+	// 	if (p1->z < 0)
+	// 	{
+	// 		p1->z = 0;
+	// 		p1->x += linear_interpolation(p1->z, p2->z, 0) * (p2->x - p1->x);
+	// 		p1->y += linear_interpolation(p1->z, p2->z, 0) * (p2->y - p1->y);
+	// 	}
 
-		else if (p2->y < 0)
-		{
-			p2->x += linear_interpolation(p1->z, p2->z, 0) * (p2->x - p1->x);
-			p2->y += linear_interpolation(p1->z, p2->z, 0) * (p2->y - p1->y);
-		}
-	}
+	// 	else if (p2->z < 0)
+	// 	{
+	// 		p2->z = 0;
+	// 		p2->x += linear_interpolation(p1->z, p2->z, 0) * (p2->x - p1->x);
+	// 		p2->y += linear_interpolation(p1->z, p2->z, 0) * (p2->y - p1->y);
+	// 	}
+	// 	if (p1->z <= 0 || p2->z <= 0)
+	// 		return (EXIT_FAILURE);
+	// }
 
 
 	if ((p1->x < 0 || p1->x > cont->win_w - 1 || \

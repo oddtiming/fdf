@@ -7,9 +7,9 @@ void	project_perspective(t_fdf_cont *cont, t_point *p)
 	p->y -= (cont->win_h - cont->map_h) / 2 - cont->y_offset;
 	p->x += cont->x_offset;
 	p->y += cont->y_offset;
-	p->z += cont->z_offset;
-	p->x = (p->x * 100 * cont->square_width / p->z);
-	p->y = (p->y * 100 * cont->square_width / p->z);
+	p->z += (cont->z_offset * cont->z_divisor);
+	p->x = (p->x * 80 * cont->square_width / p->z);
+	p->y = (p->y * 80 * cont->square_width / p->z);
 	p->x += (cont->win_w - cont->map_w) / 2;
 	p->y += (cont->win_h - cont->map_h) / 2;
 }
@@ -22,41 +22,23 @@ void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
 
 	p->x = p->x * cont->square_width;
 	p->y = p->y * cont->square_width;
-	// if (!cont->toggle_proj)
-	// 	p->z = p->z * cont->square_width * cont->z_divisor + cont->z_offset;
-	// else
 	p->z = p->z * cont->square_width * cont->z_divisor;
-	//rotate_x
 	prev_y = p->y;
 	prev_z = p->z;
 	p->y = angles->cos_x * prev_y - angles->sin_x * prev_z;
 	p->z = angles->cos_x * prev_z + angles->sin_x * prev_y;
-	//rotate_y
 	prev_x = p->x;
 	prev_z = p->z;
 	p->x = angles->cos_y * prev_x + angles->sin_y * prev_z;
 	p->z = angles->cos_y * prev_z - angles->sin_y * prev_x;
-	//rotate_z
 	prev_x = p->x;
 	prev_y = p->y;
 	p->x = angles->cos_z * prev_x - angles->sin_z * prev_y;
 	p->y = angles->cos_z * prev_y + angles->sin_z * prev_x;
-
-	// if (!cont->toggle_proj)
-	// {
-	// 	p->z += cont->z_offset;
-	// 	p->x = (p->x / p->z * 2 * cont->z_offset);
-	// 	p->y = (p->y / p->z * 2 * cont->z_offset);
-	// // }
 	p->x += (cont->win_w - cont->map_w) / 2 - cont->x_offset;
 	p->y += (cont->win_h - cont->map_h) / 2 - cont->y_offset;
 	if (!cont->toggle_proj)
 		project_perspective(cont, p);
-	// else
-	// {
-	// }
-
-
 	p->x = round(p->x);
 	p->y = round(p->y);
 	p->z = round(p->z);
