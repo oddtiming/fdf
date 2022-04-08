@@ -15,14 +15,16 @@ void	display_menu_translations(t_fdf_cont *cont)
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 470, FDF_WH, "y trans:");
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 470, FDF_WH, y_offset);
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 470, FDF_WH, "px");
-	if (!cont->toggle_proj)
-	{
-		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 490, FDF_WH, "z trans:");
-		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 490, FDF_WH, z_offset);
-		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 490, FDF_WH, "px");
-	}
 	free(x_offset);
 	free(y_offset);
+	if (cont->toggle_proj)
+	{
+		free(z_offset);
+		return ;
+	}
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 490, FDF_WH, "z trans:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 490, FDF_WH, z_offset);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 490, FDF_WH, "px");
 	free(z_offset);
 }
 
@@ -113,27 +115,25 @@ void	display_menu(t_fdf_cont *cont)
 	int		height;
 	int		width;
 
-	if (!cont->toggle_menu)
-		return ;
 	img_ptr = NULL;
 	height = 0;
 	width = 0;
-	img_ptr = mlx_xpm_file_to_image(cont->mlx_ptr, "./extra_stuff_not_important/banner.xpm", &width, &height);
+	img_ptr = mlx_xpm_file_to_image(
+			cont->mlx_ptr, "./imgs/banner.xpm", &width, &height);
 	display_menu_background(cont, width, height);
-	mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img_ptr, 0, 0);
+	display_img(cont, img_ptr);
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 160, FDF_WH, "proj:");
 	if (!cont->toggle_proj)
 		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, FDF_RED, "PERSP");
 	else
-		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, FDF_YELLOW, "ORTHO");
+		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, FDF_YELLO, "ORTHO");
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 25, 190, FDF_WH, "Altitude legend");
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 50, 220, FDF_CYAN, ">>");
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 70, 220, FDF_BLUE, ">>");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 220, FDF_YELLOW, ">>");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 220, FDF_YELLO, ">>");
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 110, 220, FDF_RED, ">>");
 	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 130, 220, FDF_PINK, ">>");
 	display_menu_dimensions(cont);
 	display_menu_angles(cont);
 	display_menu_translations(cont);
-
 }

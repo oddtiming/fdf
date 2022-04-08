@@ -2,14 +2,14 @@
 
 void	project_perspective(t_fdf_cont *cont, t_point *p)
 {
-
 	p->x -= (cont->win_w - cont->map_w) / 2 - cont->x_offset;
 	p->y -= (cont->win_h - cont->map_h) / 2 - cont->y_offset;
 	p->x += cont->x_offset;
 	p->y += cont->y_offset;
-	p->z += (cont->z_offset * cont->z_divisor);
+	p->z += cont->z_offset;
 	p->x = (p->x * 80 * cont->square_width / p->z);
 	p->y = (p->y * 80 * cont->square_width / p->z);
+	p->z *= cont->square_width;
 	p->x += (cont->win_w - cont->map_w) / 2;
 	p->y += (cont->win_h - cont->map_h) / 2;
 }

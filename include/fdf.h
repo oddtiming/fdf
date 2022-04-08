@@ -1,5 +1,5 @@
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
 /**
  * @brief 
@@ -18,6 +18,7 @@
 #  define DEBUG 0
 # endif
 
+# define TWO_PI 6.28318530718
 
 //TYPEDEFS
 // Enums
@@ -31,7 +32,7 @@ typedef enum
 	FDF_PINK	= 0xFF00FF,
 	FDF_RED		= 0xFF0000,
 	FDF_WH		= 0xFFFFFF,
-	FDF_YELLOW	= 0xFFFF00
+	FDF_YELLO	= 0xFFFF00
 } e_colors;
 
 typedef enum
@@ -63,16 +64,17 @@ typedef struct s_line
 {
 	t_point	p1;
 	t_point	p2;
-	double	*independent_var;
-	double	*dependent_var;
-	int	independent_max;
-	int	independent_step;
-	int	dependent_step;
-	int	offset_increment;
-	int	offset_decrement;
-	int	offset;
-	int	dx;
-	int	dy;
+	double	*indep_var;
+	double	*dep_var;
+	int		independent_max;
+	int		indep_step;
+	int		dep_step;
+	int		offset_increment;
+	int		offset_decrement;
+	int		offset;
+	int		dx;
+	int		dy;
+	bool	is_reverse;
 }	t_line;
 
 
@@ -109,12 +111,14 @@ typedef struct s_fdf_cont
 	int		y_offset;
 	int		z_offset;
 	int		square_width;
+	int		mouse_initial_xy;
 	bool	map_is_colored;
 	bool	toggle_rot_x;
 	bool	toggle_rot_y;
 	bool	toggle_rot_z;
 	bool	toggle_menu;
 	bool	toggle_proj;
+	bool	toggle_mouse_rot;
 }	t_fdf_cont;
 
 
@@ -126,23 +130,26 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath);
 void	parse_map(t_fdf_cont *cont, int fd);
 int		parse_map_line(char *curr_line);
 
-// assign.c
+//	assign.c
 void	assign_limits(t_fdf_cont *cont);
 void	assign_map(t_fdf_cont *cont, int fd);
-void	assign_map_line(t_fdf_cont *cont, char *line, int y);
+
+//	assign_colors.c
 void	assign_colors(t_fdf_cont *cont);
 
 //	init.c
 void	fdf_init(t_fdf_cont *cont, char *filepath);
+void	reset_proportions(t_fdf_cont *cont);
 
 // Hooks
 //	hooks.c
 void	set_hooks(t_fdf_cont *cont);	
 int		handle_expose_hook(t_fdf_cont *cont);
-int		handle_key_hook(int keysym, t_fdf_cont *cont);
-int		handle_keypress_hook(int keysym, t_fdf_cont *cont);
+int		handle_key_release_hook(int keysym, t_fdf_cont *cont);
+int		handle_key_press_hook(int keysym, t_fdf_cont *cont);
 int		handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont);
-int		handle_default_hook(t_fdf_cont *cont);
+int		handle_mouse_motion(int x, int y, t_fdf_cont *cont);
+int		default_hook(t_fdf_cont *cont);
 
 // Image manipulation
 //	draw_img.c
@@ -150,7 +157,7 @@ void	fill_pixel(t_img *img, int x, int y, int color);
 
 //	display.c
 int		display_default(t_fdf_cont *cont);
-int		display_img(t_fdf_cont *cont, t_img *img);
+int		display_img(t_fdf_cont *cont, void *img_ptr);
 int		display_square_rainbow(t_fdf_cont *cont);
 void	test_display_lines(t_fdf_cont *cont);
 void	test_display_lines_multicolor(t_fdf_cont *cont);
@@ -171,11 +178,8 @@ void	draw_square_rainbow(t_img *img, int size);
 void	draw_line_rainbow(t_img *img, t_point p1, t_point p2);
 void	draw_line_rainbow_offset(t_img *img, t_point p1, t_point p2, int offset);
 
-// rotate.c
-void	rotate_map(t_fdf_cont *cont);
-void	rotate_z(t_fdf_cont *cont, double theta);
-void	rotate_y(t_fdf_cont *cont, double theta);
-void	rotate_x(t_fdf_cont *cont, double theta);
+//	line_clipping.c
+int	line_clipping(t_fdf_cont *cont, t_point *p1, t_point *p2);
 
 // 	color.c
 void	change_color(int x, int y, int *color);

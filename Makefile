@@ -13,19 +13,20 @@ ON_RED		=	\033[41m
 RESET_COL	=	\033[0m
 
 CFILES	=	assign.c \
+			assign_colors.c \
+			bresenham.c \
 			colors.c \
 			cleanup.c \
 			display.c \
 			display_map.c \
 			display_menu.c \
-			draw.c \
 			draw_img.c \
 			fdf.c \
 			hooks.c \
 			init.c \
 			iterators.c \
+			line_clipping.c \
 			parse.c \
-			rotate.c \
 			utils.c
 
 SRC_DIR	= src

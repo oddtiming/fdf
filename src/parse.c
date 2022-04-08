@@ -15,15 +15,6 @@ void	fdf_parse(t_fdf_cont *cont, char *filepath)
 	fd = open(filepath, O_RDONLY);
 	assign_map(cont, fd);
 	assign_limits(cont);
-	if (DEBUG)
-	{
-		printf("cont->max_alt = %d \n", cont->max_alt);
-		printf("cont->min_alt = %d \n", cont->min_alt);
-		printf("cont->square_width = %d \n", cont->square_width);
-		printf("cont->win_w = %d \n", cont->win_w);
-		printf("cont->win_h = %d \n", cont->win_h);
-	}
-
 	if (cont->map_is_colored == false)
 		assign_colors(cont);
 	close(fd);

@@ -1,10 +1,4 @@
 #include "fdf.h"
-#include <sys/time.h>
-
-void	do_mlx_loop(void *mlx_ptr)
-{
-	mlx_loop(mlx_ptr);
-}
 
 int	main(int argc, char *argv[])
 {
@@ -21,8 +15,7 @@ int	main(int argc, char *argv[])
 	display_map(cont);
 
 	set_hooks(cont);
-	do_mlx_loop(cont->mlx_ptr);
+	mlx_loop(cont->mlx_ptr);
 
-	fdf_cleanup(cont);
 	return (0);
 }
