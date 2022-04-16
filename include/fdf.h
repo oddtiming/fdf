@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iyahoui- <iyahoui-@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/16 16:12:28 by iyahoui-          #+#    #+#             */
+/*   Updated: 2022/04/16 16:12:29 by iyahoui-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -10,7 +22,6 @@
 # include <stdlib.h>
 # include <math.h>
 # include "../minilibx_macos/mlx.h"
-# include "iterators.h"
 # include "../libft/libft.h"
 
 # ifndef DEBUG
@@ -28,7 +39,7 @@ typedef enum e_colors
 	ORANGE	= 0xFF7700,
 	PINK	= 0xFF00FF,
 	RED		= 0xFF0000,
-	WHITE		= 0xFFFFFF,
+	WHITE	= 0xFFFFFF,
 	YELLOW	= 0xFFFF00
 }	t_colors;
 
