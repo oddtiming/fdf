@@ -9,7 +9,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-# include "mlx.h"
+# include "../minilibx_macos/mlx.h"
 # include "iterators.h"
 # include "../libft/libft.h"
 
