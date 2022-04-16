@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iyahoui- <iyahoui-@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 17:17:30 by iyahoui-          #+#    #+#             */
-/*   Updated: 2022/04/15 23:04:45 by iyahoui-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "fdf.h"
 
 void	reset_proportions(t_fdf_cont *cont)
@@ -25,9 +13,13 @@ void	reset_proportions(t_fdf_cont *cont)
 	cont->y_offset = 0;
 	cont->z_offset = 1000;
 	cont->theta_x = 0.5236;
-	cont->theta_y = 0.5236;
+	cont->theta_y = -0.5236;
 	cont->theta_z = 0.5236;
 	cont->z_divisor = 1.0F;
+	if ((double)ft_max(cont->max_alt, -cont->min_alt)
+		/ (double)ft_min(cont->map_h, cont->map_w) > 0.5F)
+		cont->z_divisor = (double)ft_min(cont->map_h, cont->map_w)
+			/ (double)ft_max(cont->max_alt, -cont->min_alt) / 2.0F;
 }
 
 void	fdf_init(t_fdf_cont *cont, char *filepath)
@@ -52,7 +44,7 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	img->data_addr = mlx_get_data_addr(
 			img->img_ptr, &img->bpp, &img->line_len, &img->endian);
 	cont->toggle_menu = false;
-	cont->toggle_proj = false;
+	cont->toggle_proj = true;
 	reset_proportions(cont);
 	return ;
 }

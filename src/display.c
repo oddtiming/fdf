@@ -3,10 +3,9 @@
 int	display_default(t_fdf_cont *cont)
 {
 	t_img	*img;
-	
+
 	img = cont->img;
 	mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img->img_ptr, 0, 0);
-
 	return (0);
 }
 

@@ -20,13 +20,15 @@ CFILES	=	assign.c \
 			display.c \
 			display_map.c \
 			display_menu.c \
-			draw_img.c \
 			fdf.c \
 			hooks.c \
 			init.c \
-			iterators.c \
+			key_hooks.c \
 			line_clipping.c \
+			matrix.c \
+			mouse_hooks.c \
 			parse.c \
+			perspective.c \
 			utils.c
 
 SRC_DIR	= src

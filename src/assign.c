@@ -46,13 +46,6 @@ void	assign_limits(t_fdf_cont *cont)
 		cont->square_width = ft_min(20,
 				ft_max(683 / cont->map_h, 853 / cont->map_w));
 	assign_window_dimensions(cont);
-	if (ft_max(cont->max_alt,
-			abs(cont->min_alt)) >= ft_max(cont->map_h, cont->map_w) / 4)
-	{
-		cont->z_divisor = 0.25F;
-		cont->max_alt /= 4.0F;
-		cont->min_alt /= 4.0F;
-	}
 }
 
 static void	assign_map_line(t_fdf_cont *cont, char *line, int y)
@@ -73,7 +66,7 @@ static void	assign_map_line(t_fdf_cont *cont, char *line, int y)
 			index++;
 		while (line[index] == '-' || ft_isdigit(line[index]))
 			index++;
-		point->color = FDF_WH;
+		point->color = WHITE;
 		if (line[index] == ',' || line[index] == '.')
 		{
 			point->color = ft_atox(&line[++index]);

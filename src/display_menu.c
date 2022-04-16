@@ -9,12 +9,12 @@ void	display_menu_translations(t_fdf_cont *cont)
 	x_offset = ft_itoa(cont->x_offset);
 	y_offset = ft_itoa(cont->y_offset);
 	z_offset = ft_itoa(cont->z_offset);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 450, FDF_WH, "x trans:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 450, FDF_WH, x_offset);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 450, FDF_WH, "px");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 470, FDF_WH, "y trans:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 470, FDF_WH, y_offset);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 470, FDF_WH, "px");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 450, WHITE, "x trans:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 450, WHITE, x_offset);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 450, WHITE, "px");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 470, WHITE, "y trans:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 470, WHITE, y_offset);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 470, WHITE, "px");
 	free(x_offset);
 	free(y_offset);
 	if (cont->toggle_proj)
@@ -22,9 +22,9 @@ void	display_menu_translations(t_fdf_cont *cont)
 		free(z_offset);
 		return ;
 	}
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 490, FDF_WH, "z trans:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 490, FDF_WH, z_offset);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 490, FDF_WH, "px");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 490, WHITE, "z trans:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 95, 490, WHITE, z_offset);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 150, 490, WHITE, "px");
 	free(z_offset);
 }
 
@@ -39,18 +39,18 @@ void	display_menu_angles(t_fdf_cont *cont)
 	theta_x = ft_itoa((int)(cont->theta_x * 57.2958) % 360);
 	theta_y = ft_itoa((int)(cont->theta_y * 57.2958) % 360);
 	theta_z = ft_itoa((int)(cont->theta_z * 57.2958) % 360);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 350, FDF_WH, "ZOOM:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 350, FDF_WH, zoom);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 350, FDF_WH, "x");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 380, FDF_WH, "x rot:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 380, FDF_WH, theta_x);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 380, FDF_WH, "deg");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 400, FDF_WH, "y rot:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 400, FDF_WH, theta_y);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 400, FDF_WH, "deg");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 420, FDF_WH, "z rot:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 420, FDF_WH, theta_z);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 420, FDF_WH, "deg");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 350, WHITE, "ZOOM:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 350, WHITE, zoom);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 350, WHITE, "x");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 380, WHITE, "x rot:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 380, WHITE, theta_x);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 380, WHITE, "deg");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 400, WHITE, "y rot:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 400, WHITE, theta_y);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 400, WHITE, "deg");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 420, WHITE, "z rot:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 420, WHITE, theta_z);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 120, 420, WHITE, "deg");
 	free(zoom);
 	free(theta_x);
 	free(theta_y);
@@ -68,40 +68,40 @@ void	display_menu_dimensions(t_fdf_cont *cont)
 	win_h = ft_itoa(cont->win_h);
 	map_w = ft_itoa(cont->map_w);
 	map_h = ft_itoa(cont->map_h);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 250, FDF_WH, "WIN_W:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 250, FDF_WH, win_w);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 135, 250, FDF_WH, "px");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 270, FDF_WH, "WIN_H:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 270, FDF_WH, win_h);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 135, 270, FDF_WH, "px");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 300, FDF_WH, "MAP_W:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 300, FDF_WH, map_w);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 320, FDF_WH, "MAP_H:");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 320, FDF_WH, map_h);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 250, WHITE, "WIN_W:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 250, WHITE, win_w);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 135, 250, WHITE, "px");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 270, WHITE, "WIN_H:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 270, WHITE, win_h);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 135, 270, WHITE, "px");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 300, WHITE, "MAP_W:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 300, WHITE, map_w);
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 320, WHITE, "MAP_H:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 320, WHITE, map_h);
 	free(win_w);
 	free(win_h);
 	free(map_w);
 	free(map_h);
 }
 
-void	display_menu_background(t_fdf_cont *cont, int menu_width, int menu_height)
+static void	display_menu_background(t_fdf_cont *cont, int width, int height)
 {
 	int	x;
 	int	y;
 
-	y = menu_height - 1;
+	y = height - 1;
 	y = 0;
 	while (y < cont->win_h)
 	{
 		x = 0;
-		while (y >= menu_height - 1 && x < menu_width)
+		while (y >= height - 1 && x < width)
 		{
-			fill_pixel(cont->img, x, y, FDF_BLACK);
+			fill_pixel(cont->img, x, y, BLACK);
 			x++;
 		}
-		while (x < menu_width + 7)
+		while (x < width + 7)
 		{
-			fill_pixel(cont->img, x, y, FDF_GREY);
+			fill_pixel(cont->img, x, y, GREY);
 			x++;
 		}
 		y++;
@@ -122,17 +122,17 @@ void	display_menu(t_fdf_cont *cont)
 			cont->mlx_ptr, "./imgs/banner.xpm", &width, &height);
 	display_menu_background(cont, width, height);
 	display_img(cont, img_ptr);
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 160, FDF_WH, "proj:");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 15, 160, WHITE, "proj:");
 	if (!cont->toggle_proj)
-		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, FDF_RED, "PERSP");
+		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, RED, "PERSP");
 	else
-		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, FDF_YELLO, "ORTHO");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 25, 190, FDF_WH, "Altitude legend");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 50, 220, FDF_CYAN, ">>");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 70, 220, FDF_BLUE, ">>");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 220, FDF_YELLO, ">>");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 110, 220, FDF_RED, ">>");
-	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 130, 220, FDF_PINK, ">>");
+		mlx_string_put(cont->mlx_ptr, cont->win_ptr, 80, 160, YELLOW, "ORTHO");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 25, 190, WHITE, "Alt legend");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 50, 220, CYAN, ">>");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 70, 220, BLUE, ">>");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 90, 220, YELLOW, ">>");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 110, 220, RED, ">>");
+	mlx_string_put(cont->mlx_ptr, cont->win_ptr, 130, 220, PINK, ">>");
 	display_menu_dimensions(cont);
 	display_menu_angles(cont);
 	display_menu_translations(cont);

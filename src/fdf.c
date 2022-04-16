@@ -6,16 +6,12 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		exit_on_err("Error: FdF only accepts one input\n");
-	cont = malloc(sizeof(t_fdf_cont));
-	if (!cont)
-		exit (1);
+	cont = ft_safealloc(sizeof(t_fdf_cont));
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
 	center_map(cont);
 	display_map(cont);
-
 	set_hooks(cont);
 	mlx_loop(cont->mlx_ptr);
-
 	return (0);
 }
