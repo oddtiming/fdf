@@ -1,5 +1,31 @@
 #include "fdf.h"
 
+static void	print_usage()
+{
+	printf("%s\n*** Coalitions ***\n%s", BASH_RED, BASH_RESET);
+	printf("Armada:   'A' / KEY_1:\n");
+	printf("Legion:   'L' / KEY_2:\n");
+	printf("Torrent:  'T' / KEY_3:\n");
+	printf("%s\n*** Rotations ***\n%s", BASH_CYAN, BASH_RESET);
+	printf("x axis:   NUMPAD1 // NUMPAD2\n  Toggle: NUMPAD3\n");
+	printf("y axis:   NUMPAD4 // NUMPAD5\n  Toggle: NUMPAD6\n");
+	printf("z axis:   NUMPAD7 // NUMPAD8\n  Toggle: NUMPAD9\n");
+	printf("Toggle All:  'R'\n");
+	printf("%s\n*** Translations ***\n%s", BASH_CYAN, BASH_RESET);
+	printf("x axis:   KEY_LEFT       // KEY_RIGHT\n");
+	printf("y axis:   KEY_UP / KEY_Z // KEY_DOWN / KEY_X\n");
+	printf("z axis:   'W'            // 'D' \n");
+	printf("%s\n*** Scale ***\n%s", BASH_CYAN, BASH_RESET);
+	printf("Zoom:          '+' // '-' \n");
+	printf("Height scale:  'Q' // 'E' \n");
+	printf("%s\n*** Fun stuff ***\n%s", BASH_CYAN, BASH_RESET);
+	printf("Toggle map color:  'C'\n");
+	printf("Toggle menu:  KEY_F1\n");
+	printf("Toggle orthographic/perspective projection:  'P'\n");
+	printf("Cycle between orthogonal projections(when orthographic is on):  'O'\n");
+	printf("Reset to initial settings:  '0'\n");
+}
+
 void	reset_proportions(t_fdf *cont)
 {
 	cont->toggle_rot_x = true;
@@ -45,5 +71,6 @@ void	fdf_init(t_fdf *cont, char *filepath)
 	cont->toggle_menu = false;
 	cont->toggle_proj = false;
 	reset_proportions(cont);
+	print_usage();
 	return ;
 }

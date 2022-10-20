@@ -26,7 +26,7 @@
 # define NB_COALITIONS 3
 
 // Enums
-typedef enum e_colors
+typedef enum e_map_colors
 {
 	BLACK	= 0x000000,
 	BLUE	= 0x0000FF,
@@ -38,7 +38,16 @@ typedef enum e_colors
 	RED		= 0xFF0000,
 	WHITE	= 0xFFFFFF,
 	YELLOW	= 0xFFFF00
-}	t_colors;
+}	t_map_colors;
+
+# define BASH_BLACK	 "\033[0;30m"
+# define BASH_RED	 "\033[1;31m"
+# define BASH_GREEN	 "\033[0;32m"
+# define BASH_YELLOW "\033[0;33m"
+# define BASH_BLUE	 "\033[0;34m"
+# define BASH_PURPLE "\033[0;35m"
+# define BASH_CYAN	 "\033[0;36m"
+# define BASH_RESET	 "\033[0m"
 
 typedef enum e_coa_colors
 {

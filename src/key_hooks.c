@@ -97,7 +97,8 @@ int	handle_key_press_hook_2(int keysym, t_fdf *cont)
 	if (keysym == KEY_LEFT)
 		if (cont->x_offset < cont->win_w * 0.1F * cont->square_width)
 			cont->x_offset += 10;
-	if (keysym == KEY_RIGHT || keysym == KEY_D)
+	// if (keysym == KEY_RIGHT || keysym == KEY_D)
+	if (keysym == KEY_RIGHT)
 		if (cont->x_offset > cont->win_w * -0.1F * cont->square_width)
 			cont->x_offset -= 10;
 	if (keysym == KEY_UP || keysym == KEY_Z)
