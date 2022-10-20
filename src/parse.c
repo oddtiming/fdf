@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	fdf_parse(t_fdf_cont *cont, char *filepath)
+void	fdf_parse(t_fdf *cont, char *filepath)
 {
 	char	*file_extension;
 	int		fd;
@@ -74,7 +74,7 @@ int	parse_map_line(char *line)
 	return (curr_line_width);
 }
 
-void	parse_map(t_fdf_cont *cont, int fd)
+void	parse_map(t_fdf *cont, int fd)
 {
 	char	*curr_line;
 	int		curr_line_width;

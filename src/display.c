@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int	display_default(t_fdf_cont *cont)
+int	display_default(t_fdf *cont)
 {
 	t_img	*img;
 
@@ -9,7 +9,7 @@ int	display_default(t_fdf_cont *cont)
 	return (0);
 }
 
-int	display_img(t_fdf_cont *cont, void *img_ptr)
+int	display_img(t_fdf *cont, void *img_ptr)
 {
 	mlx_put_image_to_window(cont->mlx_ptr, cont->win_ptr, img_ptr, 0, 0);
 	return (0);

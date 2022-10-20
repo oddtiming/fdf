@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	center_map(t_fdf_cont *cont)
+void	center_map(t_fdf *cont)
 {
 	double	x_center;
 	double	y_center;
@@ -24,7 +24,7 @@ void	center_map(t_fdf_cont *cont)
 	return ;
 }
 
-void	apply_scale(t_fdf_cont *cont, t_point *p)
+void	apply_scale(t_fdf *cont, t_point *p)
 {
 	p->x *= cont->square_width;
 	p->y *= cont->square_width;
@@ -51,7 +51,7 @@ void	apply_rotation(t_angles *angles, t_point *p)
 	p->y = angles->cos_z * prev_y + angles->sin_z * prev_x;
 }
 
-void	apply_translation(t_fdf_cont *cont, t_point *p)
+void	apply_translation(t_fdf *cont, t_point *p)
 {
 	p->x += cont->win_w / 2;
 	p->y += cont->win_h / 2;
@@ -59,7 +59,7 @@ void	apply_translation(t_fdf_cont *cont, t_point *p)
 	p->y -= cont->y_offset;
 }
 
-void	apply_matrix(t_fdf_cont *cont, t_angles *angles, t_point *p)
+void	apply_matrix(t_fdf *cont, t_angles *angles, t_point *p)
 {
 	apply_scale(cont, p);
 	apply_rotation(angles, p);

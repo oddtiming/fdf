@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	display_menu_translations(t_fdf_cont *cont)
+void	display_menu_translations(t_fdf *cont)
 {
 	char	*x_offset;
 	char	*y_offset;
@@ -28,7 +28,7 @@ void	display_menu_translations(t_fdf_cont *cont)
 	free(z_offset);
 }
 
-void	display_menu_angles(t_fdf_cont *cont)
+void	display_menu_angles(t_fdf *cont)
 {
 	char	*zoom;
 	char	*theta_x;
@@ -57,7 +57,7 @@ void	display_menu_angles(t_fdf_cont *cont)
 	free(theta_z);
 }
 
-void	display_menu_dimensions(t_fdf_cont *cont)
+void	display_menu_dimensions(t_fdf *cont)
 {
 	char	*win_w;
 	char	*win_h;
@@ -84,7 +84,7 @@ void	display_menu_dimensions(t_fdf_cont *cont)
 	free(map_h);
 }
 
-static void	display_menu_background(t_fdf_cont *cont, int width, int height)
+static void	display_menu_background(t_fdf *cont, int width, int height)
 {
 	int	x;
 	int	y;
@@ -109,7 +109,7 @@ static void	display_menu_background(t_fdf_cont *cont, int width, int height)
 	display_default(cont);
 }
 
-void	display_menu(t_fdf_cont *cont)
+void	display_menu(t_fdf *cont)
 {
 	void	*img_ptr;
 	int		height;

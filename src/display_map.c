@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	project_point(t_fdf_cont *cont, t_angles *angles, int x, int y)
+void	project_point(t_fdf *cont, t_angles *angles, int x, int y)
 {
 	t_point	p1;
 	t_point	p2;
@@ -21,7 +21,7 @@ void	project_point(t_fdf_cont *cont, t_angles *angles, int x, int y)
 	}
 }
 
-static t_angles	calculate_angles(t_fdf_cont *cont)
+static t_angles	calculate_angles(t_fdf *cont)
 {
 	t_angles	angles;
 
@@ -34,7 +34,7 @@ static t_angles	calculate_angles(t_fdf_cont *cont)
 	return (angles);
 }
 
-void	display_map(t_fdf_cont *cont)
+void	display_map(t_fdf *cont)
 {
 	t_angles	angles;
 	int			x;

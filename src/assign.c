@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static void	assign_notable_altitudes(t_fdf_cont *cont)
+static void	assign_notable_altitudes(t_fdf *cont)
 {
 	int	x;
 	int	y;
@@ -24,21 +24,23 @@ static void	assign_notable_altitudes(t_fdf_cont *cont)
 	return ;
 }
 
-static void	assign_window_dimensions(t_fdf_cont *cont)
+static void	assign_window_dimensions(t_fdf *cont)
 {
-	cont->win_h = cont->map_h * cont->square_width * 3;
-	cont->win_w = cont->map_w * cont->square_width * 3;
-	if (cont->win_w < 300)
-		cont->win_w = 300;
-	else if (cont->win_w > 1280)
-		cont->win_w = 1280;
-	if (cont->win_h < 300)
-		cont->win_h = 300;
-	else if (cont->win_h > 1024)
-		cont->win_h = 1024;
+	cont->win_h = WIN_H;
+	cont->win_w = WIN_W;
+	// cont->win_h = cont->map_h * cont->square_width * 3;
+	// cont->win_w = cont->map_w * cont->square_width * 3;
+	// if (cont->win_w < 300)
+	// 	cont->win_w = 300;
+	// else if (cont->win_w > 1280)
+	// 	cont->win_w = 1280;
+	// if (cont->win_h < 300)
+	// 	cont->win_h = 300;
+	// else if (cont->win_h > 1024)
+	// 	cont->win_h = 1024;
 }
 
-void	assign_limits(t_fdf_cont *cont)
+void	assign_limits(t_fdf *cont)
 {
 	assign_notable_altitudes(cont);
 	cont->square_width = 5;
@@ -48,7 +50,7 @@ void	assign_limits(t_fdf_cont *cont)
 	assign_window_dimensions(cont);
 }
 
-static void	assign_map_line(t_fdf_cont *cont, char *line, int y)
+static void	assign_map_line(t_fdf *cont, char *line, int y)
 {
 	t_point	*point;
 	int		index;
@@ -77,7 +79,7 @@ static void	assign_map_line(t_fdf_cont *cont, char *line, int y)
 	}
 }
 
-void	assign_map(t_fdf_cont *cont, int fd)
+void	assign_map(t_fdf *cont, int fd)
 {
 	char	*curr_line;
 	int		y;

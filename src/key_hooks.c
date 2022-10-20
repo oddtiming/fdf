@@ -1,14 +1,14 @@
 #include "fdf.h"
 #include "fdf_hooks.h"
 
-static void	toggle_all_rotations(t_fdf_cont *cont)
+static void	toggle_all_rotations(t_fdf *cont)
 {
 	cont->toggle_rot_x = !cont->toggle_rot_x;
 	cont->toggle_rot_y = !cont->toggle_rot_y;
 	cont->toggle_rot_z = !cont->toggle_rot_z;
 }
 
-int	handle_key_release_hook(int keysym, t_fdf_cont *cont)
+int	handle_key_release_hook(int keysym, t_fdf *cont)
 {
 	if (keysym == KEY_ESC)
 		fdf_clean_exit(cont);
@@ -34,10 +34,25 @@ int	handle_key_release_hook(int keysym, t_fdf_cont *cont)
 		cont->toggle_rot_x = !cont->toggle_rot_x;
 	else if (keysym == NUMPAD0 || keysym == KEY_0)
 		reset_proportions(cont);
+	else if (keysym == KEY_1 || keysym == KEY_A)
+	{
+		cont->toggle_coalitions = true;
+		cont->final_coa_color = ARMADA;
+	}
+	else if (keysym == KEY_2 || keysym == KEY_L)
+	{
+		cont->toggle_coalitions = true;
+		cont->final_coa_color = LEGION;
+	}
+	else if (keysym == KEY_3 || keysym == KEY_T)
+	{
+		cont->toggle_coalitions = true;
+		cont->final_coa_color = TORRENT;
+	}
 	return (0);
 }
 
-int	handle_key_press_hook(int keysym, t_fdf_cont *cont)
+int	handle_key_press_hook(int keysym, t_fdf *cont)
 {
 	if (cont->toggle_menu)
 		return (1);
@@ -64,7 +79,7 @@ int	handle_key_press_hook(int keysym, t_fdf_cont *cont)
 	return (handle_key_press_hook_2(keysym, cont));
 }
 
-int	handle_key_press_hook_2(int keysym, t_fdf_cont *cont)
+int	handle_key_press_hook_2(int keysym, t_fdf *cont)
 {
 	if (keysym == KEY_W)
 		if (cont->z_offset > -1000)
@@ -78,7 +93,8 @@ int	handle_key_press_hook_2(int keysym, t_fdf_cont *cont)
 	if (keysym == KEY_E)
 		if (cont->z_divisor < 5)
 			cont->z_divisor += 0.12;
-	if (keysym == KEY_LEFT || keysym == KEY_A)
+	// if (keysym == KEY_LEFT || keysym == KEY_A)
+	if (keysym == KEY_LEFT)
 		if (cont->x_offset < cont->win_w * 0.1F * cont->square_width)
 			cont->x_offset += 10;
 	if (keysym == KEY_RIGHT || keysym == KEY_D)

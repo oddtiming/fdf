@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include "fdf_hooks.h"
 
-int	handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont)
+int	handle_mouse_hook(int button, int x, int y, t_fdf *cont)
 {
 	if (button == 1 && !cont->toggle_menu)
 	{
@@ -11,13 +11,14 @@ int	handle_mouse_hook(int button, int x, int y, t_fdf_cont *cont)
 			cont->toggle_rot_x = false;
 			cont->toggle_rot_y = false;
 			cont->toggle_rot_z = false;
-			cont->mouse_initial_xy = (x << 16) | y;
 		}
 	}
+	(void)x;
+	(void)y;
 	return (0);
 }
 
-int	handle_mouse_motion(int x, int y, t_fdf_cont *cont)
+int	handle_mouse_motion(int x, int y, t_fdf *cont)
 {
 	double	x_percent;
 	double	y_percent;

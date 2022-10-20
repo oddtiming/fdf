@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include "fdf_hooks.h"
 
-void	set_hooks(t_fdf_cont *cont)
+void	set_hooks(t_fdf *cont)
 {
 	mlx_do_key_autorepeaton(cont->mlx_ptr);
 	mlx_expose_hook(cont->win_ptr, handle_expose_hook, cont);
@@ -14,7 +14,7 @@ void	set_hooks(t_fdf_cont *cont)
 	return ;
 }
 
-int	default_hook(t_fdf_cont *cont)
+int	default_hook(t_fdf *cont)
 {
 	if (cont->toggle_menu)
 		return (0);
@@ -24,14 +24,17 @@ int	default_hook(t_fdf_cont *cont)
 		cont->theta_y += 0.0145;
 	if (cont->toggle_rot_z == true)
 		cont->theta_z += 0.0145;
+	if (cont->toggle_coalitions)
+		flash_coalition_color(cont);
 	display_map(cont);
 	return (0);
 }
 
-int	handle_expose_hook(t_fdf_cont *cont)
+int	handle_expose_hook(t_fdf *cont)
 {
-	t_fdf_cont	*mlx;
+	t_fdf	*mlx;
 
-	mlx = (t_fdf_cont *)cont;
+	mlx = (t_fdf *)cont;
+	(void)mlx;
 	return (0);
 }

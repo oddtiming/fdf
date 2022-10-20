@@ -2,11 +2,11 @@
 
 int	main(int argc, char *argv[])
 {
-	t_fdf_cont	*cont;
+	t_fdf	*cont;
 
 	if (argc != 2)
 		exit_on_err("Error: FdF only accepts one input\n");
-	cont = ft_safealloc(sizeof(t_fdf_cont));
+	cont = ft_safealloc(sizeof(t_fdf));
 	fdf_parse(cont, argv[1]);
 	fdf_init(cont, argv[1]);
 	center_map(cont);

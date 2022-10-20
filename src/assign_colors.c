@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static void	assign_point_color(t_fdf_cont *cont, int x, int y)
+static void	assign_point_color(t_fdf *cont, int x, int y)
 {
 	double	curr_alt;
 	double	median_max;
@@ -31,7 +31,7 @@ static void	assign_point_color(t_fdf_cont *cont, int x, int y)
 /* If z is negative, go from 0xFFFFFF to 0x00FFFF to 0x0000FF
  * If z is positive, go from 0xFFFFFF to 0xFFFF00 to 0xFF00FF
  */
-void	assign_colors(t_fdf_cont *cont)
+void	assign_colors(t_fdf *cont)
 {
 	int		x;
 	int		y;

@@ -58,13 +58,18 @@ static void	bresenham(t_bresenham *line)
 	line->offset += line->offset_increment;
 }
 
-static void	interpolate_color(t_fdf_cont *cont, t_bresenham *line,
+static void	interpolate_color(t_fdf *cont, t_bresenham *line,
 		t_point *p1, t_point *p2)
 {
 	double	color_percent;
 	int		pixel_color;
 
-	if (cont->map_is_colored)
+
+	if (cont->force_colors)
+	{
+		pixel_color = cont->coalition_color;
+	}
+	else if (cont->map_is_colored)
 	{
 		if (line->dx >= line->dy)
 			color_percent = linear_interpolation(p1->x, p2->x, line->p1.x);
@@ -77,7 +82,7 @@ static void	interpolate_color(t_fdf_cont *cont, t_bresenham *line,
 	fill_pixel(cont->img, line->p1.x, line->p1.y, pixel_color);
 }
 
-void	draw_line(t_fdf_cont *cont, t_point p1, t_point p2)
+void	draw_line(t_fdf *cont, t_point p1, t_point p2)
 {
 	t_bresenham	*line;
 

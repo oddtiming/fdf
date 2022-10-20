@@ -1,28 +1,27 @@
 #include "fdf.h"
 
-void	reset_proportions(t_fdf_cont *cont)
+void	reset_proportions(t_fdf *cont)
 {
-	cont->toggle_rot_x = false;
-	cont->toggle_rot_y = false;
-	cont->toggle_rot_z = false;
+	cont->toggle_rot_x = true;
+	cont->toggle_rot_y = true;
+	cont->toggle_rot_z = true;
 	cont->map_is_colored = true;
 	cont->toggle_mouse_rot = false;
-	cont->square_width = ft_min(20,
-			ft_max(683 / cont->map_h, 853 / cont->map_w));
+	cont->square_width = 25;
 	cont->x_offset = 0;
 	cont->y_offset = 0;
 	cont->z_offset = 1000;
 	cont->theta_x = 0.5236;
 	cont->theta_y = -0.5236;
 	cont->theta_z = 0.5236;
-	cont->z_divisor = 1.0F;
-	if ((double)ft_max(cont->max_alt, -cont->min_alt)
-		/ (double)ft_min(cont->map_h, cont->map_w) > 0.5F)
-		cont->z_divisor = (double)ft_min(cont->map_h, cont->map_w)
-			/ (double)ft_max(cont->max_alt, -cont->min_alt) / 2.0F;
+	cont->z_divisor = -0.2F;
+	// if ((double)ft_max(cont->max_alt, -cont->min_alt)
+	// 	/ (double)ft_min(cont->map_h, cont->map_w) > 0.5F)
+	// 	cont->z_divisor = (double)ft_min(cont->map_h, cont->map_w)
+	// 		/ (double)ft_max(cont->max_alt, -cont->min_alt) / 2.0F;
 }
 
-void	fdf_init(t_fdf_cont *cont, char *filepath)
+void	fdf_init(t_fdf *cont, char *filepath)
 {
 	t_img	*img;
 
@@ -44,7 +43,7 @@ void	fdf_init(t_fdf_cont *cont, char *filepath)
 	img->data_addr = mlx_get_data_addr(
 			img->img_ptr, &img->bpp, &img->line_len, &img->endian);
 	cont->toggle_menu = false;
-	cont->toggle_proj = true;
+	cont->toggle_proj = false;
 	reset_proportions(cont);
 	return ;
 }

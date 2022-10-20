@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static void	line_clip_p1(t_fdf_cont *cont, t_point *p1, t_point *p2)
+static void	line_clip_p1(t_fdf *cont, t_point *p1, t_point *p2)
 {
 	int	max_w;
 
@@ -27,7 +27,7 @@ static void	line_clip_p1(t_fdf_cont *cont, t_point *p1, t_point *p2)
 	}
 }
 
-static void	line_clip_p2(t_fdf_cont *cont, t_point *p1, t_point *p2)
+static void	line_clip_p2(t_fdf *cont, t_point *p1, t_point *p2)
 {
 	int	max_h;
 
@@ -54,7 +54,7 @@ static void	line_clip_p2(t_fdf_cont *cont, t_point *p1, t_point *p2)
 	}
 }
 
-int	line_clipping(t_fdf_cont *cont, t_point *p1, t_point *p2)
+int	line_clipping(t_fdf *cont, t_point *p1, t_point *p2)
 {
 	if (!cont->toggle_proj && (p1->z <= 0 || p2->z <= 0))
 		return (EXIT_FAILURE);

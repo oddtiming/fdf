@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	project_perspective(t_fdf_cont *cont, t_point *p)
+void	project_perspective(t_fdf *cont, t_point *p)
 {
 	p->x -= cont->win_w / 2 - cont->x_offset;
 	p->y -= cont->win_h / 2 - cont->y_offset;
@@ -13,7 +13,7 @@ void	project_perspective(t_fdf_cont *cont, t_point *p)
 	p->y += cont->win_h / 2;
 }
 
-void	cycle_orthographic_perspectives(t_fdf_cont *cont)
+void	cycle_orthographic_perspectives(t_fdf *cont)
 {
 	static int	switch_counter;
 
